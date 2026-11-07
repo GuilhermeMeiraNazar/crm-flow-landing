@@ -22,9 +22,9 @@ export function Home() {
         <How C={C} />
         <Models C={C} />
         <Pricing C={C} />
-        <Faq C={C} />
         <Services C={C} />
         <FinalCta C={C} />
+        <Faq C={C} />
       </main>
       <Footer C={C} />
     </>

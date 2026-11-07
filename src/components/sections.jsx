@@ -1,6 +1,6 @@
 import s from '../styles/landing.module.scss';
 import { SITE, ctaHref } from '../config/site.js';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Shot, ShotFrame, Caption, ev } from './ui.jsx';
 
 const brl = (n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: SITE.pricing.currency }).format(n);
@@ -17,6 +17,10 @@ const ICONS = {
   audio: <><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></>,
   team: <><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6" /></>,
   theme: <path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z" />,
+  server: <><rect x="3" y="4" width="18" height="6" rx="2" /><rect x="3" y="14" width="18" height="6" rx="2" /><path d="M7 7h.01M7 17h.01" /></>,
+  plug: <><path d="M9 3v5M15 3v5" /><path d="M6 8h12v3a6 6 0 0 1-12 0z" /><path d="M12 17v4" /></>,
+  chat: <path d="M4 5h16v11H9l-5 4z" />,
+  chart: <path d="M3 20h18M6 16v-6M11 16V6M16 16v-4M21 16V8" />,
   gift: <path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z" />,
 };
 
@@ -206,31 +210,83 @@ export function AiSection({ C }) {
   );
 }
 
-// Como funciona: passos horizontais, uma captura por passo e uma unica legenda.
+// Como funciona: trilha vertical com uma seta roxa curva que liga os passos. A geometria e medida no navegador
+// (posicao real de cada numero), entao a curva acompanha qualquer largura. Sem JS, os passos aparecem em coluna sem a seta.
+function Flow({ steps }) {
+  const wrap = useRef(null);
+  const [geo, setGeo] = useState(null);
+  useEffect(() => {
+    const el = wrap.current;
+    if (!el) return undefined;
+    const measure = () => {
+      const box = el.getBoundingClientRect();
+      const nodes = [...el.querySelectorAll('[data-node]')].map((n) => {
+        const r = n.getBoundingClientRect();
+        return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2, r: r.width / 2 };
+      });
+      const wide = box.width >= 720;
+      const dx = wide ? 96 : 14;
+      const segs = nodes.slice(0, -1).map((a, i) => {
+        const b = nodes[i + 1];
+        const y0 = a.y + a.r + 6;
+        const y3 = b.y - b.r - 10;
+        const h = y3 - y0;
+        const s = i % 2 ? -1 : 1;
+        return `M${a.x.toFixed(1)} ${y0.toFixed(1)} C${(a.x + s * dx).toFixed(1)} ${(y0 + h * 0.28).toFixed(1)} ${(b.x - s * dx).toFixed(1)} ${(y3 - h * 0.28).toFixed(1)} ${b.x.toFixed(1)} ${y3.toFixed(1)}`;
+      });
+      setGeo({ w: box.width, h: box.height, segs });
+    };
+    measure();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    if (ro) { ro.observe(el); el.querySelectorAll('li').forEach((li) => ro.observe(li)); }
+    window.addEventListener('resize', measure);
+    return () => { if (ro) ro.disconnect(); window.removeEventListener('resize', measure); };
+  }, []);
+  return (
+    <div className={s.flow} ref={wrap} data-reveal>
+      {geo && (
+        <svg className={s.flowSvg} width={geo.w} height={geo.h} viewBox={`0 0 ${geo.w} ${geo.h}`} aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="flow-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2={geo.h}>
+              <stop offset="0" stopColor="#9A90FF" />
+              <stop offset="1" stopColor="#6254E8" />
+            </linearGradient>
+            <marker id="flow-head" viewBox="0 0 14 14" refX="10" refY="7" markerWidth="14" markerHeight="14" markerUnits="userSpaceOnUse" orient="auto">
+              <path d="M3 2.5 L10.5 7 L3 11.5" fill="none" stroke="#9A90FF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+            </marker>
+          </defs>
+          {geo.segs.map((d, i) => (
+            <path key={d} className={s.flowSeg} style={{ '--k': i }} d={d} pathLength="1" fill="none" stroke="url(#flow-grad)" strokeWidth="3" strokeLinecap="round" markerEnd="url(#flow-head)" />
+          ))}
+        </svg>
+      )}
+      <ol className={s.flowList}>
+        {steps.map((st, i) => (
+          <li key={st.t} className={`${s.flowStep} ${i % 2 ? s.flowRight : s.flowLeft}`} {...ev(st.ev)}>
+            <span className={s.flowNum} data-node aria-hidden="true">{i + 1}</span>
+            <div className={s.flowCard}>
+              <span className={s.tileIcon}><Icon>{ICONS[st.icon]}</Icon></span>
+              <h3>{st.t}</h3>
+              <p>{st.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
 export function How({ C }) {
   const h = C.how;
   return (
     <section className={`${s.section} ${s.sectionLine}`} id={h.id} aria-labelledby="how-t">
       <div className={s.container}>
         <Head eyebrow={h.eyebrow} title={h.title} id="how-t" evIds={h.ev} />
-        <figure className={s.fig}>
-          <ol className={s.steps}>
-            {h.steps.map((st, i) => (
-              <li key={st.t} className={s.step} data-reveal style={{ '--i': i }} {...ev(st.ev)}>
-                <div className={s.stepShot}><ShotFrame name={st.shot} alt={st.alt} bar={false} sizes="(min-width: 900px) 280px, 90vw" /></div>
-                <span className={s.stepNum} aria-hidden="true">{i + 1}</span>
-                <h3>{st.t}</h3>
-                <p>{st.d}</p>
-              </li>
-            ))}
-          </ol>
-          <Caption />
-        </figure>
+        <Flow steps={h.steps} />
       </div>
     </section>
   );
 }
-
 // Hospedado ou no seu servidor: quem cuida do servidor, o que o cliente faz e onde ficam os dados.
 export function Models({ C }) {
   const m = C.models;
@@ -264,7 +320,7 @@ export function Models({ C }) {
 }
 
 const Mark = ({ ok, label }) => (
-  <span className={ok ? s.yes : s.no}><span className="sr-only">{label}</span></span>
+  <span className={ok ? s.mkYes : s.mkNo}><span className="sr-only">{label}</span></span>
 );
 
 function PlanCard({ p, pl, group }) {
@@ -336,7 +392,6 @@ export function Pricing({ C }) {
     if (e.key === 'ArrowRight') { e.preventDefault(); pick(idx + 1, true); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); pick(idx - 1, true); }
   };
-  const rm = p.roadmap;
   const ln = p.launch;
   return (
     <section className={`${s.section} ${s.sectionLine}`} id={p.id} aria-labelledby="price-t">
@@ -365,22 +420,6 @@ export function Pricing({ C }) {
             </div>
           );
         })}
-
-        <div id={rm.id} className={s.roadmap} {...ev(rm.ev)}>
-          <h3 className={s.subTitle}>{rm.title}</h3>
-          <p className={s.groupLead}>{rm.lead}</p>
-          <div className={s.grid3}>
-            {rm.items.map((x) => (
-              <article key={x.id} className={s.tile} data-roadmap {...ev(x.ev)}>
-                <h4>{x.t}</h4>
-                <p>{x.d}</p>
-                <p className={s.meta}>{x.where}</p>
-                <a className={`${s.btn} ${s.btnGhost} ${s.btnSm}`} href={ctaHref(`Olá! Quero ser avisado quando "${x.t}" for lançado no ${SITE.name}.`)}>{rm.cta}</a>
-              </article>
-            ))}
-          </div>
-          <p className={s.foot}>{rm.note}</p>
-        </div>
 
         <aside className={s.launch} {...ev(ln.ev)}>
           <div className={s.launchBig} aria-hidden="true"><b>{ln.big}</b><span>{ln.bigLabel}</span></div>

@@ -102,3 +102,9 @@ Nenhuma tela classe C, nenhuma sidebar, nenhum total ou resultado em R$. Rótulo
 **Dados reais em `site.js`:** razão social, CNPJ, e-mail, WhatsApp, domínio, URL de compra.
 **Escolhas:** o H1 (A, B ou C); nomes "Hosted"/"Self-Hosted" nos cartões (mantive os seus; um dono de pequena empresa pode não entender "Hosted"); manter ou não o selo "Recomendado".
 **Fora do alcance:** o tema claro foi removido, não testado. O vídeo mostra a interface do CRM como está hoje; se a interface mudar, regravar com `node _tools/record-demo.mjs` na cópia `_demo`.
+
+## 7. Ajustes posteriores
+- Bloco 'No roadmap' removido (decisao do dono: tudo estara disponivel no dia 1), junto com as linhas 'Modulos adicionais' da comparacao e a clausula de roadmap dos Termos. Nenhum desses recursos aparece mais na pagina. Quando existirem no produto e tiverem evidencia em CONTEUDO.md, entram nos cartoes. O bonus de 30 dias do Copiloto na oferta de lancamento continua no texto e nao tem mais contexto na pagina.
+- FAQ passou a ser a ultima secao (depois do CTA final).
+- 'Como funciona' sem capturas: trilha vertical com cartoes alternados e seta roxa curva medida no navegador (um segmento com ponta de seta por passo, desenhado ao entrar na tela; sem animacao com reduced-motion). Referencias: smartclick.agency/blog/saas-landing-page-best-practices (mostrar como funciona em vez de listar recursos), unicornplatform.com/blog/optimal-landing-page-structure (cada secao com um papel e um proximo passo), flaviocopes.com/animated-svg-connection-lines e techblog.sdstudio.top (stroke-dasharray + stroke-dashoffset com pathLength normalizado).
+- Correcao: o item 'Sem correcao de bugs futuros nem suporte tecnico' vazava do cartao porque a classe .no da lista colidia com a marca X da tabela comparativa (largura de 20 px). A marca da tabela agora tem classe propria.

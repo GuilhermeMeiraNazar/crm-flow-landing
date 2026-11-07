@@ -148,17 +148,25 @@ $bp-lg: 1200px;
 .aiShot { min-width: 0; }
 .notice { margin-top: 32px; padding: 16px 24px; border: 1px solid var(--border-strong); border-left: 3px solid var(--accent-ai); border-radius: var(--radius-md); background: var(--surface); color: var(--text-secondary); font-size: 0.95rem; }
 
-// Como funciona: passos horizontais, uma captura por passo
-.steps { display: grid; gap: 24px; grid-template-columns: 1fr; }
-@media (min-width: $bp-sm) { .steps { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: $bp-lg) { .steps { grid-template-columns: repeat(4, 1fr); } }
-.step { display: flex; flex-direction: column; gap: 8px; }
-.stepShot { margin-bottom: 8px; }
-.stepShot img { aspect-ratio: 4 / 3; object-fit: cover; object-position: top left; }
-.stepNum { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius-sm); background: var(--accent-ai-soft); color: var(--accent-ai); font-weight: 600; font-size: 0.9rem; }
-.step h3 { font-size: 1.125rem; }
-.step p { color: var(--text-secondary); font-size: 0.95rem; }
-
+// Como funciona: trilha vertical (cartoes alternados) com seta curva roxa
+.flow { position: relative; max-width: 960px; margin-inline: auto; }
+.flowList { position: relative; z-index: 1; display: grid; row-gap: 56px; }
+.flowSvg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: visible; filter: drop-shadow(0 0 8px var(--glow-ai)); }
+.flowSeg { stroke-dasharray: 1; stroke-dashoffset: 0; opacity: 1; transition: stroke-dashoffset 0.9s ease calc(var(--k) * 0.45s + 0.1s), opacity 0.3s ease calc(var(--k) * 0.45s + 0.1s); }
+:global(.js-ready) .flow:not(:global(.is-in)) .flowSeg { stroke-dashoffset: 1; opacity: 0; }
+.flowStep { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; }
+.flowNum { grid-column: 1; grid-row: 1; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); color: #fff; font-weight: 700; font-size: 1.125rem; box-shadow: 0 0 0 6px var(--bg), 0 0 0 7px var(--accent-ai-soft); }
+.flowCard { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; gap: 8px; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
+.flowCard h3 { font-size: 1.125rem; }
+.flowCard p { color: var(--text-secondary); font-size: 0.95rem; }
+.flowCard .tileIcon { margin-bottom: 0; }
+@media (min-width: $bp-md) {
+  .flowList { row-gap: 64px; }
+  .flowStep { grid-template-columns: 1fr 48px 1fr; gap: 32px; }
+  .flowNum { grid-column: 2; }
+  .flowLeft .flowCard { grid-column: 1; text-align: right; align-items: flex-end; }
+  .flowRight .flowCard { grid-column: 3; }
+}
 // Hospedado ou no seu servidor
 .kv { display: grid; gap: 16px; }
 .kv dt { font-size: 0.8rem; font-weight: 600; color: var(--text-tertiary); margin-bottom: 4px; }
@@ -203,15 +211,11 @@ $bp-lg: 1200px;
 .table tbody th { font-weight: 500; color: var(--text-primary); min-width: 200px; }
 .table td { color: var(--text-secondary); min-width: 120px; }
 .table tr:last-child th, .table tr:last-child td { border-bottom: 0; }
-.yes, .no { display: inline-block; position: relative; width: 20px; height: 20px; border-radius: 50%; }
-.yes { background: var(--accent-live-soft); border: 1px solid var(--accent-live); }
-.yes::after { content: ''; position: absolute; left: 5px; top: 5px; width: 8px; height: 4px; border-left: 2px solid var(--accent-live-text); border-bottom: 2px solid var(--accent-live-text); transform: rotate(-45deg); }
-.no { background: color-mix(in srgb, var(--accent-danger) 16%, transparent); border: 1px solid var(--accent-danger); }
-.no::after { content: '\00D7'; position: absolute; inset: 0; text-align: center; line-height: 18px; font-size: 14px; font-weight: 700; color: var(--accent-danger); }
-
-// Roadmap (sem valores)
-.roadmap { margin-top: clamp(48px, 8vw, 80px); }
-.roadmap .subTitle { margin-top: 0; }
+.mkYes, .mkNo { display: inline-block; position: relative; width: 20px; height: 20px; border-radius: 50%; }
+.mkYes { background: var(--accent-live-soft); border: 1px solid var(--accent-live); }
+.mkYes::after { content: ''; position: absolute; left: 5px; top: 5px; width: 8px; height: 4px; border-left: 2px solid var(--accent-live-text); border-bottom: 2px solid var(--accent-live-text); transform: rotate(-45deg); }
+.mkNo { background: color-mix(in srgb, var(--accent-danger) 16%, transparent); border: 1px solid var(--accent-danger); }
+.mkNo::after { content: '\00D7'; position: absolute; inset: 0; text-align: center; line-height: 18px; font-size: 14px; font-weight: 700; color: var(--accent-danger); }
 
 // Oferta de lancamento (roxo = marca)
 .launch { display: grid; gap: 24px; align-items: center; margin: 56px 0 24px; padding: clamp(24px, 4vw, 40px); border-radius: var(--radius-lg); border: 1px solid var(--accent-ai); background: linear-gradient(135deg, var(--accent-ai-soft), var(--surface) 60%); box-shadow: var(--shadow-md); }

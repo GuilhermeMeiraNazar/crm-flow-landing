@@ -147,10 +147,10 @@ export const copy = (S) => ({
     title: 'Da contratação ao primeiro atendimento.',
     ev: ['S4'],
     steps: [
-      { t: 'Escolher e implantar', d: 'Você escolhe o plano e nós colocamos o ConversIA da sua empresa no ar, no nosso servidor ou no seu.', ev: ['FRAME'], shot: 'hero', alt: 'Tela do ConversIA com o menu lateral e o pipeline de vendas.' },
-      { t: 'Conectar', d: 'Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA.', ev: ['S4', 'S5'], shot: 'ia', alt: 'Tela de Chaves de IA com provedor, modelo e chave configurada.' },
-      { t: 'Atender', d: 'Sua equipe entra pelo navegador, com perfis de admin e de agente, e atende pela fila de conversas.', ev: ['F1', 'F27'], shot: 'inbox', alt: 'Tela de Conversas com fila, lista de conversas e janela de chat.' },
-      { t: 'Acompanhar', d: 'Os negócios andam pelas etapas do funil, e os relatórios mostram funil, atendimento e custo de IA.', ev: ['F7', 'F14'], shot: 'pipeline', alt: 'Quadro kanban do Pipeline com os negócios por etapa.' },
+      { t: 'Escolher e implantar', d: 'Você escolhe o plano e nós colocamos o ConversIA da sua empresa no ar, no nosso servidor ou no seu.', ev: ['FRAME'], icon: 'server' },
+      { t: 'Conectar', d: 'Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA.', ev: ['S4', 'S5'], icon: 'plug' },
+      { t: 'Atender', d: 'Sua equipe entra pelo navegador, com perfis de admin e de agente, e atende pela fila de conversas.', ev: ['F1', 'F27'], icon: 'chat' },
+      { t: 'Acompanhar', d: 'Os negócios andam pelas etapas do funil, e os relatórios mostram funil, atendimento e custo de IA.', ev: ['F7', 'F14'], icon: 'chart' },
     ],
   },
 
@@ -207,7 +207,6 @@ export const copy = (S) => ({
           { t: 'IA de atendimento e triagem', v: [true, true, true, true], ev: ['F3', 'F5'] },
           { t: 'Kanban e relatórios', v: [true, true, true, true], ev: ['F7', 'F14'] },
           { t: 'Paleta de cores com a identidade da empresa', v: [false, false, true, false], ev: ['S7'] },
-          { t: 'Módulos adicionais (no roadmap)', v: [false, false, false, true], ev: ['FRAME'] },
         ],
       },
       {
@@ -222,11 +221,10 @@ export const copy = (S) => ({
           { t: 'Chaves de IA', v: ['suas', 'suas'], ev: ['F16'] },
           { t: 'Atualizações do contêiner Docker e patches de segurança', v: [false, true], ev: ['FRAME'] },
           { t: 'Suporte técnico', v: [false, true], ev: ['FRAME'] },
-          { t: 'Módulos adicionais (no roadmap)', v: [true, true], ev: ['FRAME'] },
         ],
       },
     ],
-    // No maximo 3 itens por cartao. O que ainda nao existe fica no bloco "No roadmap", nunca dentro do cartao.
+    // No maximo 3 itens por cartao. Nada que ainda nao exista entra no cartao.
     plans: {
       'hosted-basico': {
         tagline: 'Para organizar o atendimento e os leads no funil.',
@@ -280,22 +278,6 @@ export const copy = (S) => ({
           { t: 'Suporte técnico para a sua equipe.', ev: ['FRAME'] },
         ],
       },
-    },
-    // Roadmap: sem valores. Texto sujeito a revisao juridica (ver legal.js, secao 8). Nada aqui esta disponivel hoje.
-    roadmap: {
-      id: 'roadmap',
-      title: 'No roadmap',
-      lead: 'Estamos desenvolvendo estes recursos. Eles ainda não estão disponíveis e não têm valores definidos.',
-      cta: 'Avise-me',
-      ev: ['FRAME'],
-      note: 'Os planos Hosted Básico, Intermediário e Avançado não aceitam módulos avulsos.',
-      items: [
-        { id: 'copiloto', soon: true, t: 'Copiloto do Gestor', d: 'Assistente no WhatsApp privado do dono: consulta de estoque, avisos de vendas e relatórios.', where: 'Previsto nos planos Intermediário e Avançado e como módulo adicional.', ev: ['FRAME'] },
-        { id: 'agenda', soon: true, t: 'Agenda com confirmação automática', d: 'Agendamento e lembretes de compromissos dentro da conversa.', where: 'Previsto nos planos Intermediário e Avançado e como módulo adicional.', ev: ['FRAME'] },
-        { id: 'cobranca', soon: true, t: 'Emissão de cobrança via IA', d: 'Cobrança PIX dentro da conversa.', where: 'Previsto nos planos Intermediário e Avançado e como módulo adicional.', ev: ['FRAME'] },
-        { id: 'instancia', soon: true, t: 'Mais de um número de WhatsApp', d: 'Números adicionais no mesmo painel.', where: 'Previsto no plano Avançado e como módulo adicional.', ev: ['FRAME'] },
-        { id: 'funis', soon: true, t: 'Múltiplos funis de vendas', d: 'Kanbans simultâneos para setores diferentes, como Vendas, Suporte e Financeiro.', where: 'Previsto no plano Avançado.', ev: ['FRAME'] },
-      ],
     },
     launch: {
       badge: 'Lote dos 20 primeiros',
