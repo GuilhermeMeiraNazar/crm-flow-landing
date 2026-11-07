@@ -1,0 +1,17 @@
+import { chromium } from 'playwright';
+const base = process.argv[2] || 'http://localhost:8088';
+const b = await chromium.launch();
+const c = await b.newContext({ viewport: { width: 1440, height: 900 } });
+const p = await c.newPage();
+const errs = []; p.on('console', (m) => { if (['error', 'warning'].includes(m.type())) errs.push(m.text()); }); p.on('pageerror', (e) => errs.push(e.message));
+const reqs = []; p.on('request', (r) => { if (/\/media\//.test(r.url())) reqs.push(r.url().split('/').pop()); });
+await p.goto(base + '/', { waitUntil: 'networkidle' });
+console.log('antes do clique, /media/ pedido:', reqs.join(',') || '(nada)');
+await p.locator('button', { hasText: 'Reproduzir o vídeo' }).scrollIntoViewIfNeeded();
+await p.waitForTimeout(800);
+console.log('apos rolar ate o bloco, /media/ pedido:', reqs.join(','));
+await p.locator('button', { hasText: 'Reproduzir o vídeo' }).click();
+await p.waitForTimeout(3500);
+console.log(await p.evaluate(() => { const v = document.querySelector('video'); return JSON.stringify({ duracao: Math.round(v.duration), tempo: Number(v.currentTime.toFixed(1)), pausado: v.paused, mudo: v.muted, controles: v.controls, pronto: v.readyState, fonte: v.currentSrc.split('/').pop(), audioTracks: v.audioTracks ? v.audioTracks.length : 'n/d' }); }));
+console.log(errs.length ? errs.join('\n') : 'console: sem erros nem avisos');
+await b.close();

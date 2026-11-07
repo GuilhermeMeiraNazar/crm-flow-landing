@@ -98,6 +98,14 @@ export const copy = (S) => ({
         shot: 'analytics', alt: 'Painel Deals por estágio dos Relatórios, com a contagem de negócios em cada etapa do funil.',
       },
     ],
+    video: {
+      title: 'Veja o fluxo real',
+      d: 'Conversas, pipeline e automações em 1 min 25 s, sem áudio.',
+      play: 'Reproduzir o vídeo de demonstração',
+      desc: 'Vídeo sem áudio, com dados fictícios: abre conversas da fila, move um negócio entre as etapas do pipeline e mostra a lista de automações.',
+      posterAlt: 'Quadro do pipeline do ConversIA com os negócios por etapa.',
+      ev: ['F1', 'F7', 'F12'],
+    },
     alsoTitle: 'Também no produto',
     also: [
       { icon: 'lead', t: 'Do chat ao negócio', d: 'A IA extrai nome, telefone, e-mail, orçamento e interesse, e cria ou atualiza o negócio com um limiar de confiança.', ev: ['F5', 'F6'] },
