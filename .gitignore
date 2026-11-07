@@ -8,3 +8,8 @@ _baseline/
 _demo/
 .lighthouseci/
 *.log
+
+_tools/node_modules/
+_tools/package-lock.json
+dist-ssr/
+/capturas/

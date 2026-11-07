@@ -29,3 +29,6 @@ Caminhos relativos a raiz do CRM. Referencia: HEAD `5423138` mais o working tree
 | # | Observacao |
 |---|---|
 | 11 | `license/private.pem` existe na pasta de desenvolvimento do CRM. Esta fora do git e o `build-release.js` bloqueia o arquivo no pacote, mas a chave privada de producao nao deveria ficar na mesma arvore que o codigo entregue. |
+
+| 12 | Cabecalho das colunas do kanban mostra `R$ NaN`: o total soma `d.value` (string `\"750.00\"` vinda do DECIMAL do MariaDB) com `0 +` e concatena em vez de somar. Os cartoes formatam o valor corretamente | `client/src/components/kanban/PipelineColumn.jsx:15` (resposta de `GET /api/pipeline/stages` traz `total_value` correto) | Total da coluna e mascarado nas capturas |
+| 13 | A lista de conversas mostra sempre `Sem mensagens`: o frontend le `conv.last_message` e nenhuma consulta do backend devolve esse campo | `client/src/components/inbox/ConversationList.jsx:83` (busca por `last_message` em `src/` sem resultado) | Texto mascarado nas capturas |

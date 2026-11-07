@@ -1,0 +1,27 @@
+{
+  "name": "conversia-landing",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Landing page estatica do ConversIA (nome provisorio, configuravel em src/config/site.js)",
+  "scripts": {
+    "dev": "vite",
+    "assets": "node scripts/make-assets.mjs",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "check:links": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/space-grotesk": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "sass": "^1.108.1",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.6"
+  }
+}

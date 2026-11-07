@@ -1,0 +1,21 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const pw = fs.readFileSync('../_baseline/.demo-admin-pw.txt', 'utf8').trim();
+const out = '../_baseline/explore'; fs.mkdirSync(out, { recursive: true });
+const b = await chromium.launch();
+const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, locale: 'pt-BR' });
+await ctx.addInitScript(() => localStorage.setItem('crmflow.theme', 'dark'));
+const p = await ctx.newPage();
+await p.goto('http://127.0.0.1:15173/login');
+await p.fill('input[type="email"], input[name="email"]', 'admin@demo.local');
+await p.fill('input[type="password"]', pw);
+await p.click('button[type="submit"]');
+await p.waitForURL((u) => !u.pathname.includes('login'), { timeout: 20000 }).catch(() => {});
+console.log('apos login:', p.url());
+for (const [n, path] of [['inbox', '/inbox'], ['pipeline', '/pipeline'], ['contacts', '/contacts'], ['automations', '/automations'], ['analytics', '/admin/analytics'], ['ai', '/admin/ai-settings'], ['integrations', '/integrations']]) {
+  await p.goto('http://127.0.0.1:15173' + path, { waitUntil: 'networkidle' }).catch(() => {});
+  await p.waitForTimeout(1500);
+  await p.screenshot({ path: `${out}/${n}.png` });
+  console.log(n, p.url());
+}
+await b.close();
