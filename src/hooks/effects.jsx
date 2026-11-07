@@ -27,17 +27,18 @@ export function usePageEffects() {
     };
     document.addEventListener('pointermove', onMove, { passive: true });
 
-    // Parallax leve do mockup do hero
+    // Inclinacao do mockup do hero: 0 (inclinado) a 1 (plano) nos primeiros 420 px de scroll
     let raf = 0;
     const stage = document.querySelector('[data-parallax]');
     const onScroll = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        if (stage && !prefersReducedMotion()) stage.style.setProperty('--py', `${Math.min(window.scrollY * 0.07, 48).toFixed(1)}px`);
+        if (stage && !prefersReducedMotion()) stage.style.setProperty('--p', Math.min(window.scrollY / 420, 1).toFixed(3));
       });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // ja define --p se a pagina abrir rolada (ex.: recarregar no meio)
     return () => { document.removeEventListener('pointermove', onMove); window.removeEventListener('scroll', onScroll); };
   }, []);
 }
