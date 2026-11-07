@@ -279,6 +279,32 @@ $bp-lg: 1200px;
 .planBadge { position: absolute; top: -11px; right: 20px; padding: 3px 10px; border-radius: 999px; background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); color: #fff; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em; text-transform: none; }
 .selfReq { margin-top: 8px; }
 .selfReq h4 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 12px; }
-.launch { margin: 48px 0 20px; padding: 22px 24px; border: 1px solid var(--accent-live); border-radius: var(--radius-lg); background: var(--accent-live-soft); }
-.launch h3 { font-size: 1.1rem; margin-bottom: 6px; }
-.launch p { color: var(--text-primary); }
+.soon { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--accent-ai); color: var(--accent-ai); background: var(--accent-ai-soft); font-family: var(--font-body); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.02em; text-transform: none; vertical-align: middle; white-space: nowrap; }
+.planNote { margin-top: 14px; font-size: 0.8rem; color: var(--text-tertiary); }
+
+// Modulos adicionais
+.addons { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: $bp-sm) { .addons { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: $bp-lg) { .addons { grid-template-columns: repeat(4, 1fr); } }
+.addon { display: flex; flex-direction: column; padding: 22px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
+.addon h4 { font-size: 1.02rem; margin-bottom: 8px; }
+.addon p { color: var(--text-secondary); font-size: 0.9rem; }
+.addon .addonPrice { margin-top: auto; padding-top: 16px; color: var(--text-primary); font-family: var(--font-display); font-size: 1.35rem; letter-spacing: -0.02em; }
+.addonPrice small { font-family: var(--font-body); font-size: 0.82rem; color: var(--text-secondary); letter-spacing: 0; }
+
+// Oferta de lancamento
+.launch { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: 28px; align-items: center; margin: 56px 0 24px; padding: clamp(24px, 4vw, 40px); border-radius: var(--radius-xl); border: 1px solid var(--accent-live); background: linear-gradient(135deg, var(--accent-live-soft), var(--surface) 55%); box-shadow: 0 30px 80px -40px var(--accent-live); }
+@media (min-width: $bp-lg) { .launch { grid-template-columns: 220px 1fr; gap: 48px; } }
+.launchGlow { position: absolute; z-index: -1; right: -10%; top: -40%; width: 60%; aspect-ratio: 1; background: radial-gradient(circle, var(--accent-live-soft), transparent 65%); }
+.launchBig { display: grid; justify-items: center; align-content: center; text-align: center; }
+.launchBig b { font-family: var(--font-display); font-size: clamp(5rem, 12vw, 8rem); line-height: 0.9; letter-spacing: -0.06em; background: linear-gradient(135deg, var(--accent-live-text), var(--accent-ai)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.launchBig span { margin-top: 6px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
+.launchBadge { display: inline-block; margin-bottom: 12px; padding: 4px 12px; border-radius: 999px; background: var(--accent-live); color: #04110c; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.launchBody h3 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 6px; }
+.launchLead { color: var(--text-secondary); margin-bottom: 20px; }
+.perks { display: grid; gap: 14px; margin-bottom: 24px; }
+@media (min-width: $bp-sm) { .perks { grid-template-columns: repeat(2, 1fr); } }
+.perks li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 16px; border: 1px solid var(--border-strong); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--bg-elevated) 70%, transparent); }
+.perkIcon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--accent-live-soft); color: var(--accent-live-text); }
+.perks h4 { font-size: 1rem; margin-bottom: 4px; }
+.perks p { color: var(--text-secondary); font-size: 0.88rem; }

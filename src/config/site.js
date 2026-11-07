@@ -42,6 +42,13 @@ export const SITE = {
       { id: 'self-sem-suporte', line: 'self', name: 'Sem suporte', tier: 'Self-Hosted', setup: 3500, monthly: 0, highlight: false },
       { id: 'self-com-suporte', line: 'self', name: 'Com suporte', tier: 'Self-Hosted + Suporte', setup: 3000, monthly: 150, highlight: false },
     ],
+    // Modulos adicionais (add-ons), valor mensal em reais. Exclusivos de Hosted BYOK e Self-Hosted.
+    addons: [
+      { id: 'agenda', monthly: 99 },
+      { id: 'financeiro', monthly: 149 },
+      { id: 'copiloto', monthly: 149 },
+      { id: 'instancia', monthly: 120 },
+    ],
     // Texto de garantia/reembolso. PLACEHOLDER: preencha apos revisao juridica.
     guarantee: '[GARANTIA E PRAZO DE ARREPENDIMENTO A DEFINIR COM ADVOGADO]',
   },

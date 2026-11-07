@@ -185,6 +185,12 @@ export function How({ C }) {
   );
 }
 
+const ADDON_ICONS = {
+  agenda: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18M8 15l2.5 2.5L16 13" /></>,
+  financeiro: <><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20M6 15h4" /></>,
+  copiloto: <><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0M17 3l.8 1.7L19.5 5.5l-1.7.8L17 8l-.8-1.7-1.7-.8 1.7-.8z" /></>,
+  instancia: <><rect x="6" y="2" width="12" height="20" rx="3" /><path d="M11 18h2" /></>,
+};
 const brl = (n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: SITE.pricing.currency }).format(n);
 
 // Carrossel de planos de uma linha. Quando os cartoes cabem na largura (desktop), todos aparecem lado a lado e
@@ -266,8 +272,9 @@ function PlanCarousel({ p, plans, group }) {
                   : <p className={s.price}>{brl(pl.setup)} <small>{p.labels.setupNote}</small></p>}
                 <p className={s.billing}>{pl.monthly > 0 ? `${p.labels.setup}: ${brl(pl.setup)} (${p.labels.setupNote})` : `${p.labels.setup} ${p.labels.noMonthly}`}</p>
                 <ul className={s.ticks}>
-                  {c.features.map((f) => <li key={f.t} className={f.no ? s.no : undefined} {...ev(f.ev)}>{f.t}</li>)}
+                  {c.features.map((f) => <li key={f.t} className={f.no ? s.no : undefined} {...ev(f.ev)}>{f.t}{f.soon && <span className={s.soon}>{p.labels.soon}</span>}</li>)}
                 </ul>
+                {c.note && <p className={s.planNote}>{c.note}</p>}
                 <a className={`${s.btn} ${s.btnPrimary} ${s.planCta}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
               </article>
             );
@@ -309,10 +316,44 @@ export function Pricing({ C }) {
           </div>
         );
       })}
+      <div id={p.addons.id} className={s.planGroup}>
+        <div className={s.container}>
+          <h3 className={s.groupTitle} {...ev(p.addons.ev)}>{p.addons.title}</h3>
+          <p className={s.groupLead}>{p.addons.lead}</p>
+          <div className={s.addons}>
+            {SITE.pricing.addons.map((a) => {
+              const c = p.addons.items[a.id];
+              return (
+                <article key={a.id} className={s.addon} {...ev(c.ev)}>
+                  <span className={s.alsoIcon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{ADDON_ICONS[c.icon]}</svg></span>
+                  <h4>{c.t}{c.soon && <span className={s.soon}>{p.labels.soon}</span>}</h4>
+                  <p>{c.d}</p>
+                  <p className={s.addonPrice}>+ {brl(a.monthly)} <small>/ {p.labels.monthly}</small></p>
+                </article>
+              );
+            })}
+          </div>
+          <p className={s.foot}>{p.addons.note}</p>
+        </div>
+      </div>
       <div className={s.container}>
         <aside className={s.launch} data-reveal {...ev(p.launch.ev)}>
-          <h3>{p.launch.title}</h3>
-          <p>{p.launch.d}</p>
+          <span className={s.launchGlow} aria-hidden="true" />
+          <div className={s.launchBig} aria-hidden="true"><b>{p.launch.big}</b><span>{p.launch.bigLabel}</span></div>
+          <div className={s.launchBody}>
+            <span className={s.launchBadge}>{p.launch.badge}</span>
+            <h3>{p.launch.title}</h3>
+            <p className={s.launchLead}>{p.launch.lead}</p>
+            <ul className={s.perks}>
+              {p.launch.perks.map((x) => (
+                <li key={x.t} {...ev(x.ev)}>
+                  <span className={s.perkIcon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z" /></svg></span>
+                  <div><h4>{x.t}{x.soon && <span className={s.soon}>{p.labels.soon}</span>}</h4><p>{x.d}</p></div>
+                </li>
+              ))}
+            </ul>
+            <a className={`${s.btn} ${s.btnPrimary}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
+          </div>
         </aside>
         <p className={s.placeholder}>Garantia: {SITE.pricing.guarantee}</p>
       </div>

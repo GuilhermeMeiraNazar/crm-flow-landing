@@ -37,6 +37,8 @@ for (const f of files) {
     const g = new RegExp(re.source, re.flags.includes('g') ? re.flags : `${re.flags}g`);
     for (const m of t.matchAll(g)) {
       if (label === 'placeholders') { ph++; continue; }
+      // Decisao do dono: modulo de cobranca aparece como "Em breve" (nao esta no ar). So essa ocorrencia e liberada, e so se a marca (\Em breve\ no HTML ou \soon\ no bundle) estiver a ate 300 caracteres.
+      if (label.startsWith('PIX') && /Em breve|soon:/.test(t.slice(Math.max(0, m.index - 300), m.index + 300))) continue;
       hits++;
       const i = m.index; console.log(`HIT [${label}] ${rel(f)}: ...${t.slice(Math.max(0, i - 40), i + m[0].length + 40).replace(/\s+/g, ' ')}...`);
     }

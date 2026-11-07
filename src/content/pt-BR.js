@@ -155,7 +155,7 @@ export const copy = (S) => ({
     title: 'Escolha a solução ideal para o seu atendimento.',
     lead: 'Todos os planos têm inteligência artificial nativa, integração com o WhatsApp e painel de gestão visual. Escolha entre o ConversIA hospedado por nós ou instalado no servidor da sua empresa. A implantação é uma taxa única.',
     leadEv: ['F1', 'F3', 'F7'],
-    labels: { setup: 'Implantação', setupNote: 'taxa única', monthly: 'mês', noMonthly: 'sem mensalidade', badge: 'Recomendado' },
+    labels: { setup: 'Implantação', setupNote: 'taxa única', monthly: 'mês', noMonthly: 'sem mensalidade', badge: 'Recomendado', soon: 'Em breve' },
     carousel: { region: 'Planos e valores', prev: 'Plano anterior', next: 'Próximo plano', goto: 'Ver plano' },
     groups: [
       {
@@ -163,7 +163,7 @@ export const copy = (S) => ({
         title: 'Hospedado por nós',
         lead: 'A solução completa para quem quer o CRM pronto na nuvem, rodando isolado em Docker nos nossos servidores, sem se preocupar com infraestrutura.',
         ev: ['S3.1'],
-        note: 'A franquia de IA é uma estimativa em interações por mês. O painel mostra tokens e custo estimado de IA por provedor, função e dia.',
+        note: 'A franquia de IA é uma estimativa em interações por mês. O painel mostra tokens e custo estimado de IA por provedor, função e dia. Itens marcados como "Em breve" ainda não estão disponíveis.',
         noteEv: ['F18a'],
         plans: ['hosted-basico', 'hosted-intermediario', 'hosted-avancado', 'hosted-byok'],
       },
@@ -175,13 +175,36 @@ export const copy = (S) => ({
         plans: ['self-sem-suporte', 'self-com-suporte'],
       },
     ],
-    // Oferta comercial do dono (nao e recurso do produto).
-    launch: {
-      title: 'Oferta de lançamento',
-      d: 'Para os 20 primeiros clientes: primeira mensalidade isenta. No primeiro mês, você paga só a implantação.',
+    // Modulos adicionais. Nenhum esta disponivel hoje: todos aparecem como "Em breve".
+    addons: {
+      id: 'modulos',
+      eyebrow: 'Módulos adicionais',
+      title: 'Monte o seu CRM sob medida.',
+      lead: 'Exclusivos para os planos Hosted BYOK e Self-Hosted. Adicione funcionalidades extras à sua mensalidade, só as que você precisar.',
       ev: ['FRAME'],
+      per: 'por mês',
+      note: 'Os módulos estão em desenvolvimento e marcados como "Em breve". Os planos Hosted Básico, Intermediário e Avançado não aceitam módulos avulsos.',
+      items: {
+        agenda: { icon: 'agenda', soon: true, t: 'Agenda com confirmação automática', d: 'Agendamento inteligente e lembretes de compromissos dentro da conversa.', ev: ['FRAME'] },
+        financeiro: { icon: 'financeiro', soon: true, t: 'Emissão de cobrança via IA', d: 'Geração de cobrança PIX dentro da conversa, para o cliente pagar na hora.', ev: ['FRAME'] },
+        copiloto: { icon: 'copiloto', soon: true, t: 'Copiloto do Gestor', d: 'Assistente no WhatsApp privado do dono: consulta de estoque, avisos de vendas e relatórios.', ev: ['FRAME'] },
+        instancia: { icon: 'instancia', soon: true, t: 'Conexão extra de WhatsApp', d: 'Mais um número de WhatsApp no mesmo painel. O valor é por número adicional.', ev: ['FRAME'] },
+      },
+    },
+    launch: {
+      badge: 'Lote dos 20 primeiros',
+      title: 'Oferta de lançamento para clientes fundadores',
+      lead: 'Uma condição exclusiva para quem entra primeiro.',
+      big: '20',
+      bigLabel: 'vagas de fundador',
+      ev: ['FRAME'],
+      perks: [
+        { t: 'Primeira mensalidade isenta', d: 'No primeiro mês você paga só o valor da implantação.', ev: ['FRAME'] },
+        { t: 'Bônus VIP: 30 dias do Copiloto do Gestor', d: 'Acesso integral e gratuito ao módulo para os assinantes do Hosted Básico testarem, a partir do lançamento do módulo.', ev: ['FRAME'], soon: true },
+      ],
     },
     // O que cada plano inclui. Termos comerciais do dono levam FRAME; recursos do produto levam id de CONTEUDO.md.
+    // `soon: true` = ainda nao disponivel (aparece com a marca "Em breve"). Remova a marca so quando o recurso estiver no ar.
     plans: {
       'hosted-basico': {
         tagline: 'Para pequenas empresas que precisam automatizar o primeiro atendimento e organizar os leads no funil de vendas.',
@@ -189,34 +212,41 @@ export const copy = (S) => ({
         features: [
           { t: 'Franquia de IA inclusa: cerca de 1.500 interações por mês.', ev: ['FRAME'] },
           { t: 'CRM completo via WhatsApp: contatos e conversas unificados em uma tela.', ev: ['F1', 'F11'] },
-          { t: 'IA de atendimento e triagem: responde as conversas, qualifica o lead e passa para uma pessoa quando necessário.', ev: ['F3', 'F5'] },
+          { t: 'IA de atendimento e triagem: respostas automáticas para dúvidas frequentes e qualificação inicial de leads.', ev: ['F3', 'F5'] },
           { t: 'Painel kanban e relatórios de funil, atendimento e custo de IA.', ev: ['F7', 'F14'] },
         ],
+        note: 'Este plano não permite contratação de módulos avulsos. Para mais funcionalidades, veja os planos superiores.',
       },
       'hosted-intermediario': {
-        tagline: 'Para empresas em crescimento que atendem com mais volume e querem folga na franquia de IA.',
+        tagline: 'Para empresas em crescimento que querem automatizar agendamentos e ter o controle do negócio na palma da mão.',
         taglineEv: ['FRAME'],
         features: [
           { t: 'Tudo do Hosted Básico, mais:', ev: ['FRAME'] },
           { t: 'Franquia de IA ampliada: cerca de 4.000 interações por mês.', ev: ['FRAME'] },
+          { t: 'Copiloto do Gestor: consulta de estoque, avisos de vendas e relatórios no WhatsApp privado do dono.', ev: ['FRAME'], soon: true },
+          { t: 'Agenda com confirmação automática e lembretes de compromissos.', ev: ['FRAME'], soon: true },
+          { t: 'Emissão de cobrança PIX via IA dentro da conversa.', ev: ['FRAME'], soon: true },
         ],
       },
       'hosted-avancado': {
-        tagline: 'Para operações consolidadas com alto volume de interações.',
+        tagline: 'Para operações consolidadas que exigem automação de ponta a ponta, múltiplos números e alto volume de interações.',
         taglineEv: ['FRAME'],
         features: [
           { t: 'Tudo do Hosted Intermediário, mais:', ev: ['FRAME'] },
           { t: 'Franquia de IA premium: cerca de 10.000 interações por mês.', ev: ['FRAME'] },
+          { t: 'Instâncias múltiplas: números de WhatsApp adicionais no mesmo painel.', ev: ['FRAME'], soon: true },
+          { t: 'Múltiplos funis de vendas: kanbans simultâneos para setores diferentes, como Vendas, Suporte e Financeiro.', ev: ['FRAME'], soon: true },
           { t: 'Adaptação da paleta de cores da plataforma à identidade visual da sua empresa (setup semi-customizado).', ev: ['S7'] },
         ],
       },
       'hosted-byok': {
-        tagline: 'Para quem quer a nossa hospedagem, mas prefere gerenciar os próprios custos de IA.',
+        tagline: 'Para quem quer a nossa hospedagem, mas prefere gerenciar os próprios custos de IA na OpenAI.',
         taglineEv: ['FRAME'],
         features: [
           { t: 'Todas as funcionalidades do Hosted Básico.', ev: ['FRAME'] },
-          { t: 'Você cadastra o seu cartão no provedor de IA (por exemplo, OpenAI), gera a sua chave de API e paga só o que consumir, direto na fonte.', ev: ['F16'] },
+          { t: 'Você cadastra o seu cartão na OpenAI, gera a sua chave de API e paga só o que consumir, direto na fonte.', ev: ['F16'] },
         ],
+        note: 'Permite contratação de módulos adicionais.',
       },
       'self-sem-suporte': {
         tagline: 'Implantação única no seu servidor, sem acompanhamento depois.',
@@ -224,8 +254,9 @@ export const copy = (S) => ({
         features: [
           { t: 'Implantação isolada no servidor da sua empresa.', ev: ['S3.1'] },
           { t: 'Você usa as suas próprias chaves de API de IA.', ev: ['F16'] },
-          { t: 'Não inclui correção de bugs futuros, atualizações do sistema nem suporte técnico do dia a dia.', ev: ['FRAME'], no: true },
+          { t: 'Não inclui correção de bugs futuros nem suporte técnico.', ev: ['FRAME'], no: true },
         ],
+        note: 'Permite adição de módulos avulsos no momento da implantação.',
       },
       'self-com-suporte': {
         tagline: 'Implantação no seu servidor com manutenção contínua.',
@@ -234,8 +265,9 @@ export const copy = (S) => ({
           { t: 'Implantação no servidor da sua empresa.', ev: ['S3.1'] },
           { t: 'Você usa as suas próprias chaves de API de IA.', ev: ['F16'] },
           { t: 'Atualizações contínuas do contêiner Docker e patches de segurança.', ev: ['FRAME'] },
-          { t: 'Suporte para dúvidas técnicas da sua equipe.', ev: ['FRAME'] },
+          { t: 'Suporte técnico para a sua equipe.', ev: ['FRAME'] },
         ],
+        note: 'Permite adição de módulos avulsos.',
       },
     },
     // Exigido de quem escolhe rodar no proprio servidor (CONTEUDO.md secao 4).

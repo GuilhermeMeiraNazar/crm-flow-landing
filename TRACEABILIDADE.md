@@ -42,45 +42,57 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 36 | `pricing` | Escolha a solução ideal para o seu atendimento. Todos os planos têm inteligência artificial nativa, integração com o WhatsApp e painel de gestão vi... | F1, F3, F7 | A |
 | 37 | `pricing.groups[0]` | Hospedado por nós A solução completa para quem quer o CRM pronto na nuvem, rodando isolado em Docker nos nossos servidores, sem se preocupar com in... | S3.1 | A |
 | 38 | `pricing.groups[1]` | No seu servidor Para empresas que já têm servidor próprio (VPS ou nuvem) e querem o sistema rodando internamente. O consumo de IA é gerido pela pró... | S3.1, S3.2 | A |
-| 39 | `pricing.launch` | Oferta de lançamento Para os 20 primeiros clientes: primeira mensalidade isenta. No primeiro mês, você paga só a implantação. | FRAME | n/a |
-| 40 | `pricing.plans.hosted-basico` | Para pequenas empresas que precisam automatizar o primeiro atendimento e organizar os leads no funil de vendas. | FRAME | n/a |
-| 41 | `pricing.plans.hosted-basico.features[0]` | Franquia de IA inclusa: cerca de 1.500 interações por mês. | FRAME | n/a |
-| 42 | `pricing.plans.hosted-basico.features[1]` | CRM completo via WhatsApp: contatos e conversas unificados em uma tela. | F1, F11 | A |
-| 43 | `pricing.plans.hosted-basico.features[2]` | IA de atendimento e triagem: responde as conversas, qualifica o lead e passa para uma pessoa quando necessário. | F3, F5 | A |
-| 44 | `pricing.plans.hosted-basico.features[3]` | Painel kanban e relatórios de funil, atendimento e custo de IA. | F7, F14 | A |
-| 45 | `pricing.plans.hosted-intermediario` | Para empresas em crescimento que atendem com mais volume e querem folga na franquia de IA. | FRAME | n/a |
-| 46 | `pricing.plans.hosted-intermediario.features[0]` | Tudo do Hosted Básico, mais: | FRAME | n/a |
-| 47 | `pricing.plans.hosted-intermediario.features[1]` | Franquia de IA ampliada: cerca de 4.000 interações por mês. | FRAME | n/a |
-| 48 | `pricing.plans.hosted-avancado` | Para operações consolidadas com alto volume de interações. | FRAME | n/a |
-| 49 | `pricing.plans.hosted-avancado.features[0]` | Tudo do Hosted Intermediário, mais: | FRAME | n/a |
-| 50 | `pricing.plans.hosted-avancado.features[1]` | Franquia de IA premium: cerca de 10.000 interações por mês. | FRAME | n/a |
-| 51 | `pricing.plans.hosted-avancado.features[2]` | Adaptação da paleta de cores da plataforma à identidade visual da sua empresa (setup semi-customizado). | S7 | A |
-| 52 | `pricing.plans.hosted-byok` | Para quem quer a nossa hospedagem, mas prefere gerenciar os próprios custos de IA. | FRAME | n/a |
-| 53 | `pricing.plans.hosted-byok.features[0]` | Todas as funcionalidades do Hosted Básico. | FRAME | n/a |
-| 54 | `pricing.plans.hosted-byok.features[1]` | Você cadastra o seu cartão no provedor de IA (por exemplo, OpenAI), gera a sua chave de API e paga só o que consumir, direto na fonte. | F16 | A |
-| 55 | `pricing.plans.self-sem-suporte` | Implantação única no seu servidor, sem acompanhamento depois. | FRAME | n/a |
-| 56 | `pricing.plans.self-sem-suporte.features[0]` | Implantação isolada no servidor da sua empresa. | S3.1 | A |
-| 57 | `pricing.plans.self-sem-suporte.features[1]` | Você usa as suas próprias chaves de API de IA. | F16 | A |
-| 58 | `pricing.plans.self-sem-suporte.features[2]` | Não inclui correção de bugs futuros, atualizações do sistema nem suporte técnico do dia a dia. | FRAME | n/a |
-| 59 | `pricing.plans.self-com-suporte` | Implantação no seu servidor com manutenção contínua. | FRAME | n/a |
-| 60 | `pricing.plans.self-com-suporte.features[0]` | Implantação no servidor da sua empresa. | S3.1 | A |
-| 61 | `pricing.plans.self-com-suporte.features[1]` | Você usa as suas próprias chaves de API de IA. | F16 | A |
-| 62 | `pricing.plans.self-com-suporte.features[2]` | Atualizações contínuas do contêiner Docker e patches de segurança. | FRAME | n/a |
-| 63 | `pricing.plans.self-com-suporte.features[3]` | Suporte para dúvidas técnicas da sua equipe. | FRAME | n/a |
-| 64 | `pricing.selfReq` | O que o servidor da sua empresa precisa ter Não publicamos números de capacidade por servidor: eles ainda não foram medidos em produção. | S4 | A |
-| 65 | `pricing.selfReq.rows[0]` | Sistema VPS Linux: Ubuntu 22.04 ou mais novo, ou Debian 12 ou mais novo | S4 | A |
-| 66 | `pricing.selfReq.rows[1]` | Capacidade mínima 2 vCPU e 4 GB de RAM | S4 | A |
-| 67 | `pricing.selfReq.rows[2]` | Rede IP fixo reservado pelo provedor e um domínio apontando para a VPS | S4 | A |
-| 68 | `pricing.selfReq.rows[3]` | Software Docker Engine e Docker Compose v2, com proxy HTTPS no servidor | S4 | A |
-| 69 | `pricing.selfReq.rows[4]` | WhatsApp e IA Conta Meta Business verificada e chave de API do provedor de IA | S4, S5 | A |
-| 70 | `pricing.selfReq.rows[5]` | Licença Vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão. | S3.4, S4 | A |
-| 71 | `faq.items[0]` | Qual a diferença entre hospedado e no seu servidor? Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem ... | FRAME, S4 | n/a, A |
-| 72 | `faq.items[1]` | A licença funciona em qualquer servidor? Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é p... | S3.4, S4 | A |
-| 73 | `faq.items[2]` | Para onde vão as conversas? Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta. | S5 | A |
-| 74 | `faq.items[3]` | Quanto custa a IA? Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave.... | F16, F18a | A |
-| 75 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
-| 76 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
-| 77 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil da sua empresa para funcionar. | FRAME | n/a |
+| 39 | `pricing.addons` | Monte o seu CRM sob medida. Exclusivos para os planos Hosted BYOK e Self-Hosted. Adicione funcionalidades extras à sua mensalidade, só as que você ... | FRAME | n/a |
+| 40 | `pricing.addons.items.agenda` | Agenda com confirmação automática Agendamento inteligente e lembretes de compromissos dentro da conversa. | FRAME | n/a |
+| 41 | `pricing.addons.items.financeiro` | Emissão de cobrança via IA Geração de cobrança PIX dentro da conversa, para o cliente pagar na hora. | FRAME | n/a |
+| 42 | `pricing.addons.items.copiloto` | Copiloto do Gestor Assistente no WhatsApp privado do dono: consulta de estoque, avisos de vendas e relatórios. | FRAME | n/a |
+| 43 | `pricing.addons.items.instancia` | Conexão extra de WhatsApp Mais um número de WhatsApp no mesmo painel. O valor é por número adicional. | FRAME | n/a |
+| 44 | `pricing.launch` | Oferta de lançamento para clientes fundadores Uma condição exclusiva para quem entra primeiro. | FRAME | n/a |
+| 45 | `pricing.launch.perks[0]` | Primeira mensalidade isenta No primeiro mês você paga só o valor da implantação. | FRAME | n/a |
+| 46 | `pricing.launch.perks[1]` | Bônus VIP: 30 dias do Copiloto do Gestor Acesso integral e gratuito ao módulo para os assinantes do Hosted Básico testarem, a partir do lançamento ... | FRAME | n/a |
+| 47 | `pricing.plans.hosted-basico` | Este plano não permite contratação de módulos avulsos. Para mais funcionalidades, veja os planos superiores. Para pequenas empresas que precisam au... | FRAME | n/a |
+| 48 | `pricing.plans.hosted-basico.features[0]` | Franquia de IA inclusa: cerca de 1.500 interações por mês. | FRAME | n/a |
+| 49 | `pricing.plans.hosted-basico.features[1]` | CRM completo via WhatsApp: contatos e conversas unificados em uma tela. | F1, F11 | A |
+| 50 | `pricing.plans.hosted-basico.features[2]` | IA de atendimento e triagem: respostas automáticas para dúvidas frequentes e qualificação inicial de leads. | F3, F5 | A |
+| 51 | `pricing.plans.hosted-basico.features[3]` | Painel kanban e relatórios de funil, atendimento e custo de IA. | F7, F14 | A |
+| 52 | `pricing.plans.hosted-intermediario` | Para empresas em crescimento que querem automatizar agendamentos e ter o controle do negócio na palma da mão. | FRAME | n/a |
+| 53 | `pricing.plans.hosted-intermediario.features[0]` | Tudo do Hosted Básico, mais: | FRAME | n/a |
+| 54 | `pricing.plans.hosted-intermediario.features[1]` | Franquia de IA ampliada: cerca de 4.000 interações por mês. | FRAME | n/a |
+| 55 | `pricing.plans.hosted-intermediario.features[2]` | Copiloto do Gestor: consulta de estoque, avisos de vendas e relatórios no WhatsApp privado do dono. | FRAME | n/a |
+| 56 | `pricing.plans.hosted-intermediario.features[3]` | Agenda com confirmação automática e lembretes de compromissos. | FRAME | n/a |
+| 57 | `pricing.plans.hosted-intermediario.features[4]` | Emissão de cobrança PIX via IA dentro da conversa. | FRAME | n/a |
+| 58 | `pricing.plans.hosted-avancado` | Para operações consolidadas que exigem automação de ponta a ponta, múltiplos números e alto volume de interações. | FRAME | n/a |
+| 59 | `pricing.plans.hosted-avancado.features[0]` | Tudo do Hosted Intermediário, mais: | FRAME | n/a |
+| 60 | `pricing.plans.hosted-avancado.features[1]` | Franquia de IA premium: cerca de 10.000 interações por mês. | FRAME | n/a |
+| 61 | `pricing.plans.hosted-avancado.features[2]` | Instâncias múltiplas: números de WhatsApp adicionais no mesmo painel. | FRAME | n/a |
+| 62 | `pricing.plans.hosted-avancado.features[3]` | Múltiplos funis de vendas: kanbans simultâneos para setores diferentes, como Vendas, Suporte e Financeiro. | FRAME | n/a |
+| 63 | `pricing.plans.hosted-avancado.features[4]` | Adaptação da paleta de cores da plataforma à identidade visual da sua empresa (setup semi-customizado). | S7 | A |
+| 64 | `pricing.plans.hosted-byok` | Permite contratação de módulos adicionais. Para quem quer a nossa hospedagem, mas prefere gerenciar os próprios custos de IA na OpenAI. | FRAME | n/a |
+| 65 | `pricing.plans.hosted-byok.features[0]` | Todas as funcionalidades do Hosted Básico. | FRAME | n/a |
+| 66 | `pricing.plans.hosted-byok.features[1]` | Você cadastra o seu cartão na OpenAI, gera a sua chave de API e paga só o que consumir, direto na fonte. | F16 | A |
+| 67 | `pricing.plans.self-sem-suporte` | Permite adição de módulos avulsos no momento da implantação. Implantação única no seu servidor, sem acompanhamento depois. | FRAME | n/a |
+| 68 | `pricing.plans.self-sem-suporte.features[0]` | Implantação isolada no servidor da sua empresa. | S3.1 | A |
+| 69 | `pricing.plans.self-sem-suporte.features[1]` | Você usa as suas próprias chaves de API de IA. | F16 | A |
+| 70 | `pricing.plans.self-sem-suporte.features[2]` | Não inclui correção de bugs futuros nem suporte técnico. | FRAME | n/a |
+| 71 | `pricing.plans.self-com-suporte` | Permite adição de módulos avulsos. Implantação no seu servidor com manutenção contínua. | FRAME | n/a |
+| 72 | `pricing.plans.self-com-suporte.features[0]` | Implantação no servidor da sua empresa. | S3.1 | A |
+| 73 | `pricing.plans.self-com-suporte.features[1]` | Você usa as suas próprias chaves de API de IA. | F16 | A |
+| 74 | `pricing.plans.self-com-suporte.features[2]` | Atualizações contínuas do contêiner Docker e patches de segurança. | FRAME | n/a |
+| 75 | `pricing.plans.self-com-suporte.features[3]` | Suporte técnico para a sua equipe. | FRAME | n/a |
+| 76 | `pricing.selfReq` | O que o servidor da sua empresa precisa ter Não publicamos números de capacidade por servidor: eles ainda não foram medidos em produção. | S4 | A |
+| 77 | `pricing.selfReq.rows[0]` | Sistema VPS Linux: Ubuntu 22.04 ou mais novo, ou Debian 12 ou mais novo | S4 | A |
+| 78 | `pricing.selfReq.rows[1]` | Capacidade mínima 2 vCPU e 4 GB de RAM | S4 | A |
+| 79 | `pricing.selfReq.rows[2]` | Rede IP fixo reservado pelo provedor e um domínio apontando para a VPS | S4 | A |
+| 80 | `pricing.selfReq.rows[3]` | Software Docker Engine e Docker Compose v2, com proxy HTTPS no servidor | S4 | A |
+| 81 | `pricing.selfReq.rows[4]` | WhatsApp e IA Conta Meta Business verificada e chave de API do provedor de IA | S4, S5 | A |
+| 82 | `pricing.selfReq.rows[5]` | Licença Vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão. | S3.4, S4 | A |
+| 83 | `faq.items[0]` | Qual a diferença entre hospedado e no seu servidor? Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem ... | FRAME, S4 | n/a, A |
+| 84 | `faq.items[1]` | A licença funciona em qualquer servidor? Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é p... | S3.4, S4 | A |
+| 85 | `faq.items[2]` | Para onde vão as conversas? Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta. | S5 | A |
+| 86 | `faq.items[3]` | Quanto custa a IA? Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave.... | F16, F18a | A |
+| 87 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
+| 88 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
+| 89 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil da sua empresa para funcionar. | FRAME | n/a |
 
 ## Legenda dos ids
 

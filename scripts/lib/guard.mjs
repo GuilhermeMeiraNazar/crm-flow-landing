@@ -73,6 +73,9 @@ export function checkSources() {
     }
     if (!['hosted', 'self'].includes(p.line)) v.push(`SITE.pricing.plans[${i}].line deve ser "hosted" ou "self" (valor ${p.line})`);
   });
+  (SITE.pricing?.addons || []).forEach((a, i) => {
+    if (typeof a.monthly !== 'number' || !Number.isFinite(a.monthly) || a.monthly <= 0) v.push(`SITE.pricing.addons[${i}].monthly deve ser numerico e maior que zero (valor ${a.monthly})`);
+  });
   // (a) qualquer texto com colchetes ou "CONFIRMAR"
   const all = { SITE, copy: copy(SITE), legal: legal(SITE) };
   for (const [root, obj] of Object.entries(all)) {
