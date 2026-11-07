@@ -16,7 +16,7 @@ export const legal = (S) => {
         { h: '5. Responsabilidades do contratante', p: ['Manter a segurança das senhas e dos acessos da sua equipe e das credenciais dos serviços conectados. Nos planos no seu servidor, manter também o servidor, o backup e uma cópia segura da chave de criptografia usada pela instalação: sem ela, as credenciais gravadas no banco não podem ser recuperadas. [DIVISAO DE RESPONSABILIDADES COM O FORNECEDOR NOS PLANOS HOSPEDADOS. DEFINIR COM ADVOGADO.]', 'Usar o produto em conformidade com a lei e com as regras do WhatsApp e dos demais serviços conectados.'] },
         { h: '6. Atualizações e suporte', p: ['[POLITICA DE ATUALIZACOES E SUPORTE: prazo, canais, horarios, escopo. DEFINIR.]'] },
         { h: '7. Limitação de responsabilidade', p: ['[CLAUSULA DE LIMITACAO DE RESPONSABILIDADE. DEFINIR COM ADVOGADO.]'] },
-        { h: '8. Preço, pagamento e reembolso', p: [`Preço e forma de pagamento: implantação única e mensalidade conforme o plano escolhido, como indicado na seção de planos.`, 'Reembolso e arrependimento: veja a página de Reembolso.'] },
+        { h: '8. Preço, pagamento e reembolso', p: [`Preço e forma de pagamento: implantação única e mensalidade conforme o plano escolhido, como indicado na seção de planos.`, 'Oferta de lançamento: primeira mensalidade isenta para os 20 primeiros clientes. [CONDICOES DA OFERTA: elegibilidade, prazo, planos abrangidos e o que ocorre ao fim do lote. DEFINIR COM ADVOGADO.]', 'Reembolso e arrependimento: veja a página de Reembolso.'] },
         { h: '9. Foro e lei aplicável', p: ['[FORO E LEI APLICAVEL. DEFINIR COM ADVOGADO.]'] },
       ],
     },

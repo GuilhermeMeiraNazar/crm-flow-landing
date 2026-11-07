@@ -41,8 +41,8 @@ await p.keyboard.press('ArrowLeft'); await p.waitForTimeout(900);
 console.log('ArrowLeft     ', JSON.stringify(await state(p)));
 await p.getByRole('button', { name: 'Ver plano Hosted Avançado' }).click(); await p.waitForTimeout(1000);
 console.log('aba Avancado   ', JSON.stringify(await state(p)));
-await p.getByRole('button', { name: 'Ver plano Hosted BYOK' }).click(); await p.waitForTimeout(1000);
-console.log('aba BYOK    ', JSON.stringify(await state(p)));
+await p.getByRole('button', { name: 'Ver plano Hosted Básico' }).click(); await p.waitForTimeout(1000);
+console.log('aba Basico    ', JSON.stringify(await state(p)));
 console.log('mobile overflowX', await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth));
 await ctx.close();
 // reduced motion

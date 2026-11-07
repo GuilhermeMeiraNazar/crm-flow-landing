@@ -152,61 +152,70 @@ export const copy = (S) => ({
   pricing: {
     id: 'precos',
     eyebrow: 'Planos',
-    title: 'Escolha onde o ConversIA vai rodar.',
-    lead: 'No nosso servidor, com tudo pronto, ou no servidor da sua empresa. Em todos os planos a implantação é uma taxa única.',
-    leadEv: ['FRAME'],
+    title: 'Escolha a solução ideal para o seu atendimento.',
+    lead: 'Todos os planos têm inteligência artificial nativa, integração com o WhatsApp e painel de gestão visual. Escolha entre o ConversIA hospedado por nós ou instalado no servidor da sua empresa. A implantação é uma taxa única.',
+    leadEv: ['F1', 'F3', 'F7'],
     labels: { setup: 'Implantação', setupNote: 'taxa única', monthly: 'mês', noMonthly: 'sem mensalidade', badge: 'Recomendado' },
     carousel: { region: 'Planos e valores', prev: 'Plano anterior', next: 'Próximo plano', goto: 'Ver plano' },
     groups: [
       {
         id: 'hosted',
         title: 'Hospedado por nós',
-        lead: 'Para quem quer o CRM pronto, sem cuidar de servidor. Cada empresa roda isolada, em contêineres Docker, na nossa VPS.',
+        lead: 'A solução completa para quem quer o CRM pronto na nuvem, rodando isolado em Docker nos nossos servidores, sem se preocupar com infraestrutura.',
         ev: ['S3.1'],
         note: 'A franquia de IA é uma estimativa em interações por mês. O painel mostra tokens e custo estimado de IA por provedor, função e dia.',
         noteEv: ['F18a'],
-        plans: ['hosted-byok', 'hosted-basico', 'hosted-intermediario', 'hosted-avancado'],
+        plans: ['hosted-basico', 'hosted-intermediario', 'hosted-avancado', 'hosted-byok'],
       },
       {
         id: 'self',
         title: 'No seu servidor',
-        lead: 'Para empresas que já têm servidor e querem o sistema rodando internamente, com as próprias chaves de API.',
+        lead: 'Para empresas que já têm servidor próprio (VPS ou nuvem) e querem o sistema rodando internamente. O consumo de IA é gerido pela própria empresa, com as suas chaves.',
         ev: ['S3.1', 'S3.2'],
         plans: ['self-sem-suporte', 'self-com-suporte'],
       },
     ],
+    // Oferta comercial do dono (nao e recurso do produto).
+    launch: {
+      title: 'Oferta de lançamento',
+      d: 'Para os 20 primeiros clientes: primeira mensalidade isenta. No primeiro mês, você paga só a implantação.',
+      ev: ['FRAME'],
+    },
     // O que cada plano inclui. Termos comerciais do dono levam FRAME; recursos do produto levam id de CONTEUDO.md.
     plans: {
-      'hosted-byok': {
-        tagline: 'Hospedagem completa, com a sua chave de IA.',
-        taglineEv: ['FRAME'],
-        features: [
-          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
-          { t: 'Você cadastra o seu cartão no provedor de IA e gera a sua chave de API. O custo dos tokens é 100% seu.', ev: ['F16'] },
-        ],
-      },
       'hosted-basico': {
-        tagline: 'Para negócios com fluxo leve de mensagens.',
+        tagline: 'Para pequenas empresas que precisam automatizar o primeiro atendimento e organizar os leads no funil de vendas.',
         taglineEv: ['FRAME'],
         features: [
-          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
-          { t: 'Franquia inicial de IA inclusa: cerca de 1.500 interações por mês.', ev: ['FRAME'] },
+          { t: 'Franquia de IA inclusa: cerca de 1.500 interações por mês.', ev: ['FRAME'] },
+          { t: 'CRM completo via WhatsApp: contatos e conversas unificados em uma tela.', ev: ['F1', 'F11'] },
+          { t: 'IA de atendimento e triagem: responde as conversas, qualifica o lead e passa para uma pessoa quando necessário.', ev: ['F3', 'F5'] },
+          { t: 'Painel kanban e relatórios de funil, atendimento e custo de IA.', ev: ['F7', 'F14'] },
         ],
       },
       'hosted-intermediario': {
-        tagline: 'Para quem atende com mais volume e quer folga na franquia de IA.',
+        tagline: 'Para empresas em crescimento que atendem com mais volume e querem folga na franquia de IA.',
         taglineEv: ['FRAME'],
         features: [
-          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
+          { t: 'Tudo do Hosted Básico, mais:', ev: ['FRAME'] },
           { t: 'Franquia de IA ampliada: cerca de 4.000 interações por mês.', ev: ['FRAME'] },
         ],
       },
       'hosted-avancado': {
-        tagline: 'Para operações com grande fluxo de mensagens.',
+        tagline: 'Para operações consolidadas com alto volume de interações.',
         taglineEv: ['FRAME'],
         features: [
-          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
-          { t: 'A maior franquia de IA: cerca de 10.000 interações por mês.', ev: ['FRAME'] },
+          { t: 'Tudo do Hosted Intermediário, mais:', ev: ['FRAME'] },
+          { t: 'Franquia de IA premium: cerca de 10.000 interações por mês.', ev: ['FRAME'] },
+          { t: 'Adaptação da paleta de cores da plataforma à identidade visual da sua empresa (setup semi-customizado).', ev: ['S7'] },
+        ],
+      },
+      'hosted-byok': {
+        tagline: 'Para quem quer a nossa hospedagem, mas prefere gerenciar os próprios custos de IA.',
+        taglineEv: ['FRAME'],
+        features: [
+          { t: 'Todas as funcionalidades do Hosted Básico.', ev: ['FRAME'] },
+          { t: 'Você cadastra o seu cartão no provedor de IA (por exemplo, OpenAI), gera a sua chave de API e paga só o que consumir, direto na fonte.', ev: ['F16'] },
         ],
       },
       'self-sem-suporte': {
@@ -224,8 +233,8 @@ export const copy = (S) => ({
         features: [
           { t: 'Implantação no servidor da sua empresa.', ev: ['S3.1'] },
           { t: 'Você usa as suas próprias chaves de API de IA.', ev: ['F16'] },
-          { t: 'Atualizações do contêiner Docker e patches de segurança.', ev: ['FRAME'] },
-          { t: 'Suporte para dúvidas técnicas.', ev: ['FRAME'] },
+          { t: 'Atualizações contínuas do contêiner Docker e patches de segurança.', ev: ['FRAME'] },
+          { t: 'Suporte para dúvidas técnicas da sua equipe.', ev: ['FRAME'] },
         ],
       },
     },

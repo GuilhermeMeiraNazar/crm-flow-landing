@@ -269,7 +269,7 @@ $bp-lg: 1200px;
 .planSupport { color: var(--text-secondary); font-size: 0.88rem; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
 .planSupport strong { color: var(--text-primary); font-weight: 600; }
 .planIncl { font-weight: 600; font-size: 0.92rem; margin-bottom: 12px; }
-.plan .ticks { flex: 1; }
+.plan .ticks { flex: 1; align-content: start; }
 .planCta { margin-top: 24px; }
 @media (prefers-reduced-motion: reduce) { .plan { transition: none; } }
 // Grupos de planos (hospedado / no seu servidor)
@@ -279,3 +279,6 @@ $bp-lg: 1200px;
 .planBadge { position: absolute; top: -11px; right: 20px; padding: 3px 10px; border-radius: 999px; background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); color: #fff; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em; text-transform: none; }
 .selfReq { margin-top: 8px; }
 .selfReq h4 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 12px; }
+.launch { margin: 48px 0 20px; padding: 22px 24px; border: 1px solid var(--accent-live); border-radius: var(--radius-lg); background: var(--accent-live-soft); }
+.launch h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.launch p { color: var(--text-primary); }

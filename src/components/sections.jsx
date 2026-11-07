@@ -310,6 +310,10 @@ export function Pricing({ C }) {
         );
       })}
       <div className={s.container}>
+        <aside className={s.launch} data-reveal {...ev(p.launch.ev)}>
+          <h3>{p.launch.title}</h3>
+          <p>{p.launch.d}</p>
+        </aside>
         <p className={s.placeholder}>Garantia: {SITE.pricing.guarantee}</p>
       </div>
     </section>

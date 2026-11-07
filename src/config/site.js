@@ -35,10 +35,10 @@ export const SITE = {
   pricing: {
     currency: 'BRL',
     plans: [
-      { id: 'hosted-byok', line: 'hosted', name: 'Chave própria', tier: 'Hosted BYOK', setup: 1500, monthly: 150, highlight: false },
       { id: 'hosted-basico', line: 'hosted', name: 'Básico', tier: 'Hosted Básico', setup: 1500, monthly: 250, highlight: false },
       { id: 'hosted-intermediario', line: 'hosted', name: 'Intermediário', tier: 'Hosted Intermediário', setup: 1500, monthly: 400, highlight: true },
       { id: 'hosted-avancado', line: 'hosted', name: 'Avançado', tier: 'Hosted Avançado', setup: 1500, monthly: 600, highlight: false },
+      { id: 'hosted-byok', line: 'hosted', name: 'Chave própria', tier: 'Hosted BYOK', setup: 1500, monthly: 150, highlight: false },
       { id: 'self-sem-suporte', line: 'self', name: 'Sem suporte', tier: 'Self-Hosted', setup: 3500, monthly: 0, highlight: false },
       { id: 'self-com-suporte', line: 'self', name: 'Com suporte', tier: 'Self-Hosted + Suporte', setup: 3000, monthly: 150, highlight: false },
     ],
