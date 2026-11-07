@@ -1,7 +1,7 @@
 import s from '../styles/landing.module.scss';
 import { SITE, whatsappHref } from '../config/site.js';
 import { Counter, useLitSteps } from '../hooks/effects.jsx';
-import { Shot, ev } from './ui.jsx';
+import { Shot, ShotFrame, Caption, ev } from './ui.jsx';
 
 const Head = ({ eyebrow, title, lead, id, evIds }) => (
   <div className={s.head} data-reveal {...ev(evIds)}>
@@ -26,14 +26,16 @@ export function Hero({ C }) {
             <a className={`${s.btn} ${s.btnPrimary}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
             <a className={`${s.btn} ${s.btnGhost}`} href={SITE.ctaSecondaryHref}>{SITE.ctaSecondaryLabel}</a>
           </div>
-          <p className={s.heroNote}>{h.note}</p>
         </div>
-        <div className={s.stage} data-parallax>
-          <div className={s.stageGlow} aria-hidden="true" />
-          <div className={s.tilt}>
-            <Shot name="pipeline" alt={h.shotAlt} eager sizes="(min-width: 1200px) 1100px, 100vw" />
+        <figure className={s.heroFig}>
+          <div className={s.stage} data-parallax>
+            <div className={s.stageGlow} aria-hidden="true" />
+            <div className={s.tilt}>
+              <ShotFrame name="hero" alt={h.shotAlt} eager sizes="(min-width: 1200px) 1100px, 100vw" />
+            </div>
           </div>
-        </div>
+          <Caption />
+        </figure>
       </div>
     </section>
   );

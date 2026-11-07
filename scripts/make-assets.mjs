@@ -21,7 +21,7 @@ await sharp(Buffer.from(mark(32, 28))).png().toFile('public/favicon-32.png');
 await sharp(Buffer.from(mark(180, 0))).png().toFile('public/apple-touch-icon.png');
 
 // OG 1200x630: fundo escuro com malha, monograma, nome, frase e recorte da captura real do pipeline.
-const shot = await sharp('capturas/pipeline-dark@2x.webp').resize({ width: 1500 }).extract({ left: 0, top: 0, width: 1500, height: 760 }).png().toBuffer();
+const shot = await sharp('src/assets/capturas/pipeline-dark@2x.webp').resize({ width: 1500 }).extract({ left: 0, top: 0, width: 1500, height: 760 }).png().toBuffer();
 const shotRounded = await sharp(shot).resize({ width: 640 }).composite([{ input: Buffer.from('<svg><rect width="640" height="320" rx="16"/></svg>'), blend: 'dest-in' }]).png().toBuffer();
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const bg = `

@@ -30,6 +30,8 @@ A saída é a pasta `dist/` (4 páginas: `/`, `/termos/`, `/privacidade/`, `/ree
 
 `npm run build` FALHA (e apaga o `dist/` anterior) enquanto houver: texto com colchetes ou `CONFIRMAR` (config, conteudo, textos legais e HTML gerado); `legalDraft: true`; `CTA_URL`, `domain`, `contactEmail`, `contactWhatsapp`, `company.legalName`, `company.cnpj` ou preco vazios ou placeholder. Com `ALLOW_DRAFT_BUILD=1` o build passa, avisa, grava `dist/NAO_PUBLICAR.txt` e troca o `robots.txt` por `Disallow: /`. O build forca `NODE_ENV=production`.
 
+Teste da trava: `node scripts/test-guard.mjs` (copia o projeto para a pasta temporaria, aplica valores de teste so la e roda o build real em cada caso invalido e no valido). Regras extras: CNPJ com digitos verificadores, URLs https, e-mail valido, preco numerico maior que zero.
+
 Varreduras do `dist/`: `npm run scan:dist` (termos proibidos), `npm run check:links` e `node scripts/trace.mjs`. Relatorio: `verificacao/AUDITORIA-VAZAMENTO.md`.
 
 ## Editar `src/config/site.js`
@@ -57,7 +59,7 @@ O texto da página está em `src/content/pt-BR.js`. Cada afirmação tem `ev` co
 
 ## Telas do produto
 
-As imagens em `src/assets/capturas/` foram capturadas com Playwright de uma cópia descartável do CRM com dados fictícios (nomes e telefones inventados, sem WhatsApp conectado, sem chave real). Mascaramos na captura: o badge fixo "12" de Conversas, os itens de menu de funcionalidades fora da página, o card de estado da instância local, o total "R$ NaN" das colunas do kanban e o bloco "Saldo de tokens". Os defeitos do CRM estão em `DEFEITOS-CRM.md`.
+As imagens em `src/assets/capturas/` (AVIF com WebP de reserva, 1x e 2x, mais `manifest.json` com as dimensoes) foram capturadas com Playwright de uma cópia descartável do CRM com dados fictícios (nomes e telefones inventados, sem WhatsApp conectado, sem chave real). Telas de funcionalidade sao RECORTADAS (clip do navegador) para excluir a sidebar; so a captura do hero mantem a sidebar, com Catalogo, Calendario e Base de Conhecimento desfocados. Toda captura recebe a legenda unica "Dados ficticios de demonstracao" (componente `Caption`). Relatorios mostra so o painel de contagem por etapa, sem taxas nem valores. Desfocamos na captura: o badge fixo "12" de Conversas, os itens de menu de funcionalidades fora da página, o card de estado da instância local, o total "R$ NaN" das colunas do kanban e o bloco "Saldo de tokens". Os defeitos do CRM estão em `DEFEITOS-CRM.md`.
 
 ## Contraste (ajustes só da landing)
 

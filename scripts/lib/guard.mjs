@@ -5,6 +5,30 @@ import { legal } from '../../src/content/legal.js';
 
 export const allowDraft = () => process.env.ALLOW_DRAFT_BUILD === '1';
 
+const EMAIL = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
+
+// CNPJ: 14 digitos, nao todos iguais, e os dois digitos verificadores (modulo 11) conferem.
+export function validCnpj(value) {
+  const d = String(value).replace(/\D/g, '');
+  if (d.length !== 14 || /^(\d)\1{13}$/.test(d)) return false;
+  const dv = (len) => {
+    let sum = 0; let w = len - 7;
+    for (let i = 0; i < len; i++) { sum += Number(d[i]) * w--; if (w < 2) w = 9; }
+    const r = sum % 11;
+    return r < 2 ? 0 : 11 - r;
+  };
+  return dv(12) === Number(d[12]) && dv(13) === Number(d[13]);
+}
+
+// URL obrigatoriamente https:// com host valido. Retorna a descricao do problema ou null.
+export function httpsProblem(value) {
+  let u;
+  try { u = new URL(String(value)); } catch { return 'nao e uma URL valida'; }
+  if (u.protocol !== 'https:') return `deve usar https:// (protocolo atual: ${u.protocol.replace(':', '')}://)`;
+  if (!u.hostname.includes('.')) return 'tem host invalido';
+  return null;
+}
+
 const BRACKET = /\[[^\]\n]{2,}\]/;           // placeholder em colchetes
 const CONFIRM = /\[?\s*CONFIRMAR/i;           // "[CONFIRMAR ...": mesmo sem colchete de fechamento
 const emptyish = (v) => v == null || String(v).trim() === '';
@@ -28,10 +52,20 @@ export function checkSources() {
     else if (looksPlaceholder(val)) v.push(`SITE.${k} e placeholder: "${val}"`);
   }
   if (!emptyish(SITE.contactWhatsapp) && /0{7,}/.test(String(SITE.contactWhatsapp))) v.push(`SITE.contactWhatsapp e placeholder: "${SITE.contactWhatsapp}"`);
+  // Formato dos valores (so avalia o que nao e vazio nem placeholder; vazio e placeholder ja foram reportados acima)
+  const real = (x) => !emptyish(x) && !looksPlaceholder(x);
+  if (real(SITE.company?.cnpj) && !validCnpj(SITE.company.cnpj)) v.push(`SITE.company.cnpj invalido: digitos verificadores nao conferem ("${SITE.company.cnpj}")`);
+  for (const k of ['CTA_URL', 'domain']) {
+    if (emptyish(SITE[k])) continue;
+    const r = httpsProblem(SITE[k]);
+    if (r) v.push(`SITE.${k} ${r}: "${SITE[k]}"`);
+  }
+  if (real(SITE.contactEmail) && !EMAIL.test(String(SITE.contactEmail).trim())) v.push(`SITE.contactEmail com formato invalido: "${SITE.contactEmail}"`);
   const plans = SITE.pricing?.plans || [];
   if (!plans.length) v.push('SITE.pricing.plans esta vazio');
   plans.forEach((p, i) => {
-    if (typeof p.price !== 'number' || !Number.isFinite(p.price) || p.price <= 0) v.push(`SITE.pricing.plans[${i}].price nao e um numero valido (valor atual: ${p.price})`);
+    if (typeof p.price !== 'number' || !Number.isFinite(p.price)) v.push(`SITE.pricing.plans[${i}].price deve ser numerico (tipo ${typeof p.price}, valor ${p.price})`);
+    else if (p.price <= 0) v.push(`SITE.pricing.plans[${i}].price deve ser maior que zero (valor ${p.price})`);
   });
   // (a) qualquer texto com colchetes ou "CONFIRMAR"
   const all = { SITE, copy: copy(SITE), legal: legal(SITE) };

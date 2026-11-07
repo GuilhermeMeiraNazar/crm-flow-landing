@@ -7,6 +7,8 @@
 // `review: true` = classe B: redacao conservadora, depende da aprovacao do dono.
 // Nenhum texto menciona KB/RAG, PIX, calendario, Baileys, Click-to-WhatsApp, nem o modelo de entrega alem de "produto instalavel".
 
+export const CAPTION = 'Dados fictícios de demonstração';
+
 export const copy = (S) => ({
   nav: [
     { href: '#produto', label: 'Produto' },
@@ -23,8 +25,7 @@ export const copy = (S) => ({
     h1: 'CRM de WhatsApp com IA, instalado no seu servidor.',
     sub: 'Caixa de entrada para a equipe, funil de vendas em kanban, automações por etapa e relatórios, em uma instalação dedicada à sua empresa.',
     ev: ['S1', 'S3.1', 'F1', 'F7', 'F12', 'F14'],
-    note: 'Telas reais do produto com dados fictícios de demonstração.',
-    shotAlt: `Tela de Pipeline do ${S.name}: quadro kanban com negócios distribuídos em etapas, com dados fictícios de demonstração.`,
+    shotAlt: `Tela de Pipeline do ${S.name} com o menu lateral e o quadro kanban de negócios por etapa.`,
   },
 
   integrations: {
@@ -94,7 +95,7 @@ export const copy = (S) => ({
     ],
     privacy: 'Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.',
     privacyEv: ['S3.1'],
-    shotAlt: 'Tela de Chaves de IA: agente de conversa e transcrição de áudio com provedor, modelo e chave configurada, com dados fictícios.',
+    shotAlt: 'Tela de Chaves de IA: agente de conversa e transcrição de áudio com provedor, modelo e chave configurada.',
   },
 
   showcase: [
@@ -106,7 +107,7 @@ export const copy = (S) => ({
         { t: 'Arraste e solte entre etapas.', ev: ['F7'] },
         { t: 'Histórico de movimentação com data e autoria.', ev: ['F9'] },
       ],
-      shot: 'pipeline', alt: 'Quadro kanban do Pipeline com colunas Novo lead, Em atendimento, Proposta enviada e Negociação, com negócios fictícios.',
+      shot: 'pipeline', alt: 'Quadro kanban do Pipeline com colunas Novo lead, Em atendimento, Proposta enviada e Negociação.',
     },
     {
       id: 'inbox', ev: ['F1'], eyebrow: 'Conversas', title: 'Uma fila para a equipe, no mesmo painel.',
@@ -115,7 +116,7 @@ export const copy = (S) => ({
         { t: 'Fila e “minhas” conversas, com assumir e liberar.', ev: ['F1'] },
         { t: 'Atualização em tempo real.', ev: ['F1'] },
       ],
-      shot: 'inbox', alt: 'Tela de Conversas com fila, lista de conversas e janela de chat com mensagens fictícias.',
+      shot: 'inbox', alt: 'Tela de Conversas com fila, lista de conversas e janela de chat.',
     },
     {
       id: 'automacoes', ev: ['F12'], eyebrow: 'Automações', title: 'Quando o negócio muda de etapa, o sistema age.',
@@ -125,7 +126,7 @@ export const copy = (S) => ({
         { t: 'Ações: enviar template de WhatsApp, notificar o atendente, agendar lembrete.', ev: ['F12'] },
         { t: 'Liga e desliga cada automação.', ev: ['F12'] },
       ],
-      shot: 'automacoes', alt: 'Lista de automações por etapa com gatilho, ação e status, com exemplos fictícios.',
+      shot: 'automacoes', alt: 'Lista de automações por etapa com gatilho, ação e status.',
     },
     {
       id: 'relatorios', ev: ['F14', 'F15'], eyebrow: 'Relatórios', title: 'Funil, atendimento e custo de IA em números.',
@@ -135,7 +136,7 @@ export const copy = (S) => ({
         { t: 'Conversas resolvidas pela IA, transferidas e tempo de primeira resposta.', ev: ['F14'] },
         { t: 'Exportação em CSV e planilha.', ev: ['F15'] },
       ],
-      shot: 'analytics', alt: 'Tela de Relatórios com taxa de conversão, valores do funil e gráficos por etapa, com dados fictícios.',
+      shot: 'analytics', alt: 'Painel Deals por estágio dos Relatórios, com a contagem de negócios em cada etapa do funil.',
     },
   ],
 

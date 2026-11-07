@@ -54,7 +54,7 @@ for (const f of files.filter((x) => x.endsWith('.html'))) {
   console.log(' alt (n)      :', attr(h, /\salt="([^"]*)"/g).length, '| aria-label (n):', attr(h, /\saria-label="([^"]*)"/g).length, '| title="" (n):', attr(h, /\stitle="([^"]*)"/g).length);
   console.log(' comentarios  :', attr(h, /<!--([\s\S]*?)-->/g).length ? JSON.stringify(attr(h, /<!--([\s\S]*?)-->/g).map((c) => c.slice(0, 40))) : 'nenhum');
 }
-const imgs = files.filter((x) => /\.(png|webp|svg|jpg|ico)$/i.test(x)).map(rel);
+const imgs = files.filter((x) => /\.(png|webp|avif|svg|jpg|ico)$/i.test(x)).map(rel);
 console.log(`\narquivos de imagem (${imgs.length}):\n  ${imgs.join('\n  ')}`);
 console.log('chunk de terceiros nao varrido por termos de conteudo:', vendorSkipped.join(', ') || 'nenhum');
 console.log('manifest:', files.some((x) => /manifest/i.test(x)) ? files.filter((x) => /manifest/i.test(x)).map(rel).join(', ') : 'nao existe (nenhum arquivo .webmanifest/manifest.json no dist)');

@@ -1,3 +1,4 @@
+> Ajustes finais (capturas sem sidebar, legenda unica, trava com CNPJ/https/e-mail/preco): verificacao/AJUSTES-FINAIS.md.
 > Atualizado pela auditoria de 2026-11-07: ver verificacao/AUDITORIA-VAZAMENTO.md (notas de Lighthouse, itens B retirados, trava de publicacao).
 
 # Relatório

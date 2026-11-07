@@ -1,7 +1,7 @@
 Set-Location C:\dev\crm-flow-landing
 $env:CHROME_PATH = (Get-ChildItem "$env:LOCALAPPDATA\ms-playwright\chromium-*\chrome-win*\chrome.exe" | Select-Object -First 1).FullName
 New-Item -ItemType Directory -Force verificacao\lighthouse | Out-Null
-foreach ($run in @(@('dist (rascunho, robots Disallow)', 4173, 'draft'), @('dist-lh (copia com robots liberado, so para medir)', 4174, 'open'))) {
+foreach ($run in @(@('dist/ do projeto (build de rascunho, robots Disallow)', 4173, 'draft'), @('build de producao com valores de teste (valido, sem trava; servido de %TEMP%)', 4174, 'prod'))) {
   "== $($run[0])"
   foreach ($p in @(@('home', '/'), @('termos', '/termos/'), @('privacidade', '/privacidade/'), @('reembolso', '/reembolso/'))) {
     npx lighthouse "http://127.0.0.1:$($run[1])$($p[1])" --chrome-flags="--headless=new --no-sandbox" --only-categories=performance,accessibility,best-practices,seo --output=json --output=html --output-path="./verificacao/lighthouse/lh-$($run[2])-$($p[0])" --quiet 2>&1 | Out-Null

@@ -2,37 +2,58 @@ import { useEffect, useState } from 'react';
 import s from '../styles/landing.module.scss';
 import { SITE, whatsappHref } from '../config/site.js';
 import { useScrolled } from '../hooks/effects.jsx';
+import dims from '../assets/capturas/manifest.json';
+import { CAPTION } from '../content/pt-BR.js';
 
 // Atributos de rastreabilidade: ids de evidencia (CONTEUDO.md) e marca de revisao do dono (classe B).
 export const ev = (ids, review) => ({ 'data-ev': (ids || []).join(' '), ...(review ? { 'data-review': 'B' } : {}) });
 
-const shots = import.meta.glob('../assets/capturas/*.webp', { eager: true, query: '?url', import: 'default' });
-const url = (name) => shots[`../assets/capturas/${name}.webp`];
+const assets = import.meta.glob('../assets/capturas/*.{webp,avif}', { eager: true, query: '?url', import: 'default' });
+const url = (file) => assets[`../assets/capturas/${file}`];
 
-// Captura do produto que troca com o tema. Dimensoes reais: telas 1440x900 (@2x 2880x1800); card de leads 1124x288.
-const SIZES = { full: [1440, 900], leads: [1124, 288] };
-export function Shot({ name, alt, eager = false, kind = 'full', sizes = '(min-width: 1200px) 1100px, 100vw', bar = true, className = '' }) {
-  const [w, h] = SIZES[kind];
-  const one = (theme, loading) => (
-    <img
-      className={theme === 'dark' ? s.imgDark : s.imgLight}
-      src={url(`${name}-${theme}`)}
-      srcSet={`${url(`${name}-${theme}`)} ${w}w, ${url(`${name}-${theme}@2x`)} ${w * 2}w`}
-      sizes={sizes}
-      width={w}
-      height={h}
-      alt={alt}
-      loading={loading}
-      decoding="async"
-      {...(loading === 'eager' ? { fetchpriority: 'high' } : {})}
-    />
-  );
+// Legenda UNICA, usada sob todas as capturas (inclusive a do hero).
+export function Caption() {
+  return <figcaption className={s.caption} data-caption>{CAPTION}</figcaption>;
+}
+
+// Moldura da captura: tema escuro e claro, AVIF com WebP de reserva, 1x e 2x. Dimensoes vem do manifesto gerado na captura.
+export function ShotFrame({ name, alt, eager = false, sizes = '(min-width: 1200px) 720px, 100vw', bar = true }) {
+  const [w, h] = dims[name];
+  const pic = (theme, loading) => {
+    const n = `${name}-${theme}`;
+    return (
+      <picture className={`${s.pic} ${theme === 'dark' ? s.imgDark : s.imgLight}`}>
+        <source type="image/avif" srcSet={`${url(`${n}.avif`)} ${w}w, ${url(`${n}@2x.avif`)} ${w * 2}w`} sizes={sizes} />
+        <img
+          src={url(`${n}.webp`)}
+          srcSet={`${url(`${n}.webp`)} ${w}w, ${url(`${n}@2x.webp`)} ${w * 2}w`}
+          sizes={sizes}
+          width={w}
+          height={h}
+          alt={alt}
+          loading={loading}
+          decoding="async"
+          {...(loading === 'eager' ? { fetchpriority: 'high' } : {})}
+        />
+      </picture>
+    );
+  };
   return (
-    <div className={`${s.shot} ${className}`}>
+    <div className={s.shot}>
       {bar && <div className={s.shotBar} aria-hidden="true"><i /><i /><i /></div>}
-      {one('dark', eager ? 'eager' : 'lazy')}
-      {one('light', 'lazy')}
+      {pic('dark', eager ? 'eager' : 'lazy')}
+      {pic('light', 'lazy')}
     </div>
+  );
+}
+
+export function Shot({ name, alt, sizes }) {
+  const [w] = dims[name];
+  return (
+    <figure className={s.fig} style={{ maxWidth: w }}>
+      <ShotFrame name={name} alt={alt} sizes={sizes} />
+      <Caption />
+    </figure>
   );
 }
 

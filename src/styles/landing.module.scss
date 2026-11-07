@@ -256,3 +256,10 @@ $bp-lg: 1200px;
 .legalMain h2 { font-size: 1.25rem; margin: 32px 0 10px; letter-spacing: -0.02em; }
 .legalMain p { color: var(--text-secondary); margin-bottom: 12px; }
 .legalMeta { color: var(--text-tertiary); font-size: 0.85rem; margin-bottom: 24px; }
+
+// Captura, imagem e legenda unica
+.fig { margin: 0; width: 100%; }
+.heroFig { margin: 0; }
+.pic { display: block; }
+.caption { margin-top: 12px; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--text-tertiary); }
+.heroFig .caption { margin-top: 16px; }
