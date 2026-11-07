@@ -114,8 +114,8 @@ $bp-lg: 1200px;
   .size_small { grid-column: span 2; }
   .bento > .size_wide:nth-child(2) { grid-column: span 3; }
 }
-.demo { margin-top: 20px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-elevated); padding: 14px; min-height: 150px; position: relative; overflow: hidden; }
-// demo: mensagens chegando
+.mini { margin-top: 20px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-elevated); padding: 14px; min-height: 150px; position: relative; overflow: hidden; }
+// mini-demo: mensagens chegando
 .msgs { display: grid; gap: 8px; padding-right: 2px; }
 .msg { max-width: 82%; padding: 8px 12px; border-radius: 12px; font-size: 0.82rem; background: var(--surface-hover); color: var(--text-primary); opacity: 0; animation: msgIn 9s infinite; }
 .msg:nth-child(2) { align-self: end; justify-self: end; background: var(--accent-ai-soft); border: 1px solid var(--accent-ai); animation-delay: 1.6s; }
@@ -126,21 +126,21 @@ $bp-lg: 1200px;
 .typing i { width: 5px; height: 5px; border-radius: 50%; background: var(--text-tertiary); animation: blink 1.2s infinite; }
 .typing i:nth-child(2) { animation-delay: 0.2s; } .typing i:nth-child(3) { animation-delay: 0.4s; }
 @keyframes blink { 50% { opacity: 0.25; } }
-// demo: kanban
+// mini-demo: kanban
 .kan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; height: 130px; }
 .kcol { border: 1px dashed var(--border-strong); border-radius: 8px; padding: 6px; display: grid; align-content: start; gap: 6px; }
 .kcol b { font-size: 0.62rem; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; }
 .kcard { height: 22px; border-radius: 6px; background: var(--surface-hover); border: 1px solid var(--border); }
 .kmove { position: absolute; left: 14px; top: 46px; width: calc((100% - 28px - 16px) / 3 - 12px); margin-left: 6px; height: 22px; border-radius: 6px; background: var(--accent-ai); box-shadow: 0 6px 16px var(--glow-ai); animation: kmove 6s ease-in-out infinite; }
 @keyframes kmove { 0%, 12% { transform: translate(0, 0); } 40%, 55% { transform: translate(calc(100% + 14px), 0); } 85%, 100% { transform: translate(calc(200% + 28px), 0); } }
-// demo: IA -> humano
+// mini-demo: IA -> humano
 .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.78rem; }
 .node { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface-hover); }
 .nodeOn { animation: nodeOn 7s infinite; }
 .nodeOn:nth-of-type(2) { animation-delay: 2.3s; } .nodeOn:nth-of-type(3) { animation-delay: 4.6s; }
 @keyframes nodeOn { 0%, 30% { border-color: var(--accent-live); box-shadow: 0 0 14px var(--accent-live-soft); } 34%, 100% { border-color: var(--border-strong); box-shadow: none; } }
 .arrow { color: var(--text-tertiary); }
-// demo: grafico
+// mini-demo: grafico
 .chart { width: 100%; height: 110px; }
 .chartLine { fill: none; stroke: var(--accent-ai); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 400; stroke-dashoffset: 400; }
 .chartArea { fill: var(--accent-ai-soft); opacity: 0; }
@@ -148,7 +148,7 @@ $bp-lg: 1200px;
 :global(.is-in) .chartArea { animation: fadeArea 1.2s 1.6s ease forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes fadeArea { to { opacity: 1; } }
-// demo: automacao chips
+// mini-demo: automacao chips
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { padding: 4px 9px; border-radius: 999px; font-size: 0.72rem; border: 1px solid var(--border-strong); color: var(--text-secondary); }
 .tagLive { border-color: var(--accent-live); color: var(--accent-live-text); background: var(--accent-live-soft); }

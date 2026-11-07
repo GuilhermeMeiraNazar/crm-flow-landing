@@ -1,3 +1,5 @@
+> SUPERADO por verificacao/AUDITORIA-VAZAMENTO.md. As notas de Lighthouse abaixo foram medidas com o React em modo de desenvolvimento (NODE_ENV=development herdado do shell).
+
 # Verificacao (saidas literais)
 
 ## 1. Build

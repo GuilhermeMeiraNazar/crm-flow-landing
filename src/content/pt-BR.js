@@ -114,7 +114,6 @@ export const copy = (S) => ({
       bullets: [
         { t: 'Fila e “minhas” conversas, com assumir e liberar.', ev: ['F1'] },
         { t: 'Atualização em tempo real.', ev: ['F1'] },
-        { t: 'Envio de imagens e documentos pelo atendimento.', ev: ['9.5'], review: true },
       ],
       shot: 'inbox', alt: 'Tela de Conversas com fila, lista de conversas e janela de chat com mensagens fictícias.',
     },

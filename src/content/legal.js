@@ -25,7 +25,7 @@ export const legal = (S) => {
       sections: [
         { h: '1. Este site', p: ['Este site não usa cookies de rastreamento nem ferramentas de analytics de terceiros por padrão.', 'Se a empresa ativar uma ferramenta de métricas sem cookies, esta política deve ser atualizada para citar a ferramenta, os dados coletados e a finalidade. [ATUALIZAR SE ATIVAR ANALYTICS.]', 'O site guarda no navegador apenas a sua preferência de tema claro ou escuro.'] },
         { h: '2. Dados que você nos envia', p: [`Ao entrar em contato por e-mail (${S.contactEmail}) ou WhatsApp, recebemos os dados que você informar, como nome, telefone e mensagem, para responder ao seu contato.`, '[BASE LEGAL, PRAZO DE RETENCAO E COMPARTILHAMENTO COM O CANAL DE COMPRA. DEFINIR COM ADVOGADO.]'] },
-        { h: '3. Compra', p: ['Os dados de pagamento e de cobrança são tratados pela plataforma de checkout indicada no botão de compra. [IDENTIFICAR A PLATAFORMA E O PAPEL DE CADA PARTE.]'] },
+        { h: '3. Compra', p: ['Os dados de pagamento da compra são tratados pela plataforma de checkout indicada no botão de compra. [IDENTIFICAR A PLATAFORMA E O PAPEL DE CADA PARTE.]'] },
         { h: '4. O produto ConversIA instalado', p: ['Quando instalado, o produto roda no servidor do contratante. Os dados de clientes finais tratados pelo produto ficam sob responsabilidade do contratante. [DEFINIR PAPEIS DE CONTROLADOR E OPERADOR COM ADVOGADO.]'] },
         { h: '5. Direitos do titular', p: [`Para exercer direitos previstos na Lei Geral de Proteção de Dados (Lei 13.709/2018), escreva para ${S.contactEmail}. [DEFINIR ENCARREGADO E PRAZOS.]`] },
       ],

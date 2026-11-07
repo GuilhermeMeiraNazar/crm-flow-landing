@@ -73,6 +73,7 @@ export default defineConfig({
     cssCodeSplit: false,
     assetsInlineLimit: 0,
     rollupOptions: {
+      output: { manualChunks: (id) => (id.includes('node_modules') ? 'vendor' : undefined) },
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         termos: resolve(import.meta.dirname, 'termos/index.html'),

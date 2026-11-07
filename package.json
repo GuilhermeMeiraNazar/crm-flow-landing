@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "vite",
     "assets": "node scripts/make-assets.mjs",
-    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "node scripts/build.mjs",
     "preview": "vite preview",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "scan:dist": "node scripts/scan-dist.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

@@ -1,3 +1,5 @@
+> Atualizado pela auditoria de 2026-11-07: ver verificacao/AUDITORIA-VAZAMENTO.md (notas de Lighthouse, itens B retirados, trava de publicacao).
+
 # Relatório
 
 ## O que foi feito

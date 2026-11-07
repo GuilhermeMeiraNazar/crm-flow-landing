@@ -31,7 +31,7 @@ export const SITE = {
   pricing: {
     currency: 'BRL',
     plans: [
-      { id: 'instalacao', name: 'Licença por instalação', price: null, billing: '[MODELO DE COBRANCA A DEFINIR]', highlight: true,
+      { id: 'instalacao', name: 'Licença por instalação', price: null, billing: '[MODELO COMERCIAL A DEFINIR]', highlight: true,
         features: ['Produto instalável no servidor da sua empresa', 'Licença vinculada ao IP fixo do servidor', 'Todas as telas e recursos listados nesta página'] },
     ],
     // Texto de garantia/reembolso. PLACEHOLDER: preencha apos revisao juridica.

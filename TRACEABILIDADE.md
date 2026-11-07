@@ -31,37 +31,36 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 25 | `showcase[1]` | Uma fila para a equipe, no mesmo painel. Veja a fila, assuma uma conversa, devolva quando terminar e responda sem sair da tela. | F1 | A |
 | 26 | `showcase[1].bullets[0]` | Fila e “minhas” conversas, com assumir e liberar. | F1 | A |
 | 27 | `showcase[1].bullets[1]` | Atualização em tempo real. | F1 | A |
-| 28 | `showcase[1].bullets[2]` | Envio de imagens e documentos pelo atendimento. | 9.5 | B - revisao do dono (marcado na pagina para revisao) |
-| 29 | `showcase[2]` | Quando o negócio muda de etapa, o sistema age. Defina o gatilho e a ação para cada etapa do funil. | F12 | A |
-| 30 | `showcase[2].bullets[0]` | Gatilhos: ao entrar na etapa ou após X dias parado. | F12 | A |
-| 31 | `showcase[2].bullets[1]` | Ações: enviar template de WhatsApp, notificar o atendente, agendar lembrete. | F12 | A |
-| 32 | `showcase[2].bullets[2]` | Liga e desliga cada automação. | F12 | A |
-| 33 | `showcase[3]` | Funil, atendimento e custo de IA em números. Escolha o período e exporte quando precisar. | F14, F15 | A |
-| 34 | `showcase[3].bullets[0]` | Conversão, valor fechado e em aberto, tempo parado por etapa. | F14 | A |
-| 35 | `showcase[3].bullets[1]` | Conversas resolvidas pela IA, transferidas e tempo de primeira resposta. | F14 | A |
-| 36 | `showcase[3].bullets[2]` | Exportação em CSV e planilha. | F15 | A |
-| 37 | `ownership` | Uma instalação por empresa. O ConversIA roda em um servidor Linux da sua empresa, com banco e fila próprios dentro do Docker. Seu banco de dados e ... | S3.1, S4 | A |
-| 38 | `ownership.items[0]` | Instalação dedicada Uma empresa, um projeto Docker Compose, com configuração, volumes e porta próprios. | S3.1 | A |
-| 39 | `ownership.items[1]` | Banco e fila fechados MariaDB e Redis ficam na rede interna. No firewall, só as portas 22, 80 e 443. | S3.1, S4 | A |
-| 40 | `ownership.items[2]` | Licença verificada localmente A ativação e a verificação da licença não dependem de um servidor de licenças. | S3.4 | A |
-| 41 | `ownership.items[3]` | Licença presa ao IP fixo A licença é vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão. | S3.4, S4 | A |
-| 42 | `ownership.items[4]` | Credenciais criptografadas Chaves de IA e credenciais gravadas no banco com AES-256-GCM. | S3.1 | A |
-| 43 | `ownership.items[5]` | Webhook da Meta com assinatura Os eventos do WhatsApp são aceitos só com assinatura HMAC válida. | S5 | A |
-| 44 | `how` | Da compra ao primeiro atendimento. | S4 | A |
-| 45 | `how.steps[0]` | Comprar Escolha a licença e finalize a compra. | FRAME | n/a |
-| 46 | `how.steps[1]` | Receber Você recebe o produto instalável e a licença da sua instalação. | S3.4 | A |
-| 47 | `how.steps[2]` | Instalar Suba com Docker Compose na sua VPS, crie o admin e ative a licença no painel. | S4 | A |
-| 48 | `how.steps[3]` | Conectar Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA. | S4, S5 | A |
-| 49 | `requirements` | O que o seu servidor precisa ter. A instalação usa Docker e linha de comando em Linux. Não publicamos números de desempenho nem de capacidade por s... | S4 | A |
-| 50 | `faq.items[0]` | Preciso saber Docker e Linux? Sim. A instalação é feita por linha de comando em um servidor Linux com Docker Compose.  | S4 | A |
-| 51 | `faq.items[1]` | A licença funciona em qualquer servidor? A licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é preciso emitir uma nova licen... | S3.4, S4 | A |
-| 52 | `faq.items[2]` | Meus dados ficam no meu servidor? Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é envi... | S3.1 | A |
-| 53 | `faq.items[3]` | Quanto custa a IA? O consumo é cobrado pelo provedor que você escolher, com a sua chave. O painel mostra tokens e custo estimado por função e por dia. | F16, F18a | A |
-| 54 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
-| 55 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
-| 56 | `faq.items[6]` | Que servidor eu preciso? No mínimo 2 vCPU e 4 GB de RAM, com IP fixo. Ainda não medimos capacidade em produção, então não há promessa de volume de ... | S4 | A |
-| 57 | `faq.items[7]` | E as atualizações? As migrações do banco rodam sozinhas ao subir uma nova versão. A política de atualizações e de suporte é definida na contratação.  | S4 | A |
-| 58 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil no seu servidor. | FRAME | n/a |
+| 28 | `showcase[2]` | Quando o negócio muda de etapa, o sistema age. Defina o gatilho e a ação para cada etapa do funil. | F12 | A |
+| 29 | `showcase[2].bullets[0]` | Gatilhos: ao entrar na etapa ou após X dias parado. | F12 | A |
+| 30 | `showcase[2].bullets[1]` | Ações: enviar template de WhatsApp, notificar o atendente, agendar lembrete. | F12 | A |
+| 31 | `showcase[2].bullets[2]` | Liga e desliga cada automação. | F12 | A |
+| 32 | `showcase[3]` | Funil, atendimento e custo de IA em números. Escolha o período e exporte quando precisar. | F14, F15 | A |
+| 33 | `showcase[3].bullets[0]` | Conversão, valor fechado e em aberto, tempo parado por etapa. | F14 | A |
+| 34 | `showcase[3].bullets[1]` | Conversas resolvidas pela IA, transferidas e tempo de primeira resposta. | F14 | A |
+| 35 | `showcase[3].bullets[2]` | Exportação em CSV e planilha. | F15 | A |
+| 36 | `ownership` | Uma instalação por empresa. O ConversIA roda em um servidor Linux da sua empresa, com banco e fila próprios dentro do Docker. Seu banco de dados e ... | S3.1, S4 | A |
+| 37 | `ownership.items[0]` | Instalação dedicada Uma empresa, um projeto Docker Compose, com configuração, volumes e porta próprios. | S3.1 | A |
+| 38 | `ownership.items[1]` | Banco e fila fechados MariaDB e Redis ficam na rede interna. No firewall, só as portas 22, 80 e 443. | S3.1, S4 | A |
+| 39 | `ownership.items[2]` | Licença verificada localmente A ativação e a verificação da licença não dependem de um servidor de licenças. | S3.4 | A |
+| 40 | `ownership.items[3]` | Licença presa ao IP fixo A licença é vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão. | S3.4, S4 | A |
+| 41 | `ownership.items[4]` | Credenciais criptografadas Chaves de IA e credenciais gravadas no banco com AES-256-GCM. | S3.1 | A |
+| 42 | `ownership.items[5]` | Webhook da Meta com assinatura Os eventos do WhatsApp são aceitos só com assinatura HMAC válida. | S5 | A |
+| 43 | `how` | Da compra ao primeiro atendimento. | S4 | A |
+| 44 | `how.steps[0]` | Comprar Escolha a licença e finalize a compra. | FRAME | n/a |
+| 45 | `how.steps[1]` | Receber Você recebe o produto instalável e a licença da sua instalação. | S3.4 | A |
+| 46 | `how.steps[2]` | Instalar Suba com Docker Compose na sua VPS, crie o admin e ative a licença no painel. | S4 | A |
+| 47 | `how.steps[3]` | Conectar Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA. | S4, S5 | A |
+| 48 | `requirements` | O que o seu servidor precisa ter. A instalação usa Docker e linha de comando em Linux. Não publicamos números de desempenho nem de capacidade por s... | S4 | A |
+| 49 | `faq.items[0]` | Preciso saber Docker e Linux? Sim. A instalação é feita por linha de comando em um servidor Linux com Docker Compose.  | S4 | A |
+| 50 | `faq.items[1]` | A licença funciona em qualquer servidor? A licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é preciso emitir uma nova licen... | S3.4, S4 | A |
+| 51 | `faq.items[2]` | Meus dados ficam no meu servidor? Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é envi... | S3.1 | A |
+| 52 | `faq.items[3]` | Quanto custa a IA? O consumo é cobrado pelo provedor que você escolher, com a sua chave. O painel mostra tokens e custo estimado por função e por dia. | F16, F18a | A |
+| 53 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
+| 54 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
+| 55 | `faq.items[6]` | Que servidor eu preciso? No mínimo 2 vCPU e 4 GB de RAM, com IP fixo. Ainda não medimos capacidade em produção, então não há promessa de volume de ... | S4 | A |
+| 56 | `faq.items[7]` | E as atualizações? As migrações do banco rodam sozinhas ao subir uma nova versão. A política de atualizações e de suporte é definida na contratação.  | S4 | A |
+| 57 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil no seu servidor. | FRAME | n/a |
 
 ## Legenda dos ids
 
@@ -89,7 +88,6 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | F18a | Funcionalidade 18a: registro de uso e custo de IA | A |
 | F27 | Funcionalidade 27: usuarios e agentes | A |
 | F28 | Funcionalidade 28: tema claro e escuro | A |
-| 9.5 | CONTEUDO.md secao 9.5 (item B, redacao conservadora) | B - revisao do dono |
 | FRAME | Enquadramento editorial, sem afirmacao factual sobre o produto | n/a |
 
 ## Texto sem id de evidencia (rotulos, navegacao, placeholders)

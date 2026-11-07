@@ -9,7 +9,8 @@ Este projeto é independente do CRM: não lê nem altera nada nele. Está no seu
 ```
 npm install
 npm run dev          # desenvolvimento
-npm run build        # gera dist/ (HTML pré-renderizado, sitemap.xml, robots.txt)
+npm run build        # TRAVA DE PUBLICACAO + dist/ (HTML pre-renderizado, sitemap.xml, robots.txt)
+ALLOW_DRAFT_BUILD=1 npm run build   # build de rascunho: passa com aviso e grava dist/NAO_PUBLICAR.txt
 npm run preview      # serve dist/ para conferir
 npm run check:links  # varredura de links e âncoras em dist/
 node scripts/trace.mjs   # regenera TRACEABILIDADE.md e falha se uma afirmação apontar para item classe C
@@ -24,6 +25,12 @@ A saída é a pasta `dist/` (4 páginas: `/`, `/termos/`, `/privacidade/`, `/ree
 | Netlify | Build `npm run build`, publish `dist`. `_headers` é lido pelo Netlify |
 | Vercel | Framework "Other", build `npm run build`, saída `dist`. `vercel.json` incluso |
 | Caddy na VPS | Copie `dist/` para o servidor e use `deploy/Caddyfile.example` |
+
+## Trava de publicacao
+
+`npm run build` FALHA (e apaga o `dist/` anterior) enquanto houver: texto com colchetes ou `CONFIRMAR` (config, conteudo, textos legais e HTML gerado); `legalDraft: true`; `CTA_URL`, `domain`, `contactEmail`, `contactWhatsapp`, `company.legalName`, `company.cnpj` ou preco vazios ou placeholder. Com `ALLOW_DRAFT_BUILD=1` o build passa, avisa, grava `dist/NAO_PUBLICAR.txt` e troca o `robots.txt` por `Disallow: /`. O build forca `NODE_ENV=production`.
+
+Varreduras do `dist/`: `npm run scan:dist` (termos proibidos), `npm run check:links` e `node scripts/trace.mjs`. Relatorio: `verificacao/AUDITORIA-VAZAMENTO.md`.
 
 ## Editar `src/config/site.js`
 
@@ -42,7 +49,7 @@ O texto da página está em `src/content/pt-BR.js`. Cada afirmação tem `ev` co
 
 ## Regras de conteúdo aplicadas
 
-- Só funcionalidades classe A, mais itens B com redação conservadora e a marca "revisão do dono" visível na página.
+- Só funcionalidades classe A. Nenhum item B está na página (o envio de imagens e documentos foi retirado até o teste de integração passar).
 - Fora da página: Base de Conhecimento/RAG, cobrança PIX, calendário, Baileys, Click-to-WhatsApp, estabilidade do WhatsApp não oficial.
 - Modelo de entrega não confirmado: a página só diz "produto instalável no seu servidor".
 - Sem depoimentos, logos de clientes, números de clientes, métricas de desempenho, selos ou comparativos.

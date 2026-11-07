@@ -76,7 +76,7 @@ export function Problem({ C }) {
 
 function Demo({ id }) {
   if (id === 'inbox') return (
-    <div className={s.demo} aria-hidden="true"><div className={s.msgs}>
+    <div className={s.mini} aria-hidden="true"><div className={s.msgs}>
       <span className={s.msg}>Olá, vocês têm o kit iniciante?</span>
       <span className={s.msg}>Temos sim! Posso passar os detalhes.</span>
       <span className={s.msg}>Consigo parcelar?<span className={s.typing} style={{ marginLeft: 8 }}><i /><i /><i /></span></span>
@@ -84,7 +84,7 @@ function Demo({ id }) {
     </div></div>
   );
   if (id === 'kanban') return (
-    <div className={s.demo} aria-hidden="true"><div className={s.kan}>
+    <div className={s.mini} aria-hidden="true"><div className={s.kan}>
       {['Novo', 'Proposta', 'Ganho'].map((c, i) => (
         <div key={c} className={s.kcol}><b>{c}</b>{i < 2 && <span className={s.kcard} />}{i === 0 && <span className={s.kcard} />}</div>
       ))}
@@ -92,14 +92,14 @@ function Demo({ id }) {
     </div></div>
   );
   if (id === 'ai') return (
-    <div className={s.demo} aria-hidden="true"><div className={s.flow}>
+    <div className={s.mini} aria-hidden="true"><div className={s.flow}>
       <span className={`${s.node} ${s.nodeOn}`}>IA responde</span><span className={s.arrow}>→</span>
       <span className={`${s.node} ${s.nodeOn}`}>Cliente pede atendente</span><span className={s.arrow}>→</span>
       <span className={`${s.node} ${s.nodeOn}`}>Equipe assume</span>
     </div></div>
   );
   if (id === 'reports') return (
-    <div className={s.demo} aria-hidden="true">
+    <div className={s.mini} aria-hidden="true">
       <svg className={s.chart} viewBox="0 0 300 110" preserveAspectRatio="none">
         <path className={s.chartArea} d="M0 90 L50 70 L100 78 L150 45 L200 52 L250 24 L300 14 L300 110 L0 110Z" />
         <path className={s.chartLine} d="M0 90 L50 70 L100 78 L150 45 L200 52 L250 24 L300 14" pathLength="400" />
@@ -107,13 +107,13 @@ function Demo({ id }) {
     </div>
   );
   if (id === 'auto') return (
-    <div className={s.demo} aria-hidden="true"><div className={s.chips}>
+    <div className={s.mini} aria-hidden="true"><div className={s.chips}>
       <span className={`${s.tag} ${s.tagLive}`}>Ao entrar na etapa</span><span className={s.tag}>Após X dias parado</span>
       <span className={s.tag}>Enviar template</span><span className={s.tag}>Notificar atendente</span><span className={s.tag}>Agendar lembrete</span>
     </div></div>
   );
   if (id === 'lead') return (
-    <div className={s.demo} aria-hidden="true"><div className={s.chips}>
+    <div className={s.mini} aria-hidden="true"><div className={s.chips}>
       <span className={s.tag}>nome</span><span className={s.tag}>telefone</span><span className={s.tag}>e-mail</span><span className={s.tag}>orçamento</span><span className={s.tag}>interesse</span>
       <span className={`${s.tag} ${s.tagLive}`}>→ negócio criado</span>
     </div></div>

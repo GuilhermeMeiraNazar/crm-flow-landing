@@ -13,3 +13,4 @@ _tools/node_modules/
 _tools/package-lock.json
 dist-ssr/
 /capturas/
+dist-lh/

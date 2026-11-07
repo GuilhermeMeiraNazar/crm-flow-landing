@@ -27,7 +27,6 @@ const REF = {
   F18a: ['Funcionalidade 18a: registro de uso e custo de IA', 'A'],
   F27: ['Funcionalidade 27: usuarios e agentes', 'A'],
   F28: ['Funcionalidade 28: tema claro e escuro', 'A'],
-  '9.5': ['CONTEUDO.md secao 9.5 (item B, redacao conservadora)', 'B - revisao do dono'],
   FRAME: ['Enquadramento editorial, sem afirmacao factual sobre o produto', 'n/a'],
 };
 
