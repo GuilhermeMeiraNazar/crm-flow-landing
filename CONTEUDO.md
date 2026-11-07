@@ -316,3 +316,115 @@ Consequencia para a Fase C: `--text-tertiary` nao serve para texto legivel em ne
 6. Fase B: subir o CRM com dados ficticios exige o stack local (MariaDB, Redis, backend, frontend), uma licenca de teste valida e criar um admin de demonstracao. O compose local carrega `.env` do CRM (`${DB_PASSWORD:?...}`), que eu nao posso ler nem alterar. Proponho subir uma **copia** do CRM em `C:\dev\crm-flow-landing\_demo\` com `.env` proprio, descartavel, gerado por mim com segredos aleatorios (sem tocar o original). A licenca de teste depende de `tests/fixtures/*.pem` e de `SERVER_IP`; se nao funcionar sem a chave privada de teste, listarei as capturas para voce fazer manualmente. Preciso do seu aval para essa abordagem.
 
 Parei aqui, como pedido. A Fase B so comeca depois da sua aprovacao deste documento.
+
+---
+
+## 9. Reclassificacao apos execucao dos testes (Fase B, passo 1)
+
+Substitui a coluna "Classe" da secao 2 e a nota 1 da secao 0. Criterio do dono: **A = existe teste E passou na copia**. Nenhum teste de navegador ponta a ponta existe no CRM; por isso, neste eixo, **nada passa de B para "ponta a ponta"**, e nenhuma tela foi validada por teste de navegador.
+
+### 9.1 Ambiente e resultados reais
+
+Copia descartavel em `_demo/` (HEAD `5423138` mais o working tree sujo do CRM), sem `.env*`, `uploads/`, `data/` da raiz, sessoes Baileys, `.pem` e `.git`. Projeto Docker `-p crmdemo`, banco `crm_demo` (testes: `crm_demo_test_w*`), portas `13306`, `16379`, `13000`. Par RSA novo gerado em `_demo/license/` por `scripts/generate-dev-license-keys.js`; licenca de teste por `scripts/generate-test-license.js`. Node v24.13.0 local (a imagem de producao usa Node 20).
+
+| Comando | Suites | Testes | Passaram | Falharam | Referencia de 25/10 |
+|---|---|---|---|---|---|
+| `npm test` | 169 (168 ok, 1 falha) | 2123 | **2112** | **11** | 1964 |
+| `npm run test:integration` (`--runInBand`, bancos limpos) | 7 (5 ok, 2 falhas) | 81 | **79** | **2** | 81 |
+| `npx vitest run` (client) | 29 (29 ok) | 194 | **194** | **0** | 186 |
+
+Logs literais em `_baseline/npm-test.log`, `_baseline/npm-integration.log`, `_baseline/vitest.log` (nao versionados). O Vitest saiu com codigo 0 nesta execucao; as linhas `Error: useAuth deve ser usado dentro de um AuthProvider` etc. sao saida de stderr de testes que exercitam o caso de erro, nao falhas.
+
+Ajustes de execucao (nao alteram codigo): `TEST_DB_NAME=crm_demo_test` precisa estar no ambiente do shell, porque `tests/setup/globalSetup.js` le `process.env.TEST_DB_NAME` antes de carregar o `.env` e, sem isso, cria `crm_whatsapp_test_w*` enquanto os workers usam `crm_demo_test_w*` (primeira execucao: 34 falhas por "Unknown database"). `--maxWorkers=4` no `npm test`. Dependencias do `client/` instaladas na copia (um teste do backend importa `client/node_modules/socket.io-client`).
+
+Primeira execucao da integracao em paralelo, com bancos que ja tinham dados de execucoes anteriores: 17 falhas, que desapareceram ao recriar os bancos e rodar em serie. Nao provei se a execucao em paralelo e insegura; so registro que o resultado limpo e o serial.
+
+### 9.2 Falhas reais (todas reproduzidas na copia; o original nao foi tocado)
+
+| # | Teste | Sintoma | Causa observada |
+|---|---|---|---|
+| F1 | `tests/integration/licenseActivation.test.js` (11 testes, a suite nem carrega) | `Route.post() requires a callback function but got a [object Undefined]` em `src/routes/whatsapp.routes.js:64` | O `jest.doMock('../../src/middleware/rateLimiter')` do teste (linha 177 em diante) nao inclui `sendMessageUserLimiter`, que a rota passou a usar. O modulo real exporta o limitador (`rateLimiter.js:201`). Teste desatualizado em relacao ao codigo ainda nao commitado. |
+| F2 | `src/__integration__/mediaSecurity.integration.test.js` > "upload valido + mediaId: envia ao gateway" | esperado 200, recebido 404 | A rota de envio agora exige conversa atribuida ao agente (`whatsapp.routes.js:62-63`); o teste nao cria essa conversa. Os outros 20 testes da suite passam. |
+| F3 | `tests/integration/aiRagEngine.integration.test.js` > "RAG pipeline: generate embedding + search LanceDB" | `Vector store indisponivel: db.tableNames is not a function` | Mock do LanceDB do teste sem `tableNames`. Os outros 5 testes da suite passam. |
+
+### 9.3 Classe final por funcionalidade
+
+Numeracao da secao 2.
+
+| # | Funcionalidade | Classe final | Base |
+|---|---|---|---|
+| 1 | Caixa de entrada multiatendente | **A** | `inboxController.test`, `inboxEvents.test`, `conversationAccessService.test`: passaram |
+| 2a | Envio de texto pelo atendente | **A** | `whatsappController.test` passou |
+| 2b | Envio de imagem e documento | **B** | `mediaSecurity.integration`: 20 de 21 passam; F2 falha no envio com `mediaId` valido |
+| 3 | Agente de IA com transferencia para humano | **A** | `conversationStateMachine` (unit e property), `transferTriggerService` (unit e property): passaram |
+| 4 | Transcricao de audio | **A** | `mediaTranscriptionJob.test`, `audioTranscriptionService.test`: passaram |
+| 5 | Extracao de lead por IA | **A** | `leadExtractionService.test`, `leadExtractionJob.test`: passaram |
+| 6 | Lead vira negocio | **A** | `leadToDealService.test` e `.idempotency`: passaram |
+| 7 | Pipeline kanban | **A** | `dealService.test`, `pipelineStageService.test`, `kanbanEvents.test`: passaram. Arrastar e soltar nao tem teste de navegador |
+| 8 | Etapas configuraveis | **A** | `pipelineStageService.invariants` passou |
+| 9 | Historico de movimentacao | **A** | `dealService.stage-history`, `backfill-deal-stage-history`: passaram |
+| 10 | Exclusao logica | **A** | `softDelete.integration` passou |
+| 11 | Contatos | **A** | `contactService.test`, `contactController.test`: passaram |
+| 12 | Automacoes (3 acoes) | **A** | `pipelineAutomationService.test` passou |
+| 12b | Automacao "Gerar link PIX" | **C** | dono: PIX fora |
+| 13 | Dashboard | **A** | `dashboardService.test`, `dashboardController.test`, `Dashboard.test` (client): passaram |
+| 14 | Relatorios | **A** | `analyticsController.property`, `Reports.test` (client): passaram |
+| 15 | Exportacao CSV/XLSX | **A** | `exportController.test`, `exportController.integration`: passaram |
+| 16 | BYOK | **A** | `providerRegistryService.property`, `aiProvider.validator`, `encryption.test`: passaram |
+| 17 | Funcoes de IA e fallback | **A** | `fallbackExecutor.test`, `llmOrchestratorService.test`: passaram |
+| 18a | Registro de uso e custo | **A** | `usagePricing.property` passou |
+| 18b | Bloqueio por teto de custo | **B** | `budgetGuardService` nao tem arquivo de teste |
+| 19 | Embeddings locais | **B, condicionada a KB** | Na copia o modelo carregou e gerou vetores de 384 dimensoes (ver 9.4); `embeddingService.test` e `embeddingRunner.test` passaram. Sem medicao de producao; so serve a KB |
+| 20 | Catalogo de produtos (CRUD) | **B** | so `productController.pagination` testado (passou). Sincronizacao com KB: **C** |
+| 21 | Calendario nativo | **fora** (decisao do dono); tecnicamente B, sem teste |
+| 22 | Base de Conhecimento e RAG | **C** | ver 9.4 |
+| 23 | Reconciliacao da KB | **C** | ver 9.4 (nao detecta o defeito) |
+| 24 | Licenca offline | **A** | `licenseVerify` (unit e property), `licenseValidationService`, `licenseController`: passaram. Ativacao real na copia: `POST /api/license/activate` retornou `success: true` e `/api/license/status` retornou `{"isActive":true}`. A suite de integracao F1 esta quebrada (nao e a verificacao) |
+| 25, 26 | PIX, Google Calendar | **C** | dono: fora |
+| 27 | Usuarios e agentes | **A** | `userService.test`, `changePassword.test`, `authController.test`: passaram |
+| 28 | Tema | **A** | `ThemeContext.test` (client) passou |
+| 29 | Configuracoes gerais | **A** | `settingsService.test`, `settingsController.test`: passaram |
+| 30 | Midia protegida (URL assinada) | **A** | `mediaStorage.test`, `mediaLinkService.test` e os testes de URL assinada da `mediaSecurity.integration`: passaram |
+| - | WhatsApp Cloud API oficial | **A** | `officialAdapter.test`, `metaSignature.middleware` (unit e property), `whatsappGatewaySendTemplate`, `metaPayloadParsing`: passaram. Nenhum teste contra a Meta real |
+| - | Webhook de leads | **A** | `webhookFlow.integration`, `webhookIngestController.property`, `webhookTokenService.test`: passaram |
+| - | Provedores OpenAI, Gemini, Claude, Groq | **A** (cadastro e orquestracao) | `adapters.test` passou. Nenhuma chamada real feita (sem chave) |
+| - | Baileys, Asaas, Mercado Pago | **C** | dono |
+
+### 9.4 Prova da Base de Conhecimento (criterio do dono)
+
+Resultado: **a KB continua em C.** O hub de embeddings rodou (embeddings embutidos), mas o criterio final falha.
+
+Cadeia executada na copia, em `localhost:13000`, com licenca de teste ativa e dados ficticios:
+
+1. Upload: `POST /api/knowledge-base/documents/text` com o titulo "Politica de trocas demo" devolveu `{"success":true,"data":{"id":1,...,"status":"processing","version":1,"is_active":true}}`.
+2. Status: `GET /api/knowledge-base/documents/1` devolveu `status=indexed chunks=1 active=1 err=`.
+3. MySQL: `kb_documents` com `status=indexed, total_chunks=1`; `kb_chunks` com 1 linha, `is_active=1`.
+4. LanceDB: tabela `knowledge_base` com 1 linha, vetor de 384 dimensoes, **`is_active=false`**.
+5. Consulta: `ragRetrievalService.search('em quantos dias posso trocar um produto?', 3, {is_active:true})` devolveu **`totalFound = 0`**. A segunda consulta tambem nao retornou trecho.
+6. A reconciliacao (`reconcile(false)`) devolveu `divergencesFound: 0`, `divergencesFixed: 0` e a consulta continuou em `totalFound = 0`: ela nao detecta nem corrige o estado.
+
+Causa (leitura do codigo, confirmada por experimento): na primeira versao de um documento, o upload ja grava `kb_documents.is_active = true` (`knowledgeBaseService.js:112`). Ao fim da indexacao o worker chama `promoteVersion`, que le como "versao anterior ativa" o proprio documento (`previousActiveId == documentId`) e entao marca como inativos, no LanceDB, os vetores dos chunks desse mesmo documento (`knowledgeBaseService.js`, bloco "Desativar vetores da versao anterior"). Resultado: o documento aparece como indexado e ativo na interface, e a busca nao encontra nada.
+
+Experimento, **somente na copia**: troquei a condicao para `previousActiveId && previousActiveId !== documentId && vectorStore.isAvailable()`, reiniciei o backend e enviei o documento "Guia de entrega demo". Saida literal: `LANCE: [{"chunk_id":1,"document_id":1,"is_active":false,"dim":384},{"chunk_id":2,"document_id":2,"is_active":true,"dim":384}]` e `CONSULTA entrega: totalFound = 1` com score `0.830` e o trecho "Guia de entrega ficticio Demo Esportes. O prazo de entrega para capitais e de 3 a 5 dias uteis...". Isso confirma a causa. A correcao e do dono; o CRM original nao foi alterado. Os testes unitarios e de integracao da KB passam e nao cobrem esse caminho (primeiro upload ate a busca).
+
+Consequencia para a landing: nenhuma copy sobre base de conhecimento, RAG nem "a IA responde com seus documentos".
+
+### 9.5 Itens B que dependem da sua revisao
+
+| Item | Redacao conservadora permitida |
+|---|---|
+| Envio de imagem e documento (2b) | "Envie imagens e documentos pelo atendimento." sem detalhes de seguranca de midia |
+| Bloqueio por teto de custo de IA (18b) | "Acompanhe tokens e custo de IA por funcao e por dia." Nao prometer bloqueio automatico por teto |
+| Catalogo de produtos (20) | "Cadastro de produtos e servicos." Sem mencionar sincronizacao com a IA |
+| Embeddings locais (19) | Nao usar enquanto a KB estiver em C |
+
+### 9.6 Defeitos do CRM registrados para o relatorio final
+
+1. Badge fixo "12" em "Conversas" (`client/src/data/navConfig.js:10`).
+2. `href="#"` em "Ver pipeline" no Dashboard (`client/src/pages/Dashboard.jsx:74`).
+3. Primeira versao de documento da KB fica invisivel para a busca (9.4).
+4. Reconciliacao da KB nao detecta o estado do item 3.
+5. `licenseActivation.test.js` desatualizado (F1), `mediaSecurity` (F2) e `aiRagEngine.integration` (F3).
+6. `globalSetup.js` le `TEST_DB_NAME` antes do `dotenv` (9.1).
+7. `docs/KB-OPERATIONAL-GUIDE.md` diz que a rota de reconciliacao nao existe; ela esta em `app.js:168`.
+8. README do CRM desatualizado (secao 3.5).
