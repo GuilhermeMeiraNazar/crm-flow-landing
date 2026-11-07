@@ -1,0 +1,18 @@
+﻿import { chromium } from 'playwright';
+const b = await chromium.launch();
+const c = await b.newContext({ viewport: { width: 1440, height: 900 } });
+await c.addInitScript(() => localStorage.setItem('conversia.theme', 'dark'));
+const p = await c.newPage();
+const errs = []; p.on('console', m => { if (['error','warning'].includes(m.type())) errs.push(m.text()); }); p.on('pageerror', e => errs.push(e.message));
+await p.goto('http://localhost:8088/', { waitUntil: 'networkidle' });
+await p.waitForTimeout(800);
+const tf = async () => p.evaluate(() => { const e = document.querySelector('[class*="tilt"]'); return [getComputedStyle(e).transform, getComputedStyle(e.parentElement).perspective]; });
+console.log('topo', JSON.stringify(await tf()));
+await p.mouse.wheel(0, 300); await p.waitForTimeout(500);
+console.log('rolado', JSON.stringify(await tf()));
+await p.evaluate(() => window.scrollTo(0, 0)); await p.waitForTimeout(300);
+await p.screenshot({ path: 'hero-static.png' });
+await p.locator('#planos-self').scrollIntoViewIfNeeded(); await p.waitForTimeout(600);
+await p.locator('#planos-self [aria-roledescription="slide"]').first().screenshot({ path: 'card-self.png' });
+console.log(errs.length ? errs.join('\n') : 'console: sem erros nem avisos');
+await b.close();

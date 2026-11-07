@@ -29,7 +29,7 @@ export function Hero({ C }) {
           </div>
         </div>
         <figure className={s.heroFig}>
-          <div className={s.stage} data-parallax>
+          <div className={s.stage}>
             <div className={s.stageGlow} aria-hidden="true" />
             <div className={s.tilt}>
               <ShotFrame name="hero" alt={h.shotAlt} eager sizes="(min-width: 1200px) 1100px, 100vw" />
@@ -295,7 +295,7 @@ function PlanCarousel({ p, plans, group }) {
                   : <p className={s.price}>{brl(pl.setup)} <small>{p.labels.setupNote}</small></p>}
                 <p className={s.billing}>{pl.monthly > 0 ? `${p.labels.setup}: ${brl(pl.setup)} (${p.labels.setupNote})` : `${p.labels.setup} ${p.labels.noMonthly}`}</p>
                 <ul className={s.ticks}>
-                  {c.features.map((f) => <li key={f.t} {...ev(f.ev)}>{f.t}</li>)}
+                  {c.features.map((f) => <li key={f.t} className={f.no ? s.no : undefined} {...ev(f.ev)}>{f.t}</li>)}
                 </ul>
                 <a className={`${s.btn} ${s.btnPrimary} ${s.planCta}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
               </article>

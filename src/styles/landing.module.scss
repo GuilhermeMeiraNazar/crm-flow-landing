@@ -62,13 +62,11 @@ $bp-lg: 1200px;
 .heroSub { color: var(--text-secondary); font-size: clamp(1.02rem, 2vw, 1.25rem); max-width: 62ch; margin: 0 auto 32px; }
 .heroText .btnRow { justify-content: center; }
 .heroNote { margin-top: 20px; font-size: 0.8rem; color: var(--text-tertiary); }
-// Mockup do hero: inclinacao suave (so rotateX, sem rotateZ) que se desfaz conforme o scroll (--p de 0 a 1, definido em effects.jsx).
-// Sem hover, sem will-change (evita texto borrado) e sem retangulo de gradiente por cima: o fade do rodape e uma mascara na propria imagem.
-.stage { position: relative; margin-top: clamp(40px, 7vw, 72px); perspective: 1800px; perspective-origin: 50% 0%; }
-.tilt { transform-origin: 50% 100%; transform: rotateX(calc(10deg * (1 - var(--p, 0)))) translateY(calc(var(--p, 0) * -12px)); -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); }
+// Mockup do hero: estatico (sem 3D, sem animacao ligada ao scroll) para nao pesar em celulares e PCs simples.
+// O fade do rodape e uma mascara na propria imagem, sem retangulo de gradiente por cima.
+.stage { position: relative; margin-top: clamp(40px, 7vw, 72px); }
+.tilt { -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); }
 .stageGlow { position: absolute; inset: 6% 8% 0 8%; z-index: -1; background: radial-gradient(60% 60% at 50% 40%, var(--glow-ai), transparent 70%); filter: blur(30px); }
-@media (max-width: 639px) { .tilt { transform: rotateX(calc(5deg * (1 - var(--p, 0)))); } }
-@media (prefers-reduced-motion: reduce) { .tilt { transform: none; } }
 
 // Moldura de captura
 .shot { position: relative; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-strong); background: var(--bg-elevated); box-shadow: var(--shadow-lg), 0 30px 80px -20px var(--glow-ai); }
@@ -178,6 +176,9 @@ $bp-lg: 1200px;
 .ticks { display: grid; gap: 10px; }
 .ticks li { position: relative; padding-left: 28px; color: var(--text-primary); font-size: 0.95rem; }
 .ticks li::before { content: ''; position: absolute; left: 0; top: 0.35em; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-live-soft); border: 1px solid var(--accent-live); }
+/* item que NAO esta incluso: X vermelho no lugar do check */
+.ticks li.no::before { background: color-mix(in srgb, var(--accent-danger) 16%, transparent); border-color: var(--accent-danger); }
+.ticks li.no::after { content: '\00D7'; left: 0; top: 0.35em; width: 16px; height: 16px; border: 0; transform: none; text-align: center; line-height: 15px; font-size: 14px; font-weight: 700; color: var(--accent-danger); }
 .ticks li::after { content: ''; position: absolute; left: 5px; top: calc(0.35em + 4px); width: 6px; height: 3px; border-left: 2px solid var(--accent-live-text); border-bottom: 2px solid var(--accent-live-text); transform: rotate(-45deg); }
 
 // Ownership

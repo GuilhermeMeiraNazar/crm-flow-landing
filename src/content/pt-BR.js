@@ -217,7 +217,7 @@ export const copy = (S) => ({
         features: [
           { t: 'Implantação isolada no servidor da sua empresa.', ev: ['S3.1'] },
           { t: 'Você usa as suas próprias chaves de API de IA.', ev: ['F16'] },
-          { t: 'Não inclui correção de bugs futuros, atualizações do sistema nem suporte técnico do dia a dia.', ev: ['FRAME'] },
+          { t: 'Não inclui correção de bugs futuros, atualizações do sistema nem suporte técnico do dia a dia.', ev: ['FRAME'], no: true },
         ],
       },
       'self-com-suporte': {
