@@ -114,16 +114,6 @@ export const copy = (S) => ({
       { icon: 'theme', t: 'Tema claro e escuro', d: 'Alterna e lembra a sua escolha.', ev: ['F28'] },
     ],
   },
-  numbers: {
-    ev: ['S5', 'F12', 'F3', 'F27'],
-    items: [
-      { value: 4, label: 'provedores de IA com a sua chave', ev: ['S5', 'F16'] },
-      { value: 3, label: 'ações de automação por etapa', ev: ['F12'] },
-      { value: 3, label: 'estados de conversa: IA, transferência pedida e humano', ev: ['F3'] },
-      { value: 2, label: 'perfis de acesso: admin e agente', ev: ['F27'] },
-    ],
-  },
-
   ai: {
     id: 'ia',
     eyebrow: 'Inteligência artificial',

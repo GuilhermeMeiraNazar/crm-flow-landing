@@ -177,11 +177,6 @@ export function Product({ C }) {
             </article>
           ))}
         </div>
-        <div className={s.numbers} {...ev(C.numbers.ev)}>
-          {C.numbers.items.map((n) => (
-            <div key={n.label} className={s.num} {...ev(n.ev)}><b>{n.value}</b><span>{n.label}</span></div>
-          ))}
-        </div>
       </div>
     </section>
   );
