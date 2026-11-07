@@ -3,7 +3,7 @@ import { SITE } from '../config/site.js';
 import { copy } from '../content/pt-BR.js';
 import { legal } from '../content/legal.js';
 import { Navbar, Footer } from '../components/ui.jsx';
-import { Hero, Marquee, Problem, Product, AiSection, How, Pricing, Services, Faq, FinalCta } from '../components/sections.jsx';
+import { Hero, WorksWith, Problem, Product, AiSection, How, Models, Pricing, Faq, Services, FinalCta } from '../components/sections.jsx';
 import { usePageEffects } from '../hooks/effects.jsx';
 
 export function Home() {
@@ -15,14 +15,15 @@ export function Home() {
       <Navbar links={C.nav} home />
       <main id="main">
         <Hero C={C} />
-        <Marquee C={C} />
+        <WorksWith C={C} />
         <Problem C={C} />
         <Product C={C} />
         <AiSection C={C} />
         <How C={C} />
+        <Models C={C} />
         <Pricing C={C} />
-        <Services C={C} />
         <Faq C={C} />
+        <Services C={C} />
         <FinalCta C={C} />
       </main>
       <Footer C={C} />

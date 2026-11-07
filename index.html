@@ -3,19 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark light" />
+    <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#0A0E13" />
     <!--SEO-->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <script>
-      (function () {
-        var d = document.documentElement, t = 'dark';
-        try { var v = localStorage.getItem('conversia.theme'); if (v === 'light' || v === 'dark') t = v; } catch (e) {}
-        d.dataset.theme = t; d.classList.add('js-ready');
-      })();
-    </script>
+    <script>document.documentElement.classList.add('js-ready');</script>
   </head>
   <body>
     <div id="root" data-page="home"><!--SSR--></div>

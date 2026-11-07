@@ -76,9 +76,6 @@ export function checkSources() {
   (SITE.pricing?.services || []).forEach((a, i) => {
     if (typeof a.price !== 'number' || !Number.isFinite(a.price) || a.price <= 0) v.push(`SITE.pricing.services[${i}].price deve ser numerico e maior que zero (valor ${a.price})`);
   });
-  (SITE.pricing?.addons || []).forEach((a, i) => {
-    if (typeof a.monthly !== 'number' || !Number.isFinite(a.monthly) || a.monthly <= 0) v.push(`SITE.pricing.addons[${i}].monthly deve ser numerico e maior que zero (valor ${a.monthly})`);
-  });
   // (a) qualquer texto com colchetes ou "CONFIRMAR"
   const all = { SITE, copy: copy(SITE), legal: legal(SITE) };
   for (const [root, obj] of Object.entries(all)) {

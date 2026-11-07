@@ -12,16 +12,16 @@ export const SITE = {
 
   // CTA primario. PLACEHOLDER: URL de checkout, formulario ou agenda.
   CTA_URL: 'https://conversia.example/comprar',
-  ctaPrimaryLabel: 'Quero o ConversIA',
+  ctaPrimaryLabel: 'Falar com a equipe',
   // CTA secundario: ancora interna.
-  ctaSecondaryLabel: 'Ver o produto',
-  ctaSecondaryHref: '#produto',
+  ctaSecondaryLabel: 'Ver planos',
+  ctaSecondaryHref: '#precos',
 
   // Contatos. PLACEHOLDER.
   contactEmail: 'contato@conversia.example',
   // So digitos, com DDI. Ex.: 5511900000000. Deixe '' para ocultar o link de WhatsApp.
   contactWhatsapp: '5511900000000',
-  whatsappMessage: 'Ola! Quero saber mais sobre o ConversIA.',
+  whatsappMessage: 'Olá! Quero falar com a equipe sobre o ConversIA.',
 
   // Razao social / CNPJ para o rodape e paginas legais. PLACEHOLDER.
   company: { legalName: '[RAZAO SOCIAL]', cnpj: '[CNPJ]', address: '[ENDERECO]' },
@@ -41,13 +41,6 @@ export const SITE = {
       { id: 'hosted-byok', line: 'hosted', name: 'Chave própria', tier: 'Hosted BYOK', setup: 1500, monthly: 150, highlight: false },
       { id: 'self-sem-suporte', line: 'self', name: 'Sem suporte', tier: 'Self-Hosted', setup: 3500, monthly: 0, highlight: false },
       { id: 'self-com-suporte', line: 'self', name: 'Com suporte', tier: 'Self-Hosted + Suporte', setup: 3000, monthly: 150, highlight: false },
-    ],
-    // Modulos adicionais (add-ons), valor mensal em reais. Exclusivos de Hosted BYOK e Self-Hosted.
-    addons: [
-      { id: 'agenda', monthly: 99 },
-      { id: 'financeiro', monthly: 149 },
-      { id: 'copiloto', monthly: 149 },
-      { id: 'instancia', monthly: 120 },
     ],
     // Servicos de aceleracao (opcionais), valor em reais. Unidade e prazos ficam no texto (src/content/pt-BR.js).
     services: [
@@ -69,5 +62,13 @@ export const SITE = {
 };
 
 export const absoluteUrl = (path = '/') => `${SITE.domain.replace(/\/$/, '')}${path}`;
-export const whatsappHref = () =>
-  SITE.contactWhatsapp ? `https://wa.me/${SITE.contactWhatsapp}?text=${encodeURIComponent(SITE.whatsappMessage)}` : null;
+// Link do WhatsApp (https://wa.me) com mensagem pre-preenchida. Sem numero configurado, devolve null.
+export const whatsappHref = (message) =>
+  SITE.contactWhatsapp ? `https://wa.me/${SITE.contactWhatsapp}?text=${encodeURIComponent(message || SITE.whatsappMessage)}` : null;
+// CTA primario: WhatsApp quando houver numero; senao a URL de compra/contato (CTA_URL).
+export const ctaHref = (message) => whatsappHref(message) || SITE.CTA_URL;
+// Telefone legivel para o rodape: 5511900000000 -> +55 (11) 90000-0000.
+export const phoneLabel = () => {
+  const d = String(SITE.contactWhatsapp || '').replace(/\D/g, '');
+  return d.length >= 12 ? `+${d.slice(0, 2)} (${d.slice(2, 4)}) ${d.slice(4, d.length - 4)}-${d.slice(-4)}` : d;
+};

@@ -1,8 +1,24 @@
 import s from '../styles/landing.module.scss';
-import { SITE, whatsappHref } from '../config/site.js';
-import { useEffect, useRef, useState } from 'react';
-import { Counter, useLitSteps, prefersReducedMotion } from '../hooks/effects.jsx';
+import { SITE, ctaHref } from '../config/site.js';
+import { useRef, useState } from 'react';
 import { Shot, ShotFrame, Caption, ev } from './ui.jsx';
+
+const brl = (n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: SITE.pricing.currency }).format(n);
+
+// Icones: um unico tracado (1.8) e o mesmo conjunto de formas em todas as secoes.
+const Icon = ({ children, size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{children}</svg>
+);
+const ICONS = {
+  inbox: <><path d="M4 13l2-8h12l2 8" /><path d="M4 13v6h16v-6h-5l-1 2h-4l-1-2z" /></>,
+  funnel: <path d="M3 5h18l-7 8v6l-4-2v-4z" />,
+  bell: <><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4z" /><path d="M10 21h4" /></>,
+  lead: <path d="M4 6h16M4 12h10M4 18h6M18 14l2 2 4-4" />,
+  audio: <><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></>,
+  team: <><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6" /></>,
+  theme: <path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z" />,
+  gift: <path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z" />,
+};
 
 const Head = ({ eyebrow, title, lead, id, evIds }) => (
   <div className={s.head} data-reveal {...ev(evIds)}>
@@ -24,13 +40,12 @@ export function Hero({ C }) {
           <h1 className={s.h1} id="h1" {...ev(['S1', 'S3.1'])}>{h.h1}</h1>
           <p className={s.heroSub} {...ev(h.ev)}>{h.sub}</p>
           <div className={s.btnRow}>
-            <a className={`${s.btn} ${s.btnPrimary}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
+            <a className={`${s.btn} ${s.btnPrimary}`} href={ctaHref()}>{SITE.ctaPrimaryLabel}</a>
             <a className={`${s.btn} ${s.btnGhost}`} href={SITE.ctaSecondaryHref}>{SITE.ctaSecondaryLabel}</a>
           </div>
         </div>
         <figure className={s.heroFig}>
           <div className={s.stage}>
-            <div className={s.stageGlow} aria-hidden="true" />
             <div className={s.tilt}>
               <ShotFrame name="hero" alt={h.shotAlt} eager sizes="(min-width: 1200px) 1100px, 100vw" />
             </div>
@@ -42,21 +57,20 @@ export function Hero({ C }) {
   );
 }
 
-export function Marquee({ C }) {
+// "Funciona com": linha estatica de chips de texto (so itens classe A, sem logotipos de terceiros).
+export function WorksWith({ C }) {
   const m = C.integrations;
-  const group = (hidden) => (
-    <ul className={s.marqueeGroup} aria-hidden={hidden || undefined}>
-      {m.items.map((i) => (
-        <li key={i.name} className={s.chip}>{i.name}{i.note && <small>{i.note}</small>}</li>
-      ))}
-    </ul>
-  );
   return (
-    <section className={s.marqueeWrap} aria-label="Integrações" {...ev(m.ev)}>
+    <section className={s.worksWith} aria-label={m.label} {...ev(m.ev)}>
       <div className={s.container}>
-        <div className={s.marqueeHead}><span className={s.marqueeLabel}>{m.label}</span><span className={s.marqueeLabel}>{m.legal}</span></div>
+        <div className={s.worksRow}>
+          <span className={s.worksLabel}>{m.label}</span>
+          <ul className={s.chips}>
+            {m.items.map((i) => <li key={i.name} className={s.chip}>{i.name}</li>)}
+          </ul>
+        </div>
+        <p className={s.worksLegal}>{m.legal}</p>
       </div>
-      <div className={s.marquee}>{group(false)}{group(true)}</div>
     </section>
   );
 }
@@ -67,9 +81,13 @@ export function Problem({ C }) {
     <section className={s.section} aria-labelledby="problema">
       <div className={s.container}>
         <Head eyebrow={p.eyebrow} title={p.title} id="problema" evIds={p.ev} />
-        <div className={s.cols3}>
+        <div className={s.grid3}>
           {p.items.map((i, k) => (
-            <div key={i.t} className={s.plain} data-reveal style={{ '--i': k }} {...ev(i.ev)}><h3>{i.t}</h3><p>{i.d}</p></div>
+            <article key={i.t} className={s.tile} data-reveal style={{ '--i': k }} {...ev(i.ev)}>
+              <span className={s.tileIcon}><Icon>{ICONS[i.icon]}</Icon></span>
+              <h3>{i.t}</h3>
+              <p>{i.d}</p>
+            </article>
           ))}
         </div>
       </div>
@@ -77,14 +95,7 @@ export function Problem({ C }) {
   );
 }
 
-const ICONS = {
-  lead: <path d="M4 6h16M4 12h10M4 18h6M18 14l2 2 4-4" />,
-  audio: <><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></>,
-  team: <><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6" /></>,
-  theme: <path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z" />,
-};
-
-// "O produto": abas com tela real de cada area. Todos os paineis ficam no HTML (so o ativo aparece).
+// "O produto": abas com a tela real de cada area. Todos os paineis ficam no HTML; so o ativo aparece.
 export function Product({ C }) {
   const b = C.product;
   const [active, setActive] = useState(0);
@@ -104,9 +115,9 @@ export function Product({ C }) {
     <section className={s.section} id={b.id} aria-labelledby="produto-t">
       <div className={s.container}>
         <Head eyebrow={b.eyebrow} title={b.title} id="produto-t" evIds={b.ev} />
-        <div className={s.prodTabs} role="tablist" aria-label="Áreas do produto" onKeyDown={onKey}>
+        <div className={s.seg} role="tablist" aria-label="Áreas do produto" onKeyDown={onKey}>
           {b.tabs.map((t, i) => (
-            <button key={t.id} ref={(el) => { tabs.current[i] = el; }} type="button" role="tab" id={`tab-${t.id}`} aria-selected={i === active} aria-controls={`painel-${t.id}`} tabIndex={i === active ? 0 : -1} className={`${s.prodTab} ${i === active ? s.prodTabOn : ''}`} onClick={() => select(i)}>
+            <button key={t.id} ref={(el) => { tabs.current[i] = el; }} type="button" role="tab" id={`tab-${t.id}`} aria-selected={i === active} aria-controls={`painel-${t.id}`} tabIndex={i === active ? 0 : -1} className={`${s.segBtn} ${i === active ? s.segOn : ''}`} onClick={() => select(i)}>
               {t.label}
             </button>
           ))}
@@ -123,27 +134,26 @@ export function Product({ C }) {
             <div className={s.prodShot}><Shot name={t.shot} alt={t.alt} /></div>
           </div>
         ))}
-        <h3 className={s.alsoTitle}>{b.alsoTitle}</h3>
-        <div className={s.also}>
+        <h3 className={s.subTitle}>{b.alsoTitle}</h3>
+        <div className={s.grid4}>
           {b.also.map((x) => (
-            <article key={x.t} className={s.alsoItem} {...ev(x.ev)}>
-              <span className={s.alsoIcon} aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{ICONS[x.icon]}</svg>
-              </span>
+            <article key={x.t} className={s.tile} {...ev(x.ev)}>
+              <span className={s.tileIcon}><Icon>{ICONS[x.icon]}</Icon></span>
               <h4>{x.t}</h4>
               <p>{x.d}</p>
             </article>
           ))}
         </div>
-        <div className={s.numbers} data-reveal {...ev(C.numbers.ev)}>
+        <div className={s.numbers} {...ev(C.numbers.ev)}>
           {C.numbers.items.map((n) => (
-            <div key={n.label} className={s.num} {...ev(n.ev)}><b><Counter value={n.value} /></b><span>{n.label}</span></div>
+            <div key={n.label} className={s.num} {...ev(n.ev)}><b>{n.value}</b><span>{n.label}</span></div>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
 export function AiSection({ C }) {
   const a = C.ai;
   return (
@@ -166,193 +176,198 @@ export function AiSection({ C }) {
     </section>
   );
 }
+
+// Como funciona: passos horizontais, uma captura por passo e uma unica legenda.
 export function How({ C }) {
   const h = C.how;
-  const { refs, lit } = useLitSteps(h.steps.length);
   return (
     <section className={`${s.section} ${s.sectionLine}`} id={h.id} aria-labelledby="how-t">
       <div className={s.container}>
         <Head eyebrow={h.eyebrow} title={h.title} id="how-t" evIds={h.ev} />
-        <ol className={s.steps}>
-          {h.steps.map((st, i) => (
-            <li key={st.t} ref={(el) => { refs.current[i] = el; }} className={`${s.step} ${lit[i] ? s.stepLit : ''}`} {...ev(st.ev)}>
-              <h3>{st.t}</h3><p>{st.d}</p>
-            </li>
-          ))}
-        </ol>
+        <figure className={s.fig}>
+          <ol className={s.steps}>
+            {h.steps.map((st, i) => (
+              <li key={st.t} className={s.step} data-reveal style={{ '--i': i }} {...ev(st.ev)}>
+                <div className={s.stepShot}><ShotFrame name={st.shot} alt={st.alt} bar={false} sizes="(min-width: 900px) 280px, 90vw" /></div>
+                <span className={s.stepNum} aria-hidden="true">{i + 1}</span>
+                <h3>{st.t}</h3>
+                <p>{st.d}</p>
+              </li>
+            ))}
+          </ol>
+          <Caption />
+        </figure>
       </div>
     </section>
   );
 }
 
-const ADDON_ICONS = {
-  agenda: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18M8 15l2.5 2.5L16 13" /></>,
-  financeiro: <><rect x="2" y="5" width="20" height="14" rx="2" /><path d="M2 10h20M6 15h4" /></>,
-  copiloto: <><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0M17 3l.8 1.7L19.5 5.5l-1.7.8L17 8l-.8-1.7-1.7-.8 1.7-.8z" /></>,
-  instancia: <><rect x="6" y="2" width="12" height="20" rx="3" /><path d="M11 18h2" /></>,
-};
-const brl = (n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: SITE.pricing.currency }).format(n);
-
-// Carrossel de planos de uma linha. Quando os cartoes cabem na largura (desktop), todos aparecem lado a lado e
-// os controles somem. Abaixo disso, faixa com rolagem por snap (toque e teclado), setas, abas e foco gerenciado.
-function PlanCarousel({ p, plans, group }) {
-  const track = useRef(null);
-  const [active, setActive] = useState(0);
-  const [scrolls, setScrolls] = useState(false);
-  const region = `${p.carousel.region}: ${group.title}`;
-
-  useEffect(() => {
-    const el = track.current;
-    if (!el) return undefined;
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      setScrolls(el.scrollWidth - el.clientWidth > 4);
-      const kids = [...el.children];
-      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) { setActive(kids.length - 1); return; }
-      const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
-      let best = 0; let dist = Infinity;
-      kids.forEach((c, i) => { const d = Math.abs(c.offsetLeft - pad - el.scrollLeft); if (d < dist) { dist = d; best = i; } });
-      setActive(best);
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onScroll) : null;
-    if (ro) ro.observe(el);
-    update();
-    return () => { el.removeEventListener('scroll', onScroll); if (ro) ro.disconnect(); if (raf) cancelAnimationFrame(raf); };
-  }, []);
-
-  const go = (i) => {
-    const el = track.current;
-    const idx = Math.max(0, Math.min(plans.length - 1, i));
-    const slide = el && el.children[idx];
-    if (!slide) return;
-    const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
-    setActive(idx);
-    el.scrollTo({ left: slide.offsetLeft - pad, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-  };
-  const onKey = (e) => {
-    if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); }
-  };
-
+// Hospedado ou no seu servidor: quem cuida do servidor, o que o cliente faz e onde ficam os dados.
+export function Models({ C }) {
+  const m = C.models;
+  const req = C.pricing.selfReq;
   return (
-    <>
+    <section className={`${s.section} ${s.sectionLine}`} id={m.id} aria-labelledby="modelos-t">
       <div className={s.container}>
-        <div className={s.carouselBar}>
-          <div className={s.planTabs} role="group" aria-label={region}>
-            {plans.map((pl, i) => (
-              <button key={pl.id} type="button" className={`${s.planTab} ${i === active ? s.planTabOn : ''}`} aria-current={i === active ? 'true' : undefined} aria-label={`${p.carousel.goto} ${pl.tier}`} onClick={() => go(i)}>
-                {pl.name}
-              </button>
-            ))}
-          </div>
-          <div className={s.carouselArrows}>
-            <button type="button" className={s.iconBtn} onClick={() => go(active - 1)} disabled={active === 0} aria-label={`${p.carousel.prev}: ${group.title}`}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
-            </button>
-            <button type="button" className={s.iconBtn} onClick={() => go(active + 1)} disabled={active === plans.length - 1} aria-label={`${p.carousel.next}: ${group.title}`}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
-            </button>
-          </div>
+        <Head eyebrow={m.eyebrow} title={m.title} lead={m.lead} id="modelos-t" evIds={m.ev} />
+        <div className={s.grid2}>
+          {m.cards.map((c) => (
+            <article key={c.id} className={s.tile} data-reveal {...ev(c.ev)}>
+              <h3>{c.t}</h3>
+              <dl className={s.kv}>
+                {c.rows.map((r) => <div key={r.k}><dt>{r.k}</dt><dd>{r.v}</dd></div>)}
+              </dl>
+              {c.id === 'self' && (
+                <details className={s.reqDetails} {...ev(req.ev)}>
+                  <summary>{req.title}</summary>
+                  <dl className={s.kv}>
+                    {req.rows.map((r) => <div key={r.t} {...ev(r.ev)}><dt>{r.t}</dt><dd>{r.d}</dd></div>)}
+                  </dl>
+                  <p className={s.foot}>{req.footnote}</p>
+                </details>
+              )}
+            </article>
+          ))}
         </div>
       </div>
-      <div className={`${s.carouselWrap} ${scrolls ? s.scrolls : s.fits}`} style={{ '--n': Math.max(plans.length, 3) }}>
-        <div className={s.track} ref={track} role="region" aria-roledescription="carrossel" aria-label={region} tabIndex={0} onKeyDown={onKey}>
-          {plans.map((pl, i) => {
-            const c = p.plans[pl.id];
-            return (
-              <article key={pl.id} className={`${s.plan} ${pl.highlight ? s.planHi : ''} ${i === active ? s.planOn : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} de ${plans.length}: ${pl.tier}`}>
-                <p className={s.planTier}>{pl.tier}{pl.highlight && <span className={s.planBadge}>{p.labels.badge}</span>}</p>
-                <h4 className={s.planName}>{pl.name}</h4>
-                <p className={s.planTag} {...ev(c.taglineEv)}>{c.tagline}</p>
-                {pl.monthly > 0
-                  ? <p className={s.price}>{brl(pl.monthly)} <small>/ {p.labels.monthly}</small></p>
-                  : <p className={s.price}>{brl(pl.setup)} <small>{p.labels.setupNote}</small></p>}
-                <p className={s.billing}>{pl.monthly > 0 ? `${p.labels.setup}: ${brl(pl.setup)} (${p.labels.setupNote})` : `${p.labels.setup} ${p.labels.noMonthly}`}</p>
-                <ul className={s.ticks}>
-                  {c.features.map((f) => <li key={f.t} className={f.no ? s.no : undefined} {...ev(f.ev)}>{f.t}{f.soon && <span className={s.soon}>{p.labels.soon}</span>}</li>)}
-                </ul>
-                {c.note && <p className={s.planNote}>{c.note}</p>}
-                <a className={`${s.btn} ${s.btnPrimary} ${s.planCta}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
-              </article>
-            );
-          })}
+    </section>
+  );
+}
+
+const Mark = ({ ok, label }) => (
+  <span className={ok ? s.yes : s.no}><span className="sr-only">{label}</span></span>
+);
+
+function PlanCard({ p, pl, group }) {
+  const c = p.plans[pl.id];
+  const model = group.id === 'hosted' ? 'hospedado por vocês' : 'no meu servidor';
+  const msg = `Olá! Quero o plano ${pl.tier} (${model}) do ${SITE.name}.`;
+  return (
+    <article className={`${s.plan} ${pl.highlight ? s.planHi : ''}`}>
+      {pl.highlight && <span className={s.planBadge}>{p.labels.badge}</span>}
+      <p className={s.planTier}>{pl.tier}</p>
+      <h4 className={s.planName}>{pl.name}</h4>
+      <p className={s.planTag} {...ev(c.taglineEv)}>{c.tagline}</p>
+      {pl.monthly > 0
+        ? <p className={s.price}>{brl(pl.monthly)} <small>/ {p.labels.monthly}</small></p>
+        : <p className={s.price}>{brl(pl.setup)} <small>{p.labels.setup.toLowerCase()}</small></p>}
+      <p className={s.billing}>{pl.monthly > 0 ? `${p.labels.setup}: ${brl(pl.setup)}` : p.labels.noMonthly}</p>
+      <ul className={s.ticks}>
+        {c.features.map((f) => <li key={f.t} className={f.no ? s.no : undefined} {...ev(f.ev)}>{f.t}</li>)}
+      </ul>
+      <a className={`${s.btn} ${pl.highlight ? s.btnPrimary : s.btnGhost} ${s.planCta}`} href={ctaHref(msg)}>{p.labels.choose} {pl.tier}</a>
+    </article>
+  );
+}
+
+function Compare({ p, g, plans, open, setOpen }) {
+  const L = p.labels;
+  return (
+    <div className={s.compare}>
+      <div className={s.compareHead}>
+        <h3>{L.compareTitle}</h3>
+        <button type="button" className={s.compareBtn} aria-expanded={open} aria-controls={`cmp-${g.id}`} onClick={() => setOpen(!open)}>{open ? L.compareClose : L.compareOpen}</button>
+      </div>
+      <div id={`cmp-${g.id}`} className={`${s.compareBody} ${open ? s.compareOpen : ''}`}>
+        <div className={s.tableWrap}>
+          <table className={s.table}>
+            <caption className="sr-only">{L.compareTitle}: {g.tab}</caption>
+            <thead>
+              <tr><th scope="col">{L.feature}</th>{plans.map((pl) => <th scope="col" key={pl.id}>{pl.tier}</th>)}</tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">{L.setupRow}</th>{plans.map((pl) => <td key={pl.id}>{brl(pl.setup)}</td>)}</tr>
+              <tr><th scope="row">{L.monthlyRow}</th>{plans.map((pl) => <td key={pl.id}>{pl.monthly > 0 ? brl(pl.monthly) : L.noMonthly}</td>)}</tr>
+              {g.compare.map((r) => (
+                <tr key={r.t} {...ev(r.ev)}>
+                  <th scope="row">{r.t}</th>
+                  {r.v.map((v, i) => <td key={plans[i].id}>{typeof v === 'boolean' ? <Mark ok={v} label={v ? L.yes : L.no} /> : v}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 export function Pricing({ C }) {
   const p = C.pricing;
+  const [line, setLine] = useState('hosted');
+  const [open, setOpen] = useState(false);
+  const tabs = useRef([]);
+  const pick = (i, focus) => {
+    const n = (i + p.groups.length) % p.groups.length;
+    setLine(p.groups[n].id);
+    if (focus && tabs.current[n]) tabs.current[n].focus();
+  };
+  const idx = p.groups.findIndex((g) => g.id === line);
+  const onKey = (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); pick(idx + 1, true); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); pick(idx - 1, true); }
+  };
+  const rm = p.roadmap;
+  const ln = p.launch;
   return (
     <section className={`${s.section} ${s.sectionLine}`} id={p.id} aria-labelledby="price-t">
       <div className={s.container}>
         <Head eyebrow={p.eyebrow} title={p.title} lead={p.lead} id="price-t" evIds={p.leadEv} />
-      </div>
-      {p.groups.map((g) => {
-        const plans = g.plans.map((id) => SITE.pricing.plans.find((x) => x.id === id));
-        return (
-          <div key={g.id} id={`planos-${g.id}`} className={s.planGroup}>
-            <div className={s.container}>
-              <h3 className={s.groupTitle} {...ev(g.ev)}>{g.title}</h3>
-              <p className={s.groupLead}>{g.lead}</p>
-            </div>
-            <PlanCarousel p={p} plans={plans} group={g} />
-            {g.note && <div className={s.container}><p className={s.foot} {...ev(g.noteEv)}>{g.note}</p></div>}
-            {g.id === 'self' && (
-              <div className={s.container}>
-                <div className={s.selfReq} {...ev(p.selfReq.ev)}>
-                  <h4>{p.selfReq.title}</h4>
-                  <dl className={s.reqTable}>
-                    {p.selfReq.rows.map((r) => <div key={r.t} className={s.reqRow} {...ev(r.ev)}><dt>{r.t}</dt><dd>{r.d}</dd></div>)}
-                  </dl>
-                  <p className={s.foot}>{p.selfReq.footnote}</p>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
-      <div id={p.addons.id} className={s.planGroup}>
-        <div className={s.container}>
-          <h3 className={s.groupTitle} {...ev(p.addons.ev)}>{p.addons.title}</h3>
-          <p className={s.groupLead}>{p.addons.lead}</p>
-          <div className={s.addons}>
-            {SITE.pricing.addons.map((a) => {
-              const c = p.addons.items[a.id];
-              return (
-                <article key={a.id} className={s.addon} {...ev(c.ev)}>
-                  <span className={s.alsoIcon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{ADDON_ICONS[c.icon]}</svg></span>
-                  <h4>{c.t}{c.soon && <span className={s.soon}>{p.labels.soon}</span>}</h4>
-                  <p>{c.d}</p>
-                  <p className={s.addonPrice}>+ {brl(a.monthly)} <small>/ {p.labels.monthly}</small></p>
-                </article>
-              );
-            })}
-          </div>
-          <p className={s.foot}>{p.addons.note}</p>
+        <div className={s.seg} role="tablist" aria-label={p.selectorLabel} onKeyDown={onKey}>
+          {p.groups.map((g, i) => (
+            <button key={g.id} ref={(el) => { tabs.current[i] = el; }} type="button" role="tab" id={`tab-${g.id}`} aria-selected={g.id === line} aria-controls={`painel-${g.id}`} tabIndex={g.id === line ? 0 : -1} className={`${s.segBtn} ${g.id === line ? s.segOn : ''}`} onClick={() => pick(i)}>
+              {g.tab}
+            </button>
+          ))}
         </div>
-      </div>
-      <div className={s.container}>
-        <aside className={s.launch} data-reveal {...ev(p.launch.ev)}>
-          <span className={s.launchGlow} aria-hidden="true" />
-          <div className={s.launchBig} aria-hidden="true"><b>{p.launch.big}</b><span>{p.launch.bigLabel}</span></div>
+        {p.groups.map((g) => {
+          const plans = g.plans.map((id) => SITE.pricing.plans.find((x) => x.id === id));
+          return (
+            <div key={g.id} id={`painel-${g.id}`} role="tabpanel" aria-labelledby={`tab-${g.id}`} hidden={g.id !== line} {...ev(g.ev)}>
+              <div className={s.grid2}>
+                <div className={s.infoBox}><h3>{g.who.t}</h3><p>{g.who.d}</p></div>
+                <div className={s.infoBox}><h3>{g.does.t}</h3><p>{g.does.d}</p></div>
+              </div>
+              <div className={`${s.planGrid} ${plans.length === 2 ? s.planGrid2 : ''}`} style={{ '--n': plans.length }}>
+                {plans.map((pl) => <PlanCard key={pl.id} p={p} pl={pl} group={g} />)}
+              </div>
+              {g.note && <p className={s.foot} {...ev(g.noteEv)}>{g.note}</p>}
+              <Compare p={p} g={g} plans={plans} open={open} setOpen={setOpen} />
+            </div>
+          );
+        })}
+
+        <div id={rm.id} className={s.roadmap} {...ev(rm.ev)}>
+          <h3 className={s.subTitle}>{rm.title}</h3>
+          <p className={s.groupLead}>{rm.lead}</p>
+          <div className={s.grid3}>
+            {rm.items.map((x) => (
+              <article key={x.id} className={s.tile} data-roadmap {...ev(x.ev)}>
+                <h4>{x.t}</h4>
+                <p>{x.d}</p>
+                <p className={s.meta}>{x.where}</p>
+                <a className={`${s.btn} ${s.btnGhost} ${s.btnSm}`} href={ctaHref(`Olá! Quero ser avisado quando "${x.t}" for lançado no ${SITE.name}.`)}>{rm.cta}</a>
+              </article>
+            ))}
+          </div>
+          <p className={s.foot}>{rm.note}</p>
+        </div>
+
+        <aside className={s.launch} {...ev(ln.ev)}>
+          <div className={s.launchBig} aria-hidden="true"><b>{ln.big}</b><span>{ln.bigLabel}</span></div>
           <div className={s.launchBody}>
-            <span className={s.launchBadge}>{p.launch.badge}</span>
-            <h3>{p.launch.title}</h3>
-            <p className={s.launchLead}>{p.launch.lead}</p>
+            <span className={s.launchBadge}>{ln.badge}</span>
+            <h3>{ln.title}</h3>
+            <p className={s.launchLead}>{ln.lead}</p>
             <ul className={s.perks}>
-              {p.launch.perks.map((x) => (
+              {ln.perks.map((x) => (
                 <li key={x.t} {...ev(x.ev)}>
-                  <span className={s.perkIcon} aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z" /></svg></span>
-                  <div><h4>{x.t}{x.soon && <span className={s.soon}>{p.labels.soon}</span>}</h4><p>{x.d}</p></div>
+                  <span className={s.tileIcon} aria-hidden="true"><Icon>{ICONS.gift}</Icon></span>
+                  <div><h4>{x.t}</h4><p>{x.d}</p></div>
                 </li>
               ))}
             </ul>
-            <a className={`${s.btn} ${s.btnPrimary}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
+            <p className={s.termsNote}>{ln.terms} <a href="/reembolso/">Ver a política</a></p>
           </div>
         </aside>
         <p className={s.placeholder}>Garantia: {SITE.pricing.guarantee}</p>
@@ -360,47 +375,7 @@ export function Pricing({ C }) {
     </section>
   );
 }
-const SERVICE_ICONS = {
-  landing: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M8 14h8" /></>,
-  consultoria: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.5" /><path d="M12 12l5-5" /></>,
-  gestao: <path d="M3 20h18M6 16V10M11 16V6M16 16v-4M21 16V8" />,
-};
 
-// Servicos opcionais de marketing (valores em SITE.pricing.services, textos em C.services).
-export function Services({ C }) {
-  const sv = C.services;
-  return (
-    <section className={`${s.section} ${s.sectionLine}`} id={sv.id} aria-labelledby="serv-t">
-      <div className={s.container}>
-        <Head eyebrow={sv.eyebrow} title={sv.title} lead={sv.lead} id="serv-t" evIds={sv.ev} />
-        <div className={s.services}>
-          {SITE.pricing.services.map((x, k) => {
-            const c = sv.items[x.id];
-            return (
-              <article key={x.id} className={s.svc} data-reveal style={{ '--i': k }} {...ev(c.ev)}>
-                <div className={s.svcTop}>
-                  <span className={s.alsoIcon} aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{SERVICE_ICONS[c.icon]}</svg></span>
-                  <span className={s.svcBadge}>{sv.badge}</span>
-                </div>
-                <h3>{c.t}</h3>
-                <p className={s.svcTag}>{c.tagline}</p>
-                <p className={s.svcPrice}>{brl(x.price)} <small>{c.priceNote}</small></p>
-                <dl className={s.svcMeta}>
-                  {c.meta.map((m) => <div key={m.k}><dt>{m.k}</dt><dd>{m.v}</dd></div>)}
-                </dl>
-                <ul className={s.ticks}>
-                  {c.features.map((f) => <li key={f.t} {...ev(f.ev)}>{f.t}</li>)}
-                </ul>
-                <a className={`${s.btn} ${s.btnGhost} ${s.planCta}`} href={whatsappHref() || SITE.CTA_URL}>Quero saber mais</a>
-              </article>
-            );
-          })}
-        </div>
-        <p className={s.foot}>{sv.note}</p>
-      </div>
-    </section>
-  );
-}
 export function Faq({ C }) {
   const f = C.faq;
   return (
@@ -420,19 +395,43 @@ export function Faq({ C }) {
   );
 }
 
+// Servicos opcionais: faixa de tres linhas de texto (valores em SITE.pricing.services).
+export function Services({ C }) {
+  const sv = C.services;
+  return (
+    <section className={`${s.section} ${s.sectionLine}`} id={sv.id} aria-labelledby="serv-t" {...ev(sv.ev)}>
+      <div className={s.container}>
+        <p className={s.eyebrow}>{sv.eyebrow}</p>
+        <h2 className={s.stripTitle} id="serv-t">{sv.title}</h2>
+        <p className={s.lead}>{sv.lead}</p>
+        <ul className={s.strip}>
+          {SITE.pricing.services.map((x) => {
+            const c = sv.items[x.id];
+            return (
+              <li key={x.id} {...ev(c.ev)}>
+                <div><b>{c.t}</b><span>{c.d}</span></div>
+                <p className={s.stripPrice}>{brl(x.price)} <small>{c.unit}</small></p>
+                <a className={s.stripLink} href={ctaHref(`Olá! Quero saber mais sobre: ${c.t}.`)}>{sv.more}</a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 export function FinalCta({ C }) {
   const c = C.finalCta;
-  const wa = whatsappHref();
   return (
     <section className={`${s.section} ${s.cta}`} aria-labelledby="cta-t">
       <div className={s.container}>
         <div className={s.ctaBox} data-reveal>
-          <span className={s.ctaGlow} aria-hidden="true" />
           <h2 id="cta-t">{c.title}</h2>
           <p>{c.sub}</p>
           <div className={s.btnRow}>
-            <a className={`${s.btn} ${s.btnPrimary}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
-            {wa && <a className={`${s.btn} ${s.btnGhost}`} href={wa} rel="noopener noreferrer">Falar no WhatsApp</a>}
+            <a className={`${s.btn} ${s.btnPrimary}`} href={ctaHref()}>{SITE.ctaPrimaryLabel}</a>
+            <a className={`${s.btn} ${s.btnGhost}`} href={SITE.ctaSecondaryHref}>{SITE.ctaSecondaryLabel}</a>
           </div>
         </div>
       </div>
