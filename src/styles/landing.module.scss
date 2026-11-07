@@ -120,14 +120,13 @@ $bp-lg: 1200px;
 .num b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: clamp(2rem, 4.4vw, 2.8rem); line-height: 1; margin-bottom: 8px; color: var(--text-primary); }
 .num span { color: var(--text-secondary); font-size: 0.9rem; }
 
-// Video de demonstracao
-.demo { margin: 0; }
-.demoFrame { position: relative; max-width: 1032px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-strong); background: var(--bg-elevated); box-shadow: var(--shadow-lg); aspect-ratio: 1032 / 720; }
-.demoVideo { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--bg-elevated); }
-.demoPlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: rgba(10, 14, 19, 0.45); color: #fff; font-weight: 600; font-size: 1rem; }
-.demoPlay:hover { background: rgba(10, 14, 19, 0.3); }
-.demoIcon { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); box-shadow: var(--shadow-md); }
-.demoFrame + .caption { text-align: left; }
+// Video de demonstracao`n.reel { margin: 0; }
+.reelFrame { position: relative; max-width: 1032px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-strong); background: var(--bg-elevated); box-shadow: var(--shadow-lg); aspect-ratio: 1032 / 720; }
+.reelVideo { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--bg-elevated); }
+.reelPlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: rgba(10, 14, 19, 0.45); color: #fff; font-weight: 600; font-size: 1rem; }
+.reelPlay:hover { background: rgba(10, 14, 19, 0.3); }
+.reelIcon { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); box-shadow: var(--shadow-md); }
+.reelFrame + .caption { text-align: left; }
 
 // Lista com check (verde = incluso) e X (vermelho = nao incluso)
 .ticks { display: grid; gap: 12px; }

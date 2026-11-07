@@ -1,3 +1,5 @@
+> ATENCAO: este documento descreve a versao ANTERIOR ao refinamento. Ordem das secoes, planos, tema, fontes e video mudaram; veja verificacao/REFINAMENTO-RELATORIO.md.
+
 # ConversIA: estrutura do front e estética da landing page
 
 Documento para revisão externa de design, UX e front-end. Descreve o que existe hoje, sem avaliar. A seção final lista dúvidas e pontos que já sei que merecem olhar.

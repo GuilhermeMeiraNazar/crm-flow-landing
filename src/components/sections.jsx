@@ -99,20 +99,20 @@ export function Problem({ C }) {
 function DemoVideo({ v }) {
   const [on, setOn] = useState(false);
   return (
-    <figure className={s.demo} {...ev(v.ev)}>
+    <figure className={s.reel} {...ev(v.ev)}>
       <h3 className={s.subTitle}>{v.title}</h3>
       <p className={s.groupLead} id="demo-desc">{v.d} {v.desc}</p>
-      <div className={s.demoFrame}>
+      <div className={s.reelFrame}>
         {on ? (
-          <video className={s.demoVideo} controls autoPlay muted playsInline preload="auto" poster="/media/fluxo-poster.avif" width="1032" height="720" aria-describedby="demo-desc">
+          <video className={s.reelVideo} controls autoPlay muted playsInline preload="auto" poster="/media/fluxo-poster.avif" width="1032" height="720" aria-describedby="demo-desc">
             <source src="/media/fluxo-conversia.webm" type="video/webm" />
             <source src="/media/fluxo-conversia.mp4" type="video/mp4" />
           </video>
         ) : (
           <>
-            <img className={s.demoVideo} src="/media/fluxo-poster.avif" width="1032" height="720" alt={v.posterAlt} loading="lazy" decoding="async" />
-            <button type="button" className={s.demoPlay} onClick={() => setOn(true)} aria-describedby="demo-desc">
-              <span className={s.demoIcon} aria-hidden="true"><Icon size={28}><path d="M8 5v14l11-7z" /></Icon></span>
+            <img className={s.reelVideo} src="/media/fluxo-poster.avif" width="1032" height="720" alt={v.posterAlt} loading="lazy" decoding="async" />
+            <button type="button" className={s.reelPlay} onClick={() => setOn(true)} aria-describedby="demo-desc">
+              <span className={s.reelIcon} aria-hidden="true"><Icon size={28}><path d="M8 5v14l11-7z" /></Icon></span>
               {v.play}
             </button>
           </>
