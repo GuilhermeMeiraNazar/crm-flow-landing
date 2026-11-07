@@ -16,7 +16,7 @@ export const copy = (S) => ({
     { href: '#seus-dados', label: 'Seus dados' },
     { href: '#como-funciona', label: 'Como funciona' },
     { href: '#requisitos', label: 'Requisitos' },
-    { href: '#precos', label: 'Preço' },
+    { href: '#precos', label: 'Planos' },
     { href: '#faq', label: 'FAQ' },
   ],
 
@@ -193,9 +193,40 @@ export const copy = (S) => ({
 
   pricing: {
     id: 'precos',
-    eyebrow: 'Preço',
-    title: 'Licença para a sua instalação.',
-    lead: 'Valores, forma de pagamento e garantia são definidos pela empresa antes da publicação.',
+    eyebrow: 'Planos',
+    title: 'Escolha o pacote para o seu atendimento.',
+    lead: 'Cada pacote inclui tudo o que está no anterior. A implantação é uma taxa única; a mensalidade é recorrente.',
+    leadEv: ['F1', 'F3', 'F16'],
+    common: 'Todos os pacotes incluem o CRM de WhatsApp com agente de IA que usa as chaves do próprio cliente.',
+    labels: { setup: 'Implantação', setupNote: 'taxa única', monthly: 'por mês', support: 'Suporte', includes: 'Inclui tudo do', plus: 'e mais:', first: 'O que está incluso:' },
+    carousel: { region: 'Pacotes e valores', prev: 'Pacote anterior', next: 'Próximo pacote', goto: 'Ver' },
+    // O que cada pacote inclui. Só entra o que tem evidência em CONTEUDO.md.
+    plans: {
+      basico: {
+        tagline: 'Para pequenas empresas que precisam organizar o atendimento e os leads no funil de vendas.',
+        taglineEv: ['FRAME'],
+        features: [
+          { t: 'CRM de WhatsApp: contatos e conversas em uma caixa de entrada para a equipe.', ev: ['F1', 'F11'] },
+          { t: 'IA de atendimento e triagem: responde as conversas e passa para uma pessoa quando necessário.', ev: ['F3'] },
+          { t: 'Dados do lead no funil: nome, telefone, e-mail, orçamento e interesse extraídos da conversa.', ev: ['F5', 'F6'] },
+          { t: 'Pipeline kanban e relatórios de funil, atendimento e custo de IA.', ev: ['F7', 'F14'] },
+        ],
+      },
+      medio: {
+        tagline: 'Para empresas em crescimento que querem mais robustez na IA e suporte com resposta mais rápida.',
+        taglineEv: ['FRAME'],
+        features: [
+          { t: 'Cadeia de reserva entre provedores de IA: se o primeiro falhar, outro assume a resposta.', ev: ['F17'] },
+        ],
+      },
+      premium: {
+        tagline: 'Para operações consolidadas que querem atendimento VIP e a plataforma com a cara da empresa.',
+        taglineEv: ['FRAME'],
+        features: [
+          { t: 'Adaptação da paleta de cores da plataforma à identidade da empresa (setup semi-personalizado).', ev: ['S7'] },
+        ],
+      },
+    },
   },
 
   faq: {

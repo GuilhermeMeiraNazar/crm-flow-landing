@@ -64,8 +64,12 @@ export function checkSources() {
   const plans = SITE.pricing?.plans || [];
   if (!plans.length) v.push('SITE.pricing.plans esta vazio');
   plans.forEach((p, i) => {
-    if (typeof p.price !== 'number' || !Number.isFinite(p.price)) v.push(`SITE.pricing.plans[${i}].price deve ser numerico (tipo ${typeof p.price}, valor ${p.price})`);
-    else if (p.price <= 0) v.push(`SITE.pricing.plans[${i}].price deve ser maior que zero (valor ${p.price})`);
+    for (const k of ['setup', 'monthly']) {
+      const val = p[k];
+      if (typeof val !== 'number' || !Number.isFinite(val)) v.push(`SITE.pricing.plans[${i}].${k} deve ser numerico (tipo ${typeof val}, valor ${val})`);
+      else if (val <= 0) v.push(`SITE.pricing.plans[${i}].${k} deve ser maior que zero (valor ${val})`);
+    }
+    if (emptyish(p.support)) v.push(`SITE.pricing.plans[${i}].support esta vazio`);
   });
   // (a) qualquer texto com colchetes ou "CONFIRMAR"
   const all = { SITE, copy: copy(SITE), legal: legal(SITE) };

@@ -28,7 +28,6 @@ const VALID = [
   [/legalName: '[^']*'/, "legalName: 'Empresa Teste LTDA'"],
   [/cnpj: '[^']*'/, "cnpj: '11.222.333/0001-81'"],
   [/address: '[^']*'/, "address: 'Rua Teste, 100'"],
-  [/price: null/, 'price: 1990'],
   [/legalDraft: true/, 'legalDraft: false'],
 ];
 const withValid = strip(VALID.reduce((t, [re, to]) => t.replace(re, to), base));
@@ -42,10 +41,13 @@ const CASES = [
   ['dominio em http://', variant(/domain: '[^']*'/, "domain: 'http://landing-teste.com.br'"), /domain/],
   ['e-mail sem TLD (contato@landing)', variant(/contactEmail: '[^']*'/, "contactEmail: 'contato@landing'"), /contactEmail/],
   ['e-mail com duas arrobas', variant(/contactEmail: '[^']*'/, "contactEmail: 'contato@@landing-teste.com.br'"), /contactEmail/],
-  ['preco zero', variant(/price: 1990/, 'price: 0'), /price/],
-  ['preco negativo', variant(/price: 1990/, 'price: -10'), /price/],
-  ['preco em texto ("1990")', variant(/price: 1990/, "price: '1990'"), /price/],
-  ['preco nulo', variant(/price: 1990/, 'price: null'), /price/],
+  ['mensalidade zero', variant(/monthly: 290/, 'monthly: 0'), /monthly/],
+  ['mensalidade negativa', variant(/monthly: 290/, 'monthly: -10'), /monthly/],
+  ['mensalidade em texto ("290")', variant(/monthly: 290/, "monthly: '290'"), /monthly/],
+  ['mensalidade nula', variant(/monthly: 290/, 'monthly: null'), /monthly/],
+  ['implantacao zero', variant(/setup: 1500/, 'setup: 0'), /setup/],
+  ['implantacao em texto ("1500")', variant(/setup: 1500/, "setup: '1500'"), /setup/],
+  ['suporte vazio', variant(/support: 'Atendimento em até 24 horas úteis'/, "support: ''"), /support/],
 ];
 
 const run = () => {

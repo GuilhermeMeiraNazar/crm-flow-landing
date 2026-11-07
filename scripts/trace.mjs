@@ -27,18 +27,20 @@ const REF = {
   F18a: ['Funcionalidade 18a: registro de uso e custo de IA', 'A'],
   F27: ['Funcionalidade 27: usuarios e agentes', 'A'],
   F28: ['Funcionalidade 28: tema claro e escuro', 'A'],
+  F11: ['Funcionalidade 11: contatos', 'A'],
+  S7: ['CONTEUDO.md secao 7 (tokens de design em variaveis CSS)', 'A'],
   FRAME: ['Enquadramento editorial, sem afirmacao factual sobre o produto', 'n/a'],
 };
 
 const C = copy(SITE);
-const TEXT_KEYS = ['h1', 'sub', 'title', 't', 'q', 'a', 'd', 'lead', 'privacy', 'footnote', 'name', 'note'];
+const TEXT_KEYS = ['h1', 'sub', 'title', 't', 'q', 'a', 'd', 'lead', 'privacy', 'footnote', 'name', 'note', 'tagline', 'common'];
 const rows = []; const noEv = []; const unknown = new Set();
 const clip = (s) => (s.length > 150 ? `${s.slice(0, 147)}...` : s);
 (function walk(node, trail) {
   if (Array.isArray(node)) { node.forEach((n, i) => walk(n, `${trail}[${i}]`)); return; }
   if (!node || typeof node !== 'object') return;
   const own = TEXT_KEYS.filter((k) => typeof node[k] === 'string').map((k) => node[k]).join(' ');
-  const ids = node.ev || node.privacyEv || node.footnoteEv;
+  const ids = node.ev || node.privacyEv || node.footnoteEv || node.taglineEv || node.leadEv;
   if (own && Array.isArray(ids)) {
     ids.forEach((i) => { if (!REF[i]) unknown.add(i); });
     rows.push({ trail, text: clip(own), ids, review: !!node.review });

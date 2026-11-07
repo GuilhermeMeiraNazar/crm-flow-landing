@@ -213,12 +213,6 @@ $bp-lg: 1200px;
 .foot { margin-top: 16px; font-size: 0.85rem; color: var(--text-tertiary); }
 
 // Preco
-.priceWrap { display: grid; gap: 24px; max-width: 520px; }
-.plan { padding: 32px; border-radius: var(--radius-xl); border: 1px solid var(--border-strong); background: var(--surface); position: relative; overflow: hidden; }
-.planHi { border-color: var(--accent-ai); box-shadow: 0 0 0 1px var(--accent-ai-soft), 0 24px 60px -24px var(--glow-ai); }
-.planName { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 8px; }
-.price { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); letter-spacing: -0.03em; margin-bottom: 4px; }
-.billing { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
 .placeholder { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); padding: 10px 12px; border: 1px dashed var(--border-strong); border-radius: var(--radius-sm); margin-top: 16px; }
 
 // FAQ
@@ -264,3 +258,40 @@ $bp-lg: 1200px;
 .pic { display: block; }
 .caption { margin-top: 12px; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.04em; color: var(--text-tertiary); }
 .heroFig .caption { margin-top: 16px; }
+
+// Carrossel de pacotes
+.planCommon { color: var(--text-secondary); max-width: 62ch; margin-bottom: 28px; }
+.carouselBar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.planTabs { display: flex; gap: 6px; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); }
+.planTab { padding: 8px 16px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; color: var(--text-secondary); transition: background var(--t-base), color var(--t-base); }
+.planTab:hover { color: var(--text-primary); }
+.planTabOn { background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); color: #fff; }
+.planTabOn:hover { color: #fff; }
+.carouselArrows { display: flex; gap: 8px; }
+.carouselArrows .iconBtn:disabled { opacity: 0.4; cursor: default; }
+.carouselWrap { width: 100%; overflow: hidden; }
+.track {
+  display: flex; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+  position: relative; padding: 8px calc(50% - min(86vw, 460px) / 2) 24px; align-items: stretch;
+}
+.track::-webkit-scrollbar { display: none; }
+.track:focus-visible { outline-offset: -2px; }
+.plan {
+  position: relative; flex: 0 0 min(86vw, 460px); scroll-snap-align: center; display: flex; flex-direction: column;
+  padding: 28px; border-radius: var(--radius-xl); border: 1px solid var(--border-strong); background: var(--surface);
+  opacity: 0.72; transform: scale(0.97); transition: opacity var(--t-slow), transform var(--t-slow), border-color var(--t-slow), box-shadow var(--t-slow);
+}
+.planOn { opacity: 1; transform: none; border-color: var(--accent-ai); box-shadow: 0 0 0 1px var(--accent-ai-soft), 0 24px 60px -28px var(--glow-ai); }
+.planHi::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; border-radius: var(--radius-xl) var(--radius-xl) 0 0; background: linear-gradient(90deg, var(--btn-from), var(--accent-live)); }
+.planTier { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
+.planName { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 8px; }
+.planTag { color: var(--text-secondary); font-size: 0.92rem; min-height: 4.2em; margin-bottom: 18px; }
+.price { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.6rem); letter-spacing: -0.03em; line-height: 1.1; }
+.price small { font-family: var(--font-body); font-size: 0.9rem; letter-spacing: 0; color: var(--text-secondary); font-weight: 400; }
+.billing { color: var(--text-primary); font-size: 0.92rem; margin: 6px 0 4px; }
+.planSupport { color: var(--text-secondary); font-size: 0.88rem; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
+.planSupport strong { color: var(--text-primary); font-weight: 600; }
+.planIncl { font-weight: 600; font-size: 0.92rem; margin-bottom: 12px; }
+.plan .ticks { flex: 1; }
+.planCta { margin-top: 24px; }
+@media (prefers-reduced-motion: reduce) { .plan { transition: none; transform: none; } }

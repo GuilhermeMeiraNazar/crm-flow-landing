@@ -26,13 +26,18 @@ export const SITE = {
   // Razao social / CNPJ para o rodape e paginas legais. PLACEHOLDER.
   company: { legalName: '[RAZAO SOCIAL]', cnpj: '[CNPJ]', address: '[ENDERECO]' },
 
-  // Precos e garantia. NENHUM valor e inventado: null mostra "A definir".
-  // price: numero (em reais) ou null. billing: texto livre ('pagamento unico', 'por instalacao'...).
+  // Pacotes e valores (definidos pelo dono). Valores em reais.
+  //   setup   = taxa de implantacao (cobrada uma unica vez)
+  //   monthly = mensalidade
+  //   support = prazo de resposta do suporte (termo comercial do dono)
+  // O texto de cada pacote (descricao e o que inclui) fica em src/content/pt-BR.js, com evidencia.
+  // A ordem importa: cada pacote inclui tudo o que esta no anterior.
   pricing: {
     currency: 'BRL',
     plans: [
-      { id: 'instalacao', name: 'Licença por instalação', price: null, billing: '[MODELO COMERCIAL A DEFINIR]', highlight: true,
-        features: ['Produto instalável no servidor da sua empresa', 'Licença vinculada ao IP fixo do servidor', 'Todas as telas e recursos listados nesta página'] },
+      { id: 'basico', name: 'Pacote Básico', tier: 'Starter', setup: 1500, monthly: 290, support: 'Atendimento em até 24 horas úteis', highlight: false },
+      { id: 'medio', name: 'Pacote Médio', tier: 'Growth', setup: 2500, monthly: 590, support: 'Suporte prioritário, em até 6 horas úteis', highlight: true },
+      { id: 'premium', name: 'Pacote Premium', tier: 'Enterprise', setup: 4000, monthly: 990, support: 'Suporte VIP dedicado, em até 2 horas úteis', highlight: false },
     ],
     // Texto de garantia/reembolso. PLACEHOLDER: preencha apos revisao juridica.
     guarantee: '[GARANTIA E PRAZO DE ARREPENDIMENTO A DEFINIR COM ADVOGADO]',

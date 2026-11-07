@@ -1,6 +1,7 @@
 import s from '../styles/landing.module.scss';
 import { SITE, whatsappHref } from '../config/site.js';
-import { Counter, useLitSteps } from '../hooks/effects.jsx';
+import { useEffect, useRef, useState } from 'react';
+import { Counter, useLitSteps, prefersReducedMotion } from '../hooks/effects.jsx';
 import { Shot, ShotFrame, Caption, ev } from './ui.jsx';
 
 const Head = ({ eyebrow, title, lead, id, evIds }) => (
@@ -246,25 +247,95 @@ export function Requirements({ C }) {
 }
 
 const brl = (n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: SITE.pricing.currency }).format(n);
+
+// Carrossel de pacotes: faixa com rolagem por snap (funciona por toque e teclado), setas, indicadores e foco gerenciado.
+// Cada cartao mostra o que o pacote soma ao anterior ("cada um em cima do outro").
 export function Pricing({ C }) {
   const p = C.pricing;
+  const plans = SITE.pricing.plans;
+  const track = useRef(null);
+  const [active, setActive] = useState(0);
+
+  // Cartao ativo = o mais proximo do centro da faixa (atualiza durante o toque, o scroll e os botoes).
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return undefined;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const mid = el.scrollLeft + el.clientWidth / 2;
+      let best = 0; let dist = Infinity;
+      [...el.children].forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = i; } });
+      setActive(best);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => { el.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, []);
+
+  const go = (i) => {
+    const el = track.current;
+    const slide = el && el.children[Math.max(0, Math.min(plans.length - 1, i))];
+    if (!slide) return;
+    const left = slide.offsetLeft - (el.clientWidth - slide.offsetWidth) / 2;
+    el.scrollTo({ left, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  };  const onKey = (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); }
+  };
+
   return (
     <section className={`${s.section} ${s.sectionLine}`} id={p.id} aria-labelledby="price-t">
       <div className={s.container}>
-        <Head eyebrow={p.eyebrow} title={p.title} lead={p.lead} id="price-t" />
-        <div className={s.priceWrap}>
-          {SITE.pricing.plans.map((pl) => (
-            <article key={pl.id} className={`${s.plan} ${pl.highlight ? s.planHi : ''}`} data-reveal>
-              <h3 className={s.planName}>{pl.name}</h3>
-              <p className={s.price}>{pl.price == null ? 'A definir' : brl(pl.price)}</p>
-              <p className={s.billing}>{pl.billing}</p>
-              <ul className={s.ticks}>{pl.features.map((f) => <li key={f}>{f}</li>)}</ul>
-              <a className={`${s.btn} ${s.btnPrimary}`} href={SITE.CTA_URL} style={{ marginTop: 24 }}>{SITE.ctaPrimaryLabel}</a>
-              <p className={s.placeholder}>Garantia: {SITE.pricing.guarantee}</p>
-              <p className={s.placeholder}>Reemissão da licença: {SITE.pricing.reissuePolicy}</p>
-            </article>
-          ))}
+        <Head eyebrow={p.eyebrow} title={p.title} lead={p.lead} id="price-t" evIds={p.leadEv} />
+        <p className={s.planCommon} data-reveal {...ev(p.leadEv)}>{p.common}</p>
+      </div>
+      <div className={s.container}>
+        <div className={s.carouselBar}>
+          <div className={s.planTabs} role="group" aria-label={p.carousel.region}>
+            {plans.map((pl, i) => (
+              <button key={pl.id} type="button" className={`${s.planTab} ${i === active ? s.planTabOn : ''}`} aria-current={i === active ? 'true' : undefined} aria-label={`${p.carousel.goto} ${pl.name}`} onClick={() => go(i)}>
+                {pl.name.replace('Pacote ', '')}
+              </button>
+            ))}
+          </div>
+          <div className={s.carouselArrows}>
+            <button type="button" className={s.iconBtn} onClick={() => go(active - 1)} disabled={active === 0} aria-label={p.carousel.prev}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+            </button>
+            <button type="button" className={s.iconBtn} onClick={() => go(active + 1)} disabled={active === plans.length - 1} aria-label={p.carousel.next}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            </button>
+          </div>
         </div>
+      </div>
+      <div className={s.carouselWrap}>
+        <div className={s.track} ref={track} role="region" aria-roledescription="carrossel" aria-label={p.carousel.region} tabIndex={0} onKeyDown={onKey}>
+          {plans.map((pl, i) => {
+            const c = p.plans[pl.id];
+            const prev = i > 0 ? plans[i - 1] : null;
+            return (
+              <article key={pl.id} className={`${s.plan} ${pl.highlight ? s.planHi : ''} ${i === active ? s.planOn : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} de ${plans.length}: ${pl.name}`}>
+                <p className={s.planTier}>{pl.tier}</p>
+                <h3 className={s.planName}>{pl.name}</h3>
+                <p className={s.planTag} {...ev(c.taglineEv)}>{c.tagline}</p>
+                <p className={s.price}>{brl(pl.monthly)} <small>/ {p.labels.monthly.replace('por ', '')}</small></p>
+                <p className={s.billing}>{p.labels.setup}: {brl(pl.setup)} ({p.labels.setupNote})</p>
+                <p className={s.planSupport}><strong>{p.labels.support}:</strong> {pl.support}</p>
+                <p className={s.planIncl}>{prev ? <>{p.labels.includes} {prev.name} {p.labels.plus}</> : p.labels.first}</p>
+                <ul className={s.ticks}>
+                  {c.features.map((f) => <li key={f.t} {...ev(f.ev)}>{f.t}</li>)}
+                </ul>
+                <a className={`${s.btn} ${s.btnPrimary} ${s.planCta}`} href={SITE.CTA_URL}>{SITE.ctaPrimaryLabel}</a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+      <div className={s.container}>
+        <p className={s.placeholder}>Garantia: {SITE.pricing.guarantee}</p>
+        <p className={s.placeholder}>Reemissão da licença: {SITE.pricing.reissuePolicy}</p>
       </div>
     </section>
   );

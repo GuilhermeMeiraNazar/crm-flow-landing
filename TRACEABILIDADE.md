@@ -52,15 +52,25 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 46 | `how.steps[2]` | Instalar Suba com Docker Compose na sua VPS, crie o admin e ative a licença no painel. | S4 | A |
 | 47 | `how.steps[3]` | Conectar Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA. | S4, S5 | A |
 | 48 | `requirements` | O que o seu servidor precisa ter. A instalação usa Docker e linha de comando em Linux. Não publicamos números de desempenho nem de capacidade por s... | S4 | A |
-| 49 | `faq.items[0]` | Preciso saber Docker e Linux? Sim. A instalação é feita por linha de comando em um servidor Linux com Docker Compose.  | S4 | A |
-| 50 | `faq.items[1]` | A licença funciona em qualquer servidor? A licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é preciso emitir uma nova licen... | S3.4, S4 | A |
-| 51 | `faq.items[2]` | Meus dados ficam no meu servidor? Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é envi... | S3.1 | A |
-| 52 | `faq.items[3]` | Quanto custa a IA? O consumo é cobrado pelo provedor que você escolher, com a sua chave. O painel mostra tokens e custo estimado por função e por dia. | F16, F18a | A |
-| 53 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
-| 54 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
-| 55 | `faq.items[6]` | Que servidor eu preciso? No mínimo 2 vCPU e 4 GB de RAM, com IP fixo. Ainda não medimos capacidade em produção, então não há promessa de volume de ... | S4 | A |
-| 56 | `faq.items[7]` | E as atualizações? As migrações do banco rodam sozinhas ao subir uma nova versão. A política de atualizações e de suporte é definida na contratação.  | S4 | A |
-| 57 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil no seu servidor. | FRAME | n/a |
+| 49 | `pricing` | Escolha o pacote para o seu atendimento. Cada pacote inclui tudo o que está no anterior. A implantação é uma taxa única; a mensalidade é recorrente... | F1, F3, F16 | A |
+| 50 | `pricing.plans.basico` | Para pequenas empresas que precisam organizar o atendimento e os leads no funil de vendas. | FRAME | n/a |
+| 51 | `pricing.plans.basico.features[0]` | CRM de WhatsApp: contatos e conversas em uma caixa de entrada para a equipe. | F1, F11 | A |
+| 52 | `pricing.plans.basico.features[1]` | IA de atendimento e triagem: responde as conversas e passa para uma pessoa quando necessário. | F3 | A |
+| 53 | `pricing.plans.basico.features[2]` | Dados do lead no funil: nome, telefone, e-mail, orçamento e interesse extraídos da conversa. | F5, F6 | A |
+| 54 | `pricing.plans.basico.features[3]` | Pipeline kanban e relatórios de funil, atendimento e custo de IA. | F7, F14 | A |
+| 55 | `pricing.plans.medio` | Para empresas em crescimento que querem mais robustez na IA e suporte com resposta mais rápida. | FRAME | n/a |
+| 56 | `pricing.plans.medio.features[0]` | Cadeia de reserva entre provedores de IA: se o primeiro falhar, outro assume a resposta. | F17 | A |
+| 57 | `pricing.plans.premium` | Para operações consolidadas que querem atendimento VIP e a plataforma com a cara da empresa. | FRAME | n/a |
+| 58 | `pricing.plans.premium.features[0]` | Adaptação da paleta de cores da plataforma à identidade da empresa (setup semi-personalizado). | S7 | A |
+| 59 | `faq.items[0]` | Preciso saber Docker e Linux? Sim. A instalação é feita por linha de comando em um servidor Linux com Docker Compose.  | S4 | A |
+| 60 | `faq.items[1]` | A licença funciona em qualquer servidor? A licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é preciso emitir uma nova licen... | S3.4, S4 | A |
+| 61 | `faq.items[2]` | Meus dados ficam no meu servidor? Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é envi... | S3.1 | A |
+| 62 | `faq.items[3]` | Quanto custa a IA? O consumo é cobrado pelo provedor que você escolher, com a sua chave. O painel mostra tokens e custo estimado por função e por dia. | F16, F18a | A |
+| 63 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
+| 64 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
+| 65 | `faq.items[6]` | Que servidor eu preciso? No mínimo 2 vCPU e 4 GB de RAM, com IP fixo. Ainda não medimos capacidade em produção, então não há promessa de volume de ... | S4 | A |
+| 66 | `faq.items[7]` | E as atualizações? As migrações do banco rodam sozinhas ao subir uma nova versão. A política de atualizações e de suporte é definida na contratação.  | S4 | A |
+| 67 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil no seu servidor. | FRAME | n/a |
 
 ## Legenda dos ids
 
@@ -88,6 +98,8 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | F18a | Funcionalidade 18a: registro de uso e custo de IA | A |
 | F27 | Funcionalidade 27: usuarios e agentes | A |
 | F28 | Funcionalidade 28: tema claro e escuro | A |
+| F11 | Funcionalidade 11: contatos | A |
+| S7 | CONTEUDO.md secao 7 (tokens de design em variaveis CSS) | A |
 | FRAME | Enquadramento editorial, sem afirmacao factual sobre o produto | n/a |
 
 ## Texto sem id de evidencia (rotulos, navegacao, placeholders)
@@ -102,7 +114,6 @@ Nao fazem afirmacao factual sobre o produto.
 | `integrations.items[3]` | Gemini |
 | `integrations.items[4]` | Claude |
 | `integrations.items[5]` | Groq |
-| `pricing` | Licença para a sua instalação. Valores, forma de pagamento e garantia são definidos pela empresa antes da publicação. |
 | `faq` | O que perguntam antes de instalar. |
 | `seo` | ConversIA: CRM de WhatsApp com IA instalado no seu servidor |
 
