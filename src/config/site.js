@@ -36,15 +36,11 @@ export const SITE = {
     currency: 'BRL',
     plans: [
       { id: 'basico', name: 'Pacote Básico', tier: 'Starter', setup: 1500, monthly: 290, support: 'Atendimento em até 24 horas úteis', highlight: false },
-      { id: 'medio', name: 'Pacote Médio', tier: 'Growth', setup: 2500, monthly: 590, support: 'Suporte prioritário, em até 6 horas úteis', highlight: true },
-      { id: 'premium', name: 'Pacote Premium', tier: 'Enterprise', setup: 4000, monthly: 990, support: 'Suporte VIP dedicado, em até 2 horas úteis', highlight: false },
+      { id: 'medio', name: 'Pacote Médio', tier: 'Growth', setup: 1500, monthly: 590, support: 'Suporte prioritário, em até 6 horas úteis', highlight: true },
+      { id: 'premium', name: 'Pacote Premium', tier: 'Enterprise', setup: 1500, monthly: 990, support: 'Suporte VIP dedicado, em até 2 horas úteis', highlight: false },
     ],
     // Texto de garantia/reembolso. PLACEHOLDER: preencha apos revisao juridica.
     guarantee: '[GARANTIA E PRAZO DE ARREPENDIMENTO A DEFINIR COM ADVOGADO]',
-    // Politica de reemissao da licenca ao trocar de IP ou servidor. PLACEHOLDER.
-    reissuePolicy: '[POLITICA DE REEMISSAO DE LICENCA A DEFINIR]',
-    // Servico de instalacao assistida? null = nao anunciar.
-    installService: null,
   },
 
   // Analytics: desligado por padrao e sem rastreadores de terceiros.

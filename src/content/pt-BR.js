@@ -5,7 +5,7 @@
 //   9.5    = item B marcado para revisao do dono
 //   FRAME  = enquadramento editorial, sem afirmacao factual sobre o produto
 // `review: true` = classe B: redacao conservadora, depende da aprovacao do dono.
-// Nenhum texto menciona KB/RAG, PIX, calendario, Baileys, Click-to-WhatsApp, nem o modelo de entrega alem de "produto instalavel".
+// Nenhum texto menciona KB/RAG, PIX, calendario, Baileys, Click-to-WhatsApp. Modelo de entrega: hospedado no servidor do dono (definido pelo dono, ev FRAME); a pagina nao fala em instalar no servidor do cliente.
 
 export const CAPTION = 'Dados fictícios de demonstração';
 
@@ -13,17 +13,15 @@ export const copy = (S) => ({
   nav: [
     { href: '#produto', label: 'Produto' },
     { href: '#ia', label: 'IA' },
-    { href: '#seus-dados', label: 'Seus dados' },
     { href: '#como-funciona', label: 'Como funciona' },
-    { href: '#requisitos', label: 'Requisitos' },
     { href: '#precos', label: 'Planos' },
     { href: '#faq', label: 'FAQ' },
   ],
 
   hero: {
-    eyebrow: 'Produto instalável no seu servidor',
-    h1: 'CRM de WhatsApp com IA, instalado no seu servidor.',
-    sub: 'Caixa de entrada para a equipe, funil de vendas em kanban, automações por etapa e relatórios, em uma instalação dedicada à sua empresa.',
+    eyebrow: 'CRM de WhatsApp com IA',
+    h1: 'Atendimento e funil de vendas no WhatsApp, com IA, sem instalar nada.',
+    sub: 'Caixa de entrada para a equipe, funil de vendas em kanban, automações por etapa e relatórios. Nós colocamos tudo no ar no nosso servidor e você acessa pelo navegador.',
     ev: ['S1', 'S3.1', 'F1', 'F7', 'F12', 'F14'],
     shotAlt: `Tela de Pipeline do ${S.name} com o menu lateral e o quadro kanban de negócios por etapa.`,
   },
@@ -93,8 +91,8 @@ export const copy = (S) => ({
       { t: 'Transferência para uma pessoa', d: 'O cliente pede um atendente, a IA falha em sequência ou o negócio passa de um valor definido: a conversa vai para a equipe.', ev: ['F3'] },
       { t: 'Custo e tokens à vista', d: 'Acompanhe tokens e custo estimado por provedor, por função e por dia.', ev: ['F18a', 'F14'], },
     ],
-    privacy: 'Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.',
-    privacyEv: ['S3.1'],
+    privacy: 'Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.',
+    privacyEv: ['S5'],
     shotAlt: 'Tela de Chaves de IA: agente de conversa e transcrição de áudio com provedor, modelo e chave configurada.',
   },
 
@@ -140,62 +138,24 @@ export const copy = (S) => ({
     },
   ],
 
-  ownership: {
-    id: 'seus-dados',
-    eyebrow: 'Seu servidor, seus dados',
-    title: 'Uma instalação por empresa.',
-    lead: 'O ConversIA roda em um servidor Linux da sua empresa, com banco e fila próprios dentro do Docker.',
-    ev: ['S3.1', 'S4'],
-    items: [
-      { t: 'Instalação dedicada', d: 'Uma empresa, um projeto Docker Compose, com configuração, volumes e porta próprios.', ev: ['S3.1'] },
-      { t: 'Banco e fila fechados', d: 'MariaDB e Redis ficam na rede interna. No firewall, só as portas 22, 80 e 443.', ev: ['S3.1', 'S4'] },
-      { t: 'Licença verificada localmente', d: 'A ativação e a verificação da licença não dependem de um servidor de licenças.', ev: ['S3.4'] },
-      { t: 'Licença presa ao IP fixo', d: 'A licença é vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão.', ev: ['S3.4', 'S4'] },
-      { t: 'Credenciais criptografadas', d: 'Chaves de IA e credenciais gravadas no banco com AES-256-GCM.', ev: ['S3.1'] },
-      { t: 'Webhook da Meta com assinatura', d: 'Os eventos do WhatsApp são aceitos só com assinatura HMAC válida.', ev: ['S5'] },
-    ],
-    privacy: 'Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.',
-  },
-
   how: {
     id: 'como-funciona',
     eyebrow: 'Como funciona',
-    title: 'Da compra ao primeiro atendimento.',
+    title: 'Da contratação ao primeiro atendimento.',
     ev: ['S4'],
     steps: [
-      { t: 'Comprar', d: 'Escolha a licença e finalize a compra.', ev: ['FRAME'] },
-      { t: 'Receber', d: 'Você recebe o produto instalável e a licença da sua instalação.', ev: ['S3.4'] },
-      { t: 'Instalar', d: 'Suba com Docker Compose na sua VPS, crie o admin e ative a licença no painel.', ev: ['S4'] },
+      { t: 'Escolher o pacote', d: 'Compare Básico, Médio e Premium e fale com a gente.', ev: ['FRAME'] },
+      { t: 'Implantação', d: 'Colocamos o ConversIA da sua empresa no ar no nosso servidor, com a taxa única de implantação.', ev: ['FRAME'] },
+      { t: 'Acessar', d: 'Sua equipe entra pelo navegador, com perfis de admin e de agente.', ev: ['F27'] },
       { t: 'Conectar', d: 'Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA.', ev: ['S4', 'S5'] },
     ],
-  },
-
-  requirements: {
-    id: 'requisitos',
-    eyebrow: 'Requisitos técnicos',
-    title: 'O que o seu servidor precisa ter.',
-    lead: 'A instalação usa Docker e linha de comando em Linux.',
-    ev: ['S4'],
-    rows: [
-      ['Sistema', 'VPS Linux: Ubuntu 22.04 ou mais novo, ou Debian 12 ou mais novo'],
-      ['Capacidade mínima', '2 vCPU e 4 GB de RAM'],
-      ['Rede', 'IP fixo (reservado pelo provedor) e um domínio apontando para a VPS'],
-      ['Docker', 'Docker Engine e Docker Compose v2'],
-      ['HTTPS', 'Proxy com TLS no servidor (exemplo com Caddy incluso)'],
-      ['Firewall', 'Portas 22, 80 e 443. Banco, Redis e API não são publicados'],
-      ['WhatsApp', 'Conta Meta Business verificada para a API oficial'],
-      ['IA', 'Chave de API do provedor escolhido, cadastrada no painel'],
-      ['Licença', 'Vinculada ao IP fixo informado na instalação'],
-    ],
-    footnote: 'Não publicamos números de desempenho nem de capacidade por servidor: eles ainda não foram medidos em produção.',
-    footnoteEv: ['S4'],
   },
 
   pricing: {
     id: 'precos',
     eyebrow: 'Planos',
     title: 'Escolha o pacote para o seu atendimento.',
-    lead: 'Cada pacote inclui tudo o que está no anterior. A implantação é uma taxa única; a mensalidade é recorrente.',
+    lead: 'A implantação custa o mesmo valor em todos os pacotes e é cobrada uma vez. A mensalidade muda conforme o pacote, e cada um inclui tudo o que está no anterior.',
     leadEv: ['F1', 'F3', 'F16'],
     common: 'Todos os pacotes incluem o CRM de WhatsApp com agente de IA que usa as chaves do próprio cliente.',
     labels: { setup: 'Implantação', setupNote: 'taxa única', monthly: 'por mês', support: 'Suporte', includes: 'Inclui tudo do', plus: 'e mais:', first: 'O que está incluso:' },
@@ -232,21 +192,18 @@ export const copy = (S) => ({
   faq: {
     id: 'faq',
     eyebrow: 'Perguntas frequentes',
-    title: 'O que perguntam antes de instalar.',
+    title: 'O que perguntam antes de contratar.',
     items: [
-      { q: 'Preciso saber Docker e Linux?', a: 'Sim. A instalação é feita por linha de comando em um servidor Linux com Docker Compose. ', ev: ['S4'], extra: 'install' },
-      { q: 'A licença funciona em qualquer servidor?', a: 'A licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é preciso emitir uma nova licença. ', ev: ['S3.4', 'S4'], extra: 'reissue' },
-      { q: 'Meus dados ficam no meu servidor?', a: 'Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.', ev: ['S3.1'] },
+      { q: 'Preciso instalar alguma coisa?', a: 'Não. O ConversIA roda no nosso servidor e a sua equipe acessa pelo navegador.', ev: ['FRAME'] },
+      { q: 'Para onde vão as conversas?', a: 'Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.', ev: ['S5'] },
       { q: 'Quanto custa a IA?', a: 'O consumo é cobrado pelo provedor que você escolher, com a sua chave. O painel mostra tokens e custo estimado por função e por dia.', ev: ['F16', 'F18a'] },
       { q: 'Preciso de conta na Meta?', a: 'Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada.', ev: ['S5', 'S4'] },
       { q: 'A IA responde tudo sozinha?', a: 'Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou por regra de valor do negócio. A qualidade das respostas depende do modelo que você configurar.', ev: ['F3'] },
-      { q: 'Que servidor eu preciso?', a: 'No mínimo 2 vCPU e 4 GB de RAM, com IP fixo. Ainda não medimos capacidade em produção, então não há promessa de volume de conversas por servidor.', ev: ['S4'] },
-      { q: 'E as atualizações?', a: 'As migrações do banco rodam sozinhas ao subir uma nova versão. A política de atualizações e de suporte é definida na contratação. ', ev: ['S4'], extra: 'updates' },
     ],
   },
 
   finalCta: {
-    title: 'Coloque o atendimento e o funil no seu servidor.',
+    title: 'Coloque o atendimento e o funil da sua empresa para funcionar.',
     sub: 'Fale com a gente ou siga direto para a compra.',
     ev: ['FRAME'],
   },
@@ -261,8 +218,8 @@ export const copy = (S) => ({
   },
 
   seo: {
-    title: `${S.name}: CRM de WhatsApp com IA instalado no seu servidor`,
-    description: 'CRM de WhatsApp com caixa de entrada multiatendente, pipeline kanban, automações por etapa, relatórios e agente de IA com as suas chaves. Produto instalável no seu servidor.',
-    ogAlt: `${S.name}: CRM de WhatsApp com IA instalado no seu servidor`,
+    title: `${S.name}: CRM de WhatsApp com IA, sem instalar nada`,
+    description: 'CRM de WhatsApp com caixa de entrada multiatendente, pipeline kanban, automações por etapa, relatórios e agente de IA com as suas chaves. Hospedado no nosso servidor.',
+    ogAlt: `${S.name}: CRM de WhatsApp com IA, sem instalar nada`,
   },
 });

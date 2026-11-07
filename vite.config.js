@@ -10,7 +10,7 @@ const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').repl
 // Meta tags e dados estruturados vem de src/config/site.js e src/content (nada hardcoded nos .html).
 const PAGES = {
   'index.html': { path: '/', title: C.seo.title, description: C.seo.description, index: true, ld: true },
-  'termos/index.html': { path: '/termos/', title: `Termos de uso | ${SITE.name}`, description: `Termos de uso da licença do ${SITE.name}.`, index: !SITE.legalDraft },
+  'termos/index.html': { path: '/termos/', title: `Termos de uso | ${SITE.name}`, description: `Termos de uso do ${SITE.name}.`, index: !SITE.legalDraft },
   'privacidade/index.html': { path: '/privacidade/', title: `Política de privacidade | ${SITE.name}`, description: `Como este site trata dados pessoais.`, index: !SITE.legalDraft },
   'reembolso/index.html': { path: '/reembolso/', title: `Reembolso e arrependimento | ${SITE.name}`, description: `Política de reembolso e arrependimento do ${SITE.name}.`, index: !SITE.legalDraft },
 };
@@ -21,7 +21,7 @@ const jsonLd = () => JSON.stringify({
   name: SITE.name,
   description: C.seo.description,
   applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Linux (Docker)',
+  operatingSystem: 'Web',
   inLanguage: SITE.locale,
   url: absoluteUrl('/'),
   image: absoluteUrl('/og-image.png'),

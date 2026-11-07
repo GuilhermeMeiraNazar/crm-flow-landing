@@ -195,23 +195,6 @@ export function Showcase({ C }) {
   );
 }
 
-export function Ownership({ C }) {
-  const o = C.ownership;
-  return (
-    <section className={`${s.section} ${s.sectionLine}`} id={o.id} aria-labelledby="own-t">
-      <div className={s.container}>
-        <Head eyebrow={o.eyebrow} title={o.title} lead={o.lead} id="own-t" evIds={o.ev} />
-        <div className={s.own}>
-          {o.items.map((i, k) => (
-            <article key={i.t} className={s.card} data-spot data-reveal style={{ '--i': k % 3 }} {...ev(i.ev)}><h3>{i.t}</h3><p>{i.d}</p></article>
-          ))}
-        </div>
-        <p className={s.notice} data-reveal {...ev(['S3.1'])}>{o.privacy}</p>
-      </div>
-    </section>
-  );
-}
-
 export function How({ C }) {
   const h = C.how;
   const { refs, lit } = useLitSteps(h.steps.length);
@@ -231,21 +214,6 @@ export function How({ C }) {
   );
 }
 
-export function Requirements({ C }) {
-  const r = C.requirements;
-  return (
-    <section className={`${s.section} ${s.sectionLine}`} id={r.id} aria-labelledby="req-t">
-      <div className={s.container}>
-        <Head eyebrow={r.eyebrow} title={r.title} lead={r.lead} id="req-t" evIds={r.ev} />
-        <dl className={s.reqTable} data-reveal {...ev(r.ev)}>
-          {r.rows.map(([k, v]) => <div key={k} className={s.reqRow}><dt>{k}</dt><dd>{v}</dd></div>)}
-        </dl>
-        <p className={s.foot} {...ev(r.footnoteEv)}>{r.footnote}</p>
-      </div>
-    </section>
-  );
-}
-
 const brl = (n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: SITE.pricing.currency }).format(n);
 
 // Carrossel de pacotes: faixa com rolagem por snap (funciona por toque e teclado), setas, indicadores e foco gerenciado.
@@ -255,6 +223,7 @@ export function Pricing({ C }) {
   const plans = SITE.pricing.plans;
   const track = useRef(null);
   const [active, setActive] = useState(0);
+  const [scrolls, setScrolls] = useState(false);
 
   // Cartao ativo = o mais proximo do centro da faixa (atualiza durante o toque, o scroll e os botoes).
   useEffect(() => {
@@ -263,24 +232,33 @@ export function Pricing({ C }) {
     let raf = 0;
     const update = () => {
       raf = 0;
-      const mid = el.scrollLeft + el.clientWidth / 2;
+      setScrolls(el.scrollWidth - el.clientWidth > 4);
+      const kids = [...el.children];
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) { setActive(kids.length - 1); return; }
+      // Ativo = cartao cujo inicio esta mais perto do inicio visivel da faixa.
+      const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
       let best = 0; let dist = Infinity;
-      [...el.children].forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = i; } });
+      kids.forEach((c, i) => { const d = Math.abs(c.offsetLeft - pad - el.scrollLeft); if (d < dist) { dist = d; best = i; } });
       setActive(best);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     el.addEventListener('scroll', onScroll, { passive: true });
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onScroll) : null;
+    if (ro) ro.observe(el);
     update();
-    return () => { el.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
+    return () => { el.removeEventListener('scroll', onScroll); if (ro) ro.disconnect(); if (raf) cancelAnimationFrame(raf); };
   }, []);
 
   const go = (i) => {
     const el = track.current;
-    const slide = el && el.children[Math.max(0, Math.min(plans.length - 1, i))];
+    const idx = Math.max(0, Math.min(plans.length - 1, i));
+    const slide = el && el.children[idx];
     if (!slide) return;
-    const left = slide.offsetLeft - (el.clientWidth - slide.offsetWidth) / 2;
-    el.scrollTo({ left, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-  };  const onKey = (e) => {
+    const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
+    setActive(idx);
+    el.scrollTo({ left: slide.offsetLeft - pad, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  };
+  const onKey = (e) => {
     if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); }
   };
@@ -310,7 +288,7 @@ export function Pricing({ C }) {
           </div>
         </div>
       </div>
-      <div className={s.carouselWrap}>
+      <div className={`${s.carouselWrap} ${scrolls ? s.scrolls : s.fits}`}>
         <div className={s.track} ref={track} role="region" aria-roledescription="carrossel" aria-label={p.carousel.region} tabIndex={0} onKeyDown={onKey}>
           {plans.map((pl, i) => {
             const c = p.plans[pl.id];
@@ -335,7 +313,6 @@ export function Pricing({ C }) {
       </div>
       <div className={s.container}>
         <p className={s.placeholder}>Garantia: {SITE.pricing.guarantee}</p>
-        <p className={s.placeholder}>Reemissão da licença: {SITE.pricing.reissuePolicy}</p>
       </div>
     </section>
   );
@@ -343,7 +320,6 @@ export function Pricing({ C }) {
 
 export function Faq({ C }) {
   const f = C.faq;
-  const extra = { install: SITE.pricing.installService, reissue: SITE.pricing.reissuePolicy, updates: null };
   return (
     <section className={`${s.section} ${s.sectionLine}`} id={f.id} aria-labelledby="faq-t">
       <div className={s.container}>
@@ -352,7 +328,7 @@ export function Faq({ C }) {
           {f.items.map((it) => (
             <details key={it.q} className={s.faqItem} {...ev(it.ev)}>
               <summary>{it.q}</summary>
-              <p className={s.faqAns}>{it.a}{it.extra && extra[it.extra] ? extra[it.extra] : ''}</p>
+              <p className={s.faqAns}>{it.a}</p>
             </details>
           ))}
         </div>

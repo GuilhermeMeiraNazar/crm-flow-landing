@@ -35,8 +35,8 @@ const bg = `
   <rect x="64" y="64" width="64" height="64" rx="18" fill="url(#g)"/>
   <path d="M104 80.5A15 15 0 1 0 104 111.5" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" transform="translate(-2 -1)"/>
   <text x="146" y="108" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" fill="#EEF2F6">${esc(SITE.name)}</text>
-  <text x="64" y="230" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#EEF2F6">CRM de WhatsApp com IA,</text>
-  <text x="64" y="300" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#EEF2F6">instalado no seu servidor.</text>
+  <text x="64" y="230" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#EEF2F6">Atendimento no WhatsApp com IA,</text>
+  <text x="64" y="300" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#EEF2F6">sem instalar nada.</text>
   <text x="64" y="360" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#93A1B0">Conversas, pipeline kanban, automações e relatórios.</text>
 </svg>`;
 await sharp(Buffer.from(bg))

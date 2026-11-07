@@ -29,3 +29,9 @@ Mapeamentos feitos por mim, a confirmar:
 ## Lighthouse (mobile, container em localhost:8088, build de rascunho)
 Performance 99, Acessibilidade 100, Boas prÃ¡ticas 100, SEO 69.
 SEO 69 vem sÃ³ de "Page is blocked from indexing", intencional no rascunho. Vale sÃ³ apÃ³s deploy real.
+
+## Atualização: modelo hospedado e taxa única
+- Implantação: R$ 1.500,00 em todos os pacotes. Mensalidades: 290, 590 e 990.
+- Removidas da página: seções 'Seus dados' e 'Requisitos', passos de instalação, perguntas sobre Docker, IP fixo, licença e servidor, e o campo de política de reemissão.
+- Carrossel: cartões alinhados ao container; no desktop os três aparecem lado a lado e os controles somem. Abaixo de 960 px há rolagem com setas, abas e teclado.
+- Pendente com o dono: o que a implantação e a mensalidade cobrem (hospedagem, backup, disponibilidade). A página não promete nenhum desses itens.

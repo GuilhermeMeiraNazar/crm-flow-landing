@@ -269,19 +269,26 @@ $bp-lg: 1200px;
 .planTabOn:hover { color: #fff; }
 .carouselArrows { display: flex; gap: 8px; }
 .carouselArrows .iconBtn:disabled { opacity: 0.4; cursor: default; }
-.carouselWrap { width: 100%; overflow: hidden; }
+.carouselWrap { --pad: max(clamp(16px, 5vw, 32px), calc((100% - var(--container)) / 2 + clamp(16px, 5vw, 32px))); width: 100%; overflow: hidden; }
 .track {
   display: flex; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
-  position: relative; padding: 8px calc(50% - min(86vw, 460px) / 2) 24px; align-items: stretch;
+  position: relative; padding: 10px var(--pad) 28px; scroll-padding-inline: var(--pad); align-items: stretch;
 }
 .track::-webkit-scrollbar { display: none; }
 .track:focus-visible { outline-offset: -2px; }
 .plan {
-  position: relative; flex: 0 0 min(86vw, 460px); scroll-snap-align: center; display: flex; flex-direction: column;
+  position: relative; flex: 0 0 min(80vw, 400px); scroll-snap-align: start; display: flex; flex-direction: column;
   padding: 28px; border-radius: var(--radius-xl); border: 1px solid var(--border-strong); background: var(--surface);
-  opacity: 0.72; transform: scale(0.97); transition: opacity var(--t-slow), transform var(--t-slow), border-color var(--t-slow), box-shadow var(--t-slow);
+  transition: opacity var(--t-slow), transform var(--t-slow), border-color var(--t-slow), box-shadow var(--t-slow);
 }
-.planOn { opacity: 1; transform: none; border-color: var(--accent-ai); box-shadow: 0 0 0 1px var(--accent-ai-soft), 0 24px 60px -28px var(--glow-ai); }
+// Os tres cartoes cabem na largura: sem rolagem, sem setas, todos com o mesmo destaque.
+@media (min-width: 960px) { .plan { flex-basis: calc((100% - 40px) / 3); } .carouselBar { display: none; } }
+// Com rolagem: o cartao ativo fica em destaque e os demais recuam.
+.scrolls .plan { opacity: 0.7; }
+.scrolls .planOn { opacity: 1; }
+.planOn { border-color: var(--accent-ai); box-shadow: 0 0 0 1px var(--accent-ai-soft), 0 24px 60px -28px var(--glow-ai); }
+.fits .planOn { border-color: var(--border-strong); box-shadow: none; }
+.fits .planHi { border-color: var(--accent-ai); box-shadow: 0 0 0 1px var(--accent-ai-soft), 0 24px 60px -28px var(--glow-ai); }
 .planHi::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; border-radius: var(--radius-xl) var(--radius-xl) 0 0; background: linear-gradient(90deg, var(--btn-from), var(--accent-live)); }
 .planTier { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
 .planName { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 8px; }
@@ -294,4 +301,4 @@ $bp-lg: 1200px;
 .planIncl { font-weight: 600; font-size: 0.92rem; margin-bottom: 12px; }
 .plan .ticks { flex: 1; }
 .planCta { margin-top: 24px; }
-@media (prefers-reduced-motion: reduce) { .plan { transition: none; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .plan { transition: none; } }
