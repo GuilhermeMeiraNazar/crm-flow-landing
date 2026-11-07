@@ -29,6 +29,7 @@ const REF = {
   F28: ['Funcionalidade 28: tema claro e escuro', 'A'],
   F11: ['Funcionalidade 11: contatos', 'A'],
   S7: ['CONTEUDO.md secao 7 (tokens de design em variaveis CSS)', 'A'],
+  'OWNER-D1': ['DECLARADO PELO DONO: Consultor digital disponivel no dia 1; sem evidencia no CRM analisado (busca por copilot, copiloto, estoque e gestor em crm-flow-ia e core-hub-ia)', 'D'],
   FRAME: ['Enquadramento editorial, sem afirmacao factual sobre o produto', 'n/a'],
 };
 

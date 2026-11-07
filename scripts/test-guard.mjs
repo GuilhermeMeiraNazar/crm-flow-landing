@@ -29,6 +29,7 @@ const VALID = [
   [/cnpj: '[^']*'/, "cnpj: '11.222.333/0001-81'"],
   [/address: '[^']*'/, "address: 'Rua Teste, 100'"],
   [/legalDraft: true/, 'legalDraft: false'],
+  [/consultorDigital: false/, 'consultorDigital: true'],
 ];
 const withValid = strip(VALID.reduce((t, [re, to]) => t.replace(re, to), base));
 const variant = (re, to) => withValid.replace(re, to);
@@ -46,6 +47,7 @@ const CASES = [
   ['mensalidade nula', variant(/monthly: 150/, 'monthly: null'), /monthly/],
   ['implantacao zero', variant(/setup: 1500/, 'setup: 0'), /setup/],
   ['implantacao em texto ("1500")', variant(/setup: 1500/, "setup: '1500'"), /setup/],
+  ['recurso do dia 1 nao confirmado (consultorDigital)', variant(/consultorDigital: true/, 'consultorDigital: false'), /launchChecklist/],
   ['linha do plano invalida', variant(/line: 'hosted'/, "line: 'outra'"), /line/],
 ];
 

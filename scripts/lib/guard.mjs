@@ -76,6 +76,9 @@ export function checkSources() {
   (SITE.pricing?.services || []).forEach((a, i) => {
     if (typeof a.price !== 'number' || !Number.isFinite(a.price) || a.price <= 0) v.push(`SITE.pricing.services[${i}].price deve ser numerico e maior que zero (valor ${a.price})`);
   });
+  for (const [k, val] of Object.entries(SITE.launchChecklist || {})) {
+    if (val !== true) v.push(`SITE.launchChecklist.${k} nao confirmado: recurso anunciado sem evidencia no CRM; confirme que esta no ar e mude para true`);
+  }
   // (a) qualquer texto com colchetes ou "CONFIRMAR"
   const all = { SITE, copy: copy(SITE), legal: legal(SITE) };
   for (const [root, obj] of Object.entries(all)) {

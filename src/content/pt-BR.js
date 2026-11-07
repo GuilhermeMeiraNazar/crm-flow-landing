@@ -207,6 +207,7 @@ export const copy = (S) => ({
           { t: 'IA de atendimento e triagem', v: [true, true, true, true], ev: ['F3', 'F5'] },
           { t: 'Kanban e relatórios', v: [true, true, true, true], ev: ['F7', 'F14'] },
           { t: 'Paleta de cores com a identidade da empresa', v: [false, false, true, false], ev: ['S7'] },
+          { t: 'Consultor digital: o dono acompanha o negócio pelo WhatsApp', v: [false, true, true, 'módulo adicional'], ev: ['OWNER-D1'] },
         ],
       },
       {
@@ -221,6 +222,7 @@ export const copy = (S) => ({
           { t: 'Chaves de IA', v: ['suas', 'suas'], ev: ['F16'] },
           { t: 'Atualizações do contêiner Docker e patches de segurança', v: [false, true], ev: ['FRAME'] },
           { t: 'Suporte técnico', v: [false, true], ev: ['FRAME'] },
+          { t: 'Consultor digital: o dono acompanha o negócio pelo WhatsApp', v: ['módulo adicional', 'módulo adicional'], ev: ['OWNER-D1'] },
         ],
       },
     ],
@@ -289,7 +291,7 @@ export const copy = (S) => ({
       terms: 'Termos conforme a Política de Reembolso.',
       perks: [
         { t: 'Primeira mensalidade isenta', d: 'No primeiro mês você paga só o valor da implantação.', ev: ['FRAME'] },
-        { t: 'Bônus: 30 dias do Copiloto do Gestor', d: 'Acesso gratuito ao módulo para os assinantes do Hosted Básico testarem, a partir do lançamento do módulo.', ev: ['FRAME'] },
+        { t: 'Bônus: 30 dias do Consultor digital', d: 'Acesso gratuito ao módulo para os assinantes do Hosted Básico testarem, a partir do lançamento do módulo.', ev: ['FRAME'] },
       ],
     },
     // Exigido de quem escolhe rodar no proprio servidor (CONTEUDO.md secao 4).

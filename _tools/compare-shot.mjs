@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const c = await b.newContext({ viewport: { width: 1440, height: 900 } });
+const p = await c.newPage();
+await p.goto('http://localhost:8088/', { waitUntil: 'networkidle' });
+await p.locator('#cmp-hosted').scrollIntoViewIfNeeded();
+await p.waitForTimeout(1200);
+await p.locator('#cmp-hosted').screenshot({ path: '_tools/cmp-hosted.png' });
+await p.getByRole('tab', { name: 'No seu servidor' }).click();
+await p.locator('#cmp-self').scrollIntoViewIfNeeded();
+await p.waitForTimeout(600);
+await p.locator('#cmp-self').screenshot({ path: '_tools/cmp-self.png' });
+const rows = await p.evaluate(() => [...document.querySelectorAll('#cmp-hosted tbody tr, #cmp-self tbody tr')].filter((r) => /Consultor/.test(r.textContent)).map((r) => [...r.children].map((c) => (c.textContent || c.querySelector('.sr-only')?.textContent || '').trim()).join(' | ')));
+console.log(rows.join('\n'));
+await b.close();

@@ -52,6 +52,9 @@ export const SITE = {
     guarantee: '[GARANTIA E PRAZO DE ARREPENDIMENTO A DEFINIR COM ADVOGADO]',
   },
 
+  // Recursos anunciados na pagina que o dono declarou para o dia 1 e que NAO tem evidencia no CRM analisado.
+  // A trava bloqueia a publicacao enquanto algum estiver "false". Mude para true somente depois de o recurso estar no ar.
+  launchChecklist: { consultorDigital: false },
   // Analytics: desligado por padrao e sem rastreadores de terceiros.
   // Para ligar um analytics sem cookies (ex.: Plausible), informe provider, domain e src.
   analytics: { enabled: false, provider: null, dataDomain: '', src: '' },
