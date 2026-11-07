@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+dist-lh
+.git
+_demo
+_baseline
+_tools
+verificacao
+capturas
+.env
+.env.*
+*.pem
+*.log

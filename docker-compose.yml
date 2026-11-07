@@ -1,0 +1,25 @@
+# Landing em container. Uso:
+#   Teste local (build de rascunho, NAO publicavel):
+#     $env:ALLOW_DRAFT_BUILD='1'; docker compose up -d --build        (PowerShell)
+#     ALLOW_DRAFT_BUILD=1 docker compose up -d --build                (bash)
+#   Producao: sem a variavel; o build falha enquanto houver pendencia (ver README).
+# Sempre use o projeto "conversia-landing" (name abaixo) e nunca "down -v" fora dele.
+name: conversia-landing
+
+services:
+  landing:
+    build:
+      context: .
+      args:
+        ALLOW_DRAFT_BUILD: "${ALLOW_DRAFT_BUILD:-}"
+    image: conversia-landing:local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${LANDING_PORT:-8088}:8080"   # so a maquina local; troque o bind para expor
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

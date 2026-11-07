@@ -57,6 +57,23 @@ O texto da página está em `src/content/pt-BR.js`. Cada afirmação tem `ev` co
 - Sem depoimentos, logos de clientes, números de clientes, métricas de desempenho, selos ou comparativos.
 - Privacidade, texto aprovado: "Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta."
 
+## Docker
+
+Imagem em dois estagios: Node faz o build (com a trava de publicacao) e `nginxinc/nginx-unprivileged` serve o `dist/` (usuario sem privilegios, sistema de arquivos somente leitura, `cap_drop: ALL`, porta 8080 dentro do container, `127.0.0.1:8088` no host).
+
+```powershell
+# teste local (build de rascunho, NAO publicavel; robots com Disallow)
+$env:ALLOW_DRAFT_BUILD='1'; docker compose up -d --build
+# http://localhost:8088
+
+# parar (so este projeto)
+docker compose stop
+
+# producao: sem a variavel. O build falha enquanto houver placeholder (ver Trava de publicacao).
+docker compose up -d --build
+```n
+Trocar a porta: `LANDING_PORT=9090`. O bind e `127.0.0.1`; para expor na rede, mude o mapeamento de portas em `docker-compose.yml`.
+
 ## Telas do produto
 
 As imagens em `src/assets/capturas/` (AVIF com WebP de reserva, 1x e 2x, mais `manifest.json` com as dimensoes) foram capturadas com Playwright de uma cópia descartável do CRM com dados fictícios (nomes e telefones inventados, sem WhatsApp conectado, sem chave real). Telas de funcionalidade sao RECORTADAS (clip do navegador) para excluir a sidebar; so a captura do hero mantem a sidebar, com Catalogo, Calendario e Base de Conhecimento desfocados. Toda captura recebe a legenda unica "Dados ficticios de demonstracao" (componente `Caption`). Relatorios mostra so o painel de contagem por etapa, sem taxas nem valores. Desfocamos na captura: o badge fixo "12" de Conversas, os itens de menu de funcionalidades fora da página, o card de estado da instância local, o total "R$ NaN" das colunas do kanban e o bloco "Saldo de tokens". Os defeitos do CRM estão em `DEFEITOS-CRM.md`.
