@@ -3,7 +3,7 @@ import { SITE } from '../config/site.js';
 import { copy } from '../content/pt-BR.js';
 import { legal } from '../content/legal.js';
 import { Navbar, Footer } from '../components/ui.jsx';
-import { Hero, Marquee, Problem, Bento, AiSection, Showcase, How, Pricing, Faq, FinalCta } from '../components/sections.jsx';
+import { Hero, Marquee, Problem, Product, AiSection, How, Pricing, Faq, FinalCta } from '../components/sections.jsx';
 import { usePageEffects } from '../hooks/effects.jsx';
 
 export function Home() {
@@ -17,9 +17,8 @@ export function Home() {
         <Hero C={C} />
         <Marquee C={C} />
         <Problem C={C} />
-        <Bento C={C} />
+        <Product C={C} />
         <AiSection C={C} />
-        <Showcase C={C} />
         <How C={C} />
         <Pricing C={C} />
         <Faq C={C} />

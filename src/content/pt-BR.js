@@ -51,24 +51,64 @@ export const copy = (S) => ({
     ],
   },
 
-  bento: {
+  product: {
     id: 'produto',
     eyebrow: 'O produto',
     title: 'Tudo o que a operação de vendas no WhatsApp precisa em uma tela só.',
-    ev: ['F1', 'F3', 'F5', 'F6', 'F7', 'F12', 'F14', 'F4', 'F27', 'F28'],
-    cards: [
-      { id: 'inbox', t: 'Caixa de entrada multiatendente', d: 'Fila e “minhas” conversas, assumir e liberar, com mensagens chegando em tempo real.', ev: ['F1'], size: 'wide' },
-      { id: 'kanban', t: 'Pipeline em kanban', d: 'Arraste os negócios entre as etapas e acompanhe o valor de cada cartão.', ev: ['F7'], size: 'wide' },
-      { id: 'ai', t: 'Agente de IA que passa para uma pessoa', d: 'Responde e transfere ao atendente quando o cliente pede, quando a IA falha em sequência ou por regra de valor.', ev: ['F3'], size: 'tall' },
-      { id: 'auto', t: 'Automações por etapa', d: 'Ao entrar na etapa ou após dias parado: enviar template, notificar o atendente ou agendar lembrete.', ev: ['F12'], size: 'std' },
-      { id: 'reports', t: 'Relatórios com exportação', d: 'Funil, atendimento e custo de IA, com exportação em CSV e planilha.', ev: ['F14', 'F15'], size: 'std' },
-      { id: 'lead', t: 'Do chat ao negócio', d: 'A IA extrai nome, telefone, e-mail, orçamento e interesse, e cria ou atualiza o negócio com um limiar de confiança.', ev: ['F5', 'F6'], size: 'std' },
-      { id: 'audio', t: 'Transcrição de áudio', d: 'Áudios recebidos viram texto pelo provedor que você configurar.', ev: ['F4'], size: 'small' },
-      { id: 'team', t: 'Perfis de admin e agente', d: 'Cada pessoa vê o que o seu papel permite.', ev: ['F27'], size: 'small' },
-      { id: 'theme', t: 'Tema claro e escuro', d: 'Alterna e lembra a sua escolha.', ev: ['F28'], size: 'small' },
+    ev: ['F1', 'F7', 'F12', 'F14'],
+    tabs: [
+      {
+        id: 'conversas', label: 'Conversas', ev: ['F1'],
+        title: 'Uma fila para a equipe, no mesmo painel.',
+        d: 'Veja a fila, assuma uma conversa, devolva quando terminar e responda sem sair da tela.',
+        bullets: [
+          { t: 'Fila e “minhas” conversas, com assumir e liberar.', ev: ['F1'] },
+          { t: 'Atualização em tempo real.', ev: ['F1'] },
+        ],
+        shot: 'inbox', alt: 'Tela de Conversas com fila, lista de conversas e janela de chat.',
+      },
+      {
+        id: 'pipeline', label: 'Pipeline', ev: ['F7', 'F8', 'F9'],
+        title: 'Um funil que você desenha e acompanha.',
+        d: 'Crie as etapas do seu processo, arraste os negócios e veja o histórico de cada movimentação.',
+        bullets: [
+          { t: 'Etapas configuráveis: abertas, ganhas e perdidas.', ev: ['F8'] },
+          { t: 'Arraste e solte entre etapas.', ev: ['F7'] },
+          { t: 'Histórico de movimentação com data e autoria.', ev: ['F9'] },
+        ],
+        shot: 'pipeline', alt: 'Quadro kanban do Pipeline com colunas Novo lead, Em atendimento, Proposta enviada e Negociação.',
+      },
+      {
+        id: 'automacoes', label: 'Automações', ev: ['F12'],
+        title: 'Quando o negócio muda de etapa, o sistema age.',
+        d: 'Defina o gatilho e a ação para cada etapa do funil.',
+        bullets: [
+          { t: 'Gatilhos: ao entrar na etapa ou após X dias parado.', ev: ['F12'] },
+          { t: 'Ações: enviar template de WhatsApp, notificar o atendente, agendar lembrete.', ev: ['F12'] },
+          { t: 'Liga e desliga cada automação.', ev: ['F12'] },
+        ],
+        shot: 'automacoes', alt: 'Lista de automações por etapa com gatilho, ação e status.',
+      },
+      {
+        id: 'relatorios', label: 'Relatórios', ev: ['F14', 'F15'],
+        title: 'Funil, atendimento e custo de IA em números.',
+        d: 'Escolha o período e exporte quando precisar.',
+        bullets: [
+          { t: 'Conversão, valor fechado e em aberto, tempo parado por etapa.', ev: ['F14'] },
+          { t: 'Conversas resolvidas pela IA, transferidas e tempo de primeira resposta.', ev: ['F14'] },
+          { t: 'Exportação em CSV e planilha.', ev: ['F15'] },
+        ],
+        shot: 'analytics', alt: 'Painel Deals por estágio dos Relatórios, com a contagem de negócios em cada etapa do funil.',
+      },
+    ],
+    alsoTitle: 'Também no produto',
+    also: [
+      { icon: 'lead', t: 'Do chat ao negócio', d: 'A IA extrai nome, telefone, e-mail, orçamento e interesse, e cria ou atualiza o negócio com um limiar de confiança.', ev: ['F5', 'F6'] },
+      { icon: 'audio', t: 'Transcrição de áudio', d: 'Áudios recebidos viram texto pelo provedor que você configurar.', ev: ['F4'] },
+      { icon: 'team', t: 'Perfis de admin e agente', d: 'Cada pessoa vê o que o seu papel permite.', ev: ['F27'] },
+      { icon: 'theme', t: 'Tema claro e escuro', d: 'Alterna e lembra a sua escolha.', ev: ['F28'] },
     ],
   },
-
   numbers: {
     ev: ['S5', 'F12', 'F3', 'F27'],
     items: [
@@ -95,48 +135,6 @@ export const copy = (S) => ({
     privacyEv: ['S5'],
     shotAlt: 'Tela de Chaves de IA: agente de conversa e transcrição de áudio com provedor, modelo e chave configurada.',
   },
-
-  showcase: [
-    {
-      id: 'pipeline', ev: ['F7', 'F8', 'F9'], eyebrow: 'Pipeline', title: 'Um funil que você desenha e acompanha.',
-      d: 'Crie as etapas do seu processo, arraste os negócios e veja o histórico de cada movimentação.',
-      bullets: [
-        { t: 'Etapas configuráveis: abertas, ganhas e perdidas.', ev: ['F8'] },
-        { t: 'Arraste e solte entre etapas.', ev: ['F7'] },
-        { t: 'Histórico de movimentação com data e autoria.', ev: ['F9'] },
-      ],
-      shot: 'pipeline', alt: 'Quadro kanban do Pipeline com colunas Novo lead, Em atendimento, Proposta enviada e Negociação.',
-    },
-    {
-      id: 'inbox', ev: ['F1'], eyebrow: 'Conversas', title: 'Uma fila para a equipe, no mesmo painel.',
-      d: 'Veja a fila, assuma uma conversa, devolva quando terminar e responda sem sair da tela.',
-      bullets: [
-        { t: 'Fila e “minhas” conversas, com assumir e liberar.', ev: ['F1'] },
-        { t: 'Atualização em tempo real.', ev: ['F1'] },
-      ],
-      shot: 'inbox', alt: 'Tela de Conversas com fila, lista de conversas e janela de chat.',
-    },
-    {
-      id: 'automacoes', ev: ['F12'], eyebrow: 'Automações', title: 'Quando o negócio muda de etapa, o sistema age.',
-      d: 'Defina o gatilho e a ação para cada etapa do funil.',
-      bullets: [
-        { t: 'Gatilhos: ao entrar na etapa ou após X dias parado.', ev: ['F12'] },
-        { t: 'Ações: enviar template de WhatsApp, notificar o atendente, agendar lembrete.', ev: ['F12'] },
-        { t: 'Liga e desliga cada automação.', ev: ['F12'] },
-      ],
-      shot: 'automacoes', alt: 'Lista de automações por etapa com gatilho, ação e status.',
-    },
-    {
-      id: 'relatorios', ev: ['F14', 'F15'], eyebrow: 'Relatórios', title: 'Funil, atendimento e custo de IA em números.',
-      d: 'Escolha o período e exporte quando precisar.',
-      bullets: [
-        { t: 'Conversão, valor fechado e em aberto, tempo parado por etapa.', ev: ['F14'] },
-        { t: 'Conversas resolvidas pela IA, transferidas e tempo de primeira resposta.', ev: ['F14'] },
-        { t: 'Exportação em CSV e planilha.', ev: ['F15'] },
-      ],
-      shot: 'analytics', alt: 'Painel Deals por estágio dos Relatórios, com a contagem de negócios em cada etapa do funil.',
-    },
-  ],
 
   how: {
     id: 'como-funciona',

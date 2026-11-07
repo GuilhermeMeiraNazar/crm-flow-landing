@@ -77,65 +77,61 @@ export function Problem({ C }) {
   );
 }
 
-function Demo({ id }) {
-  if (id === 'inbox') return (
-    <div className={s.mini} aria-hidden="true"><div className={s.msgs}>
-      <span className={s.msg}>Olá, vocês têm o kit iniciante?</span>
-      <span className={s.msg}>Temos sim! Posso passar os detalhes.</span>
-      <span className={s.msg}>Consigo parcelar?<span className={s.typing} style={{ marginLeft: 8 }}><i /><i /><i /></span></span>
-      <span className={s.msg}>Em até 6 vezes.</span>
-    </div></div>
-  );
-  if (id === 'kanban') return (
-    <div className={s.mini} aria-hidden="true"><div className={s.kan}>
-      {['Novo', 'Proposta', 'Ganho'].map((c, i) => (
-        <div key={c} className={s.kcol}><b>{c}</b>{i < 2 && <span className={s.kcard} />}{i === 0 && <span className={s.kcard} />}</div>
-      ))}
-      <span className={s.kmove} />
-    </div></div>
-  );
-  if (id === 'ai') return (
-    <div className={s.mini} aria-hidden="true"><div className={s.flow}>
-      <span className={`${s.node} ${s.nodeOn}`}>IA responde</span><span className={s.arrow}>→</span>
-      <span className={`${s.node} ${s.nodeOn}`}>Cliente pede atendente</span><span className={s.arrow}>→</span>
-      <span className={`${s.node} ${s.nodeOn}`}>Equipe assume</span>
-    </div></div>
-  );
-  if (id === 'reports') return (
-    <div className={s.mini} aria-hidden="true">
-      <svg className={s.chart} viewBox="0 0 300 110" preserveAspectRatio="none">
-        <path className={s.chartArea} d="M0 90 L50 70 L100 78 L150 45 L200 52 L250 24 L300 14 L300 110 L0 110Z" />
-        <path className={s.chartLine} d="M0 90 L50 70 L100 78 L150 45 L200 52 L250 24 L300 14" pathLength="400" />
-      </svg>
-    </div>
-  );
-  if (id === 'auto') return (
-    <div className={s.mini} aria-hidden="true"><div className={s.chips}>
-      <span className={`${s.tag} ${s.tagLive}`}>Ao entrar na etapa</span><span className={s.tag}>Após X dias parado</span>
-      <span className={s.tag}>Enviar template</span><span className={s.tag}>Notificar atendente</span><span className={s.tag}>Agendar lembrete</span>
-    </div></div>
-  );
-  if (id === 'lead') return (
-    <div className={s.mini} aria-hidden="true"><div className={s.chips}>
-      <span className={s.tag}>nome</span><span className={s.tag}>telefone</span><span className={s.tag}>e-mail</span><span className={s.tag}>orçamento</span><span className={s.tag}>interesse</span>
-      <span className={`${s.tag} ${s.tagLive}`}>→ negócio criado</span>
-    </div></div>
-  );
-  return null;
-}
+const ICONS = {
+  lead: <path d="M4 6h16M4 12h10M4 18h6M18 14l2 2 4-4" />,
+  audio: <><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></>,
+  team: <><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6" /></>,
+  theme: <path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z" />,
+};
 
-export function Bento({ C }) {
-  const b = C.bento;
+// "O produto": abas com tela real de cada area. Todos os paineis ficam no HTML (so o ativo aparece).
+export function Product({ C }) {
+  const b = C.product;
+  const [active, setActive] = useState(0);
+  const tabs = useRef([]);
+  const select = (i, focus) => {
+    const n = (i + b.tabs.length) % b.tabs.length;
+    setActive(n);
+    if (focus && tabs.current[n]) tabs.current[n].focus();
+  };
+  const onKey = (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); select(active + 1, true); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); select(active - 1, true); }
+    if (e.key === 'Home') { e.preventDefault(); select(0, true); }
+    if (e.key === 'End') { e.preventDefault(); select(b.tabs.length - 1, true); }
+  };
   return (
-    <section className={s.section} id={b.id} aria-labelledby="bento-t">
+    <section className={s.section} id={b.id} aria-labelledby="produto-t">
       <div className={s.container}>
-        <Head eyebrow={b.eyebrow} title={b.title} id="bento-t" evIds={b.ev} />
-        <div className={s.bento}>
-          {b.cards.map((c, k) => (
-            <article key={c.id} className={`${s.card} ${s[`size_${c.size}`]}`} data-spot data-reveal style={{ '--i': k % 3 }} {...ev(c.ev)}>
-              <h3>{c.t}</h3>
-              <p>{c.d}</p>
-              <Demo id={c.id} />
+        <Head eyebrow={b.eyebrow} title={b.title} id="produto-t" evIds={b.ev} />
+        <div className={s.prodTabs} role="tablist" aria-label="Áreas do produto" onKeyDown={onKey}>
+          {b.tabs.map((t, i) => (
+            <button key={t.id} ref={(el) => { tabs.current[i] = el; }} type="button" role="tab" id={`tab-${t.id}`} aria-selected={i === active} aria-controls={`painel-${t.id}`} tabIndex={i === active ? 0 : -1} className={`${s.prodTab} ${i === active ? s.prodTabOn : ''}`} onClick={() => select(i)}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+        {b.tabs.map((t, i) => (
+          <div key={t.id} id={`painel-${t.id}`} role="tabpanel" aria-labelledby={`tab-${t.id}`} hidden={i !== active} className={s.prodPanel} {...ev(t.ev)}>
+            <div className={s.prodText}>
+              <h3>{t.title}</h3>
+              <p>{t.d}</p>
+              <ul className={s.ticks}>
+                {t.bullets.map((x) => <li key={x.t} {...ev(x.ev)}>{x.t}</li>)}
+              </ul>
+            </div>
+            <div className={s.prodShot}><Shot name={t.shot} alt={t.alt} /></div>
+          </div>
+        ))}
+        <h3 className={s.alsoTitle}>{b.alsoTitle}</h3>
+        <div className={s.also}>
+          {b.also.map((x) => (
+            <article key={x.t} className={s.alsoItem} {...ev(x.ev)}>
+              <span className={s.alsoIcon} aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{ICONS[x.icon]}</svg>
+              </span>
+              <h4>{x.t}</h4>
+              <p>{x.d}</p>
             </article>
           ))}
         </div>
@@ -148,7 +144,6 @@ export function Bento({ C }) {
     </section>
   );
 }
-
 export function AiSection({ C }) {
   const a = C.ai;
   return (
@@ -166,30 +161,6 @@ export function AiSection({ C }) {
           </div>
           <div data-reveal><Shot name="ia" alt={a.shotAlt} /></div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-export function Showcase({ C }) {
-  return (
-    <section className={`${s.section} ${s.sectionLine}`} aria-label="Telas do produto">
-      <div className={s.container}>
-        {C.showcase.map((r, i) => (
-          <div key={r.id} id={r.id} className={`${s.row} ${i % 2 ? s.rowFlip : ''}`}>
-            <div className={s.rowText} data-reveal>
-              <p className={s.eyebrow}>{r.eyebrow}</p>
-              <h3>{r.title}</h3>
-              <p>{r.d}</p>
-              <ul className={s.ticks}>
-                {r.bullets.map((b) => (
-                  <li key={b.t} {...ev(b.ev, b.review)}>{b.t}{b.review && <span className={s.review}>revisão do dono</span>}</li>
-                ))}
-              </ul>
-            </div>
-            <div data-reveal style={{ '--i': 1 }}><Shot name={r.shot} alt={r.alt} /></div>
-          </div>
-        ))}
       </div>
     </section>
   );
