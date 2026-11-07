@@ -4,7 +4,7 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 
 | # | Onde | Afirmacao (trecho) | Evidencia | Classe |
 |---|---|---|---|---|
-| 1 | `hero` | Atendimento e funil de vendas no WhatsApp, com IA, sem instalar nada. Caixa de entrada para a equipe, funil de vendas em kanban, automações por eta... | S1, S3.1, F1, F7, F12, F14 | n/a, A |
+| 1 | `hero` | CRM de WhatsApp com IA para a sua equipe de vendas. Caixa de entrada para a equipe, funil de vendas em kanban, automações por etapa e relatórios. E... | S1, S3.1, F1, F7, F12, F14 | n/a, A |
 | 2 | `problem` | Conversa, negócio e follow-up no mesmo lugar. | FRAME | n/a |
 | 3 | `problem.items[0]` | Atendimento com a equipe toda Fila de conversas, quem assumiu e quem está livre, com atualização em tempo real. | F1 | A |
 | 4 | `problem.items[1]` | Funil que acompanha a conversa O lead vira negócio e anda pelas etapas do seu processo de vendas. | F6, F7 | A |
@@ -40,26 +40,48 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 34 | `showcase[3].bullets[1]` | Conversas resolvidas pela IA, transferidas e tempo de primeira resposta. | F14 | A |
 | 35 | `showcase[3].bullets[2]` | Exportação em CSV e planilha. | F15 | A |
 | 36 | `how` | Da contratação ao primeiro atendimento. | S4 | A |
-| 37 | `how.steps[0]` | Escolher o pacote Compare Básico, Médio e Premium e fale com a gente. | FRAME | n/a |
-| 38 | `how.steps[1]` | Implantação Colocamos o ConversIA da sua empresa no ar no nosso servidor, com a taxa única de implantação. | FRAME | n/a |
+| 37 | `how.steps[0]` | Escolher o plano Compare os planos hospedados e os planos no seu servidor e fale com a gente. | FRAME | n/a |
+| 38 | `how.steps[1]` | Implantação Colocamos o ConversIA da sua empresa no ar, no nosso servidor ou no seu, conforme o plano, com a taxa única de implantação. | FRAME | n/a |
 | 39 | `how.steps[2]` | Acessar Sua equipe entra pelo navegador, com perfis de admin e de agente. | F27 | A |
 | 40 | `how.steps[3]` | Conectar Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA. | S4, S5 | A |
-| 41 | `pricing` | Escolha o pacote para o seu atendimento. A implantação custa o mesmo valor em todos os pacotes e é cobrada uma vez. A mensalidade muda conforme o p... | F1, F3, F16 | A |
-| 42 | `pricing.plans.basico` | Para pequenas empresas que precisam organizar o atendimento e os leads no funil de vendas. | FRAME | n/a |
-| 43 | `pricing.plans.basico.features[0]` | CRM de WhatsApp: contatos e conversas em uma caixa de entrada para a equipe. | F1, F11 | A |
-| 44 | `pricing.plans.basico.features[1]` | IA de atendimento e triagem: responde as conversas e passa para uma pessoa quando necessário. | F3 | A |
-| 45 | `pricing.plans.basico.features[2]` | Dados do lead no funil: nome, telefone, e-mail, orçamento e interesse extraídos da conversa. | F5, F6 | A |
-| 46 | `pricing.plans.basico.features[3]` | Pipeline kanban e relatórios de funil, atendimento e custo de IA. | F7, F14 | A |
-| 47 | `pricing.plans.medio` | Para empresas em crescimento que querem mais robustez na IA e suporte com resposta mais rápida. | FRAME | n/a |
-| 48 | `pricing.plans.medio.features[0]` | Cadeia de reserva entre provedores de IA: se o primeiro falhar, outro assume a resposta. | F17 | A |
-| 49 | `pricing.plans.premium` | Para operações consolidadas que querem atendimento VIP e a plataforma com a cara da empresa. | FRAME | n/a |
-| 50 | `pricing.plans.premium.features[0]` | Adaptação da paleta de cores da plataforma à identidade da empresa (setup semi-personalizado). | S7 | A |
-| 51 | `faq.items[0]` | Preciso instalar alguma coisa? Não. O ConversIA roda no nosso servidor e a sua equipe acessa pelo navegador. | FRAME | n/a |
-| 52 | `faq.items[1]` | Para onde vão as conversas? Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta. | S5 | A |
-| 53 | `faq.items[2]` | Quanto custa a IA? O consumo é cobrado pelo provedor que você escolher, com a sua chave. O painel mostra tokens e custo estimado por função e por dia. | F16, F18a | A |
-| 54 | `faq.items[3]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
-| 55 | `faq.items[4]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
-| 56 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil da sua empresa para funcionar. | FRAME | n/a |
+| 41 | `pricing` | Escolha onde o ConversIA vai rodar. No nosso servidor, com tudo pronto, ou no servidor da sua empresa. Em todos os planos a implantação é uma taxa ... | FRAME | n/a |
+| 42 | `pricing.groups[0]` | Hospedado por nós Para quem quer o CRM pronto, sem cuidar de servidor. Cada empresa roda isolada, em contêineres Docker, na nossa VPS. A franquia d... | S3.1 | A |
+| 43 | `pricing.groups[1]` | No seu servidor Para empresas que já têm servidor e querem o sistema rodando internamente, com as próprias chaves de API. | S3.1, S3.2 | A |
+| 44 | `pricing.plans.hosted-byok` | Hospedagem completa, com a sua chave de IA. | FRAME | n/a |
+| 45 | `pricing.plans.hosted-byok.features[0]` | CRM hospedado e mantido no nosso servidor. | FRAME | n/a |
+| 46 | `pricing.plans.hosted-byok.features[1]` | Você cadastra o seu cartão no provedor de IA e gera a sua chave de API. O custo dos tokens é 100% seu. | F16 | A |
+| 47 | `pricing.plans.hosted-basico` | Para negócios com fluxo leve de mensagens. | FRAME | n/a |
+| 48 | `pricing.plans.hosted-basico.features[0]` | CRM hospedado e mantido no nosso servidor. | FRAME | n/a |
+| 49 | `pricing.plans.hosted-basico.features[1]` | Franquia inicial de IA inclusa: cerca de 1.500 interações por mês. | FRAME | n/a |
+| 50 | `pricing.plans.hosted-intermediario` | Para quem atende com mais volume e quer folga na franquia de IA. | FRAME | n/a |
+| 51 | `pricing.plans.hosted-intermediario.features[0]` | CRM hospedado e mantido no nosso servidor. | FRAME | n/a |
+| 52 | `pricing.plans.hosted-intermediario.features[1]` | Franquia de IA ampliada: cerca de 4.000 interações por mês. | FRAME | n/a |
+| 53 | `pricing.plans.hosted-avancado` | Para operações com grande fluxo de mensagens. | FRAME | n/a |
+| 54 | `pricing.plans.hosted-avancado.features[0]` | CRM hospedado e mantido no nosso servidor. | FRAME | n/a |
+| 55 | `pricing.plans.hosted-avancado.features[1]` | A maior franquia de IA: cerca de 10.000 interações por mês. | FRAME | n/a |
+| 56 | `pricing.plans.self-sem-suporte` | Implantação única no seu servidor, sem acompanhamento depois. | FRAME | n/a |
+| 57 | `pricing.plans.self-sem-suporte.features[0]` | Implantação isolada no servidor da sua empresa. | S3.1 | A |
+| 58 | `pricing.plans.self-sem-suporte.features[1]` | Você usa as suas próprias chaves de API de IA. | F16 | A |
+| 59 | `pricing.plans.self-sem-suporte.features[2]` | Não inclui correção de bugs futuros, atualizações do sistema nem suporte técnico do dia a dia. | FRAME | n/a |
+| 60 | `pricing.plans.self-com-suporte` | Implantação no seu servidor com manutenção contínua. | FRAME | n/a |
+| 61 | `pricing.plans.self-com-suporte.features[0]` | Implantação no servidor da sua empresa. | S3.1 | A |
+| 62 | `pricing.plans.self-com-suporte.features[1]` | Você usa as suas próprias chaves de API de IA. | F16 | A |
+| 63 | `pricing.plans.self-com-suporte.features[2]` | Atualizações do contêiner Docker e patches de segurança. | FRAME | n/a |
+| 64 | `pricing.plans.self-com-suporte.features[3]` | Suporte para dúvidas técnicas. | FRAME | n/a |
+| 65 | `pricing.selfReq` | O que o servidor da sua empresa precisa ter Não publicamos números de capacidade por servidor: eles ainda não foram medidos em produção. | S4 | A |
+| 66 | `pricing.selfReq.rows[0]` | Sistema VPS Linux: Ubuntu 22.04 ou mais novo, ou Debian 12 ou mais novo | S4 | A |
+| 67 | `pricing.selfReq.rows[1]` | Capacidade mínima 2 vCPU e 4 GB de RAM | S4 | A |
+| 68 | `pricing.selfReq.rows[2]` | Rede IP fixo reservado pelo provedor e um domínio apontando para a VPS | S4 | A |
+| 69 | `pricing.selfReq.rows[3]` | Software Docker Engine e Docker Compose v2, com proxy HTTPS no servidor | S4 | A |
+| 70 | `pricing.selfReq.rows[4]` | WhatsApp e IA Conta Meta Business verificada e chave de API do provedor de IA | S4, S5 | A |
+| 71 | `pricing.selfReq.rows[5]` | Licença Vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão. | S3.4, S4 | A |
+| 72 | `faq.items[0]` | Qual a diferença entre hospedado e no seu servidor? Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem ... | FRAME, S4 | n/a, A |
+| 73 | `faq.items[1]` | A licença funciona em qualquer servidor? Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é p... | S3.4, S4 | A |
+| 74 | `faq.items[2]` | Para onde vão as conversas? Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta. | S5 | A |
+| 75 | `faq.items[3]` | Quanto custa a IA? Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave.... | F16, F18a | A |
+| 76 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
+| 77 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
+| 78 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil da sua empresa para funcionar. | FRAME | n/a |
 
 ## Legenda dos ids
 
@@ -104,7 +126,7 @@ Nao fazem afirmacao factual sobre o produto.
 | `integrations.items[4]` | Claude |
 | `integrations.items[5]` | Groq |
 | `faq` | O que perguntam antes de contratar. |
-| `seo` | ConversIA: CRM de WhatsApp com IA, sem instalar nada |
+| `seo` | ConversIA: CRM de WhatsApp com IA |
 
 ## Placeholders configuraveis (src/config/site.js)
 

@@ -262,8 +262,8 @@ $bp-lg: 1200px;
 // Carrossel de pacotes
 .planCommon { color: var(--text-secondary); max-width: 62ch; margin-bottom: 28px; }
 .carouselBar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-.planTabs { display: flex; gap: 6px; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); }
-.planTab { padding: 8px 16px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; color: var(--text-secondary); transition: background var(--t-base), color var(--t-base); }
+.planTabs { display: flex; gap: 6px; max-width: 100%; overflow-x: auto; scrollbar-width: none; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); }
+.planTab { white-space: nowrap; flex: 0 0 auto; padding: 8px 16px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; color: var(--text-secondary); transition: background var(--t-base), color var(--t-base); }
 .planTab:hover { color: var(--text-primary); }
 .planTabOn { background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); color: #fff; }
 .planTabOn:hover { color: #fff; }
@@ -277,12 +277,12 @@ $bp-lg: 1200px;
 .track::-webkit-scrollbar { display: none; }
 .track:focus-visible { outline-offset: -2px; }
 .plan {
-  position: relative; flex: 0 0 min(80vw, 400px); scroll-snap-align: start; display: flex; flex-direction: column;
-  padding: 28px; border-radius: var(--radius-xl); border: 1px solid var(--border-strong); background: var(--surface);
+  position: relative; flex: 0 0 min(80vw, 340px); scroll-snap-align: start; display: flex; flex-direction: column;
+  padding: 24px; border-radius: var(--radius-xl); border: 1px solid var(--border-strong); background: var(--surface);
   transition: opacity var(--t-slow), transform var(--t-slow), border-color var(--t-slow), box-shadow var(--t-slow);
 }
 // Os tres cartoes cabem na largura: sem rolagem, sem setas, todos com o mesmo destaque.
-@media (min-width: 960px) { .plan { flex-basis: calc((100% - 40px) / 3); } .carouselBar { display: none; } }
+@media (min-width: 1100px) { .plan { flex-basis: calc((100% - (var(--n) - 1) * 20px) / var(--n)); } .carouselBar { display: none; } }
 // Com rolagem: o cartao ativo fica em destaque e os demais recuam.
 .scrolls .plan { opacity: 0.7; }
 .scrolls .planOn { opacity: 1; }
@@ -291,14 +291,21 @@ $bp-lg: 1200px;
 .fits .planHi { border-color: var(--accent-ai); box-shadow: 0 0 0 1px var(--accent-ai-soft), 0 24px 60px -28px var(--glow-ai); }
 .planHi::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; border-radius: var(--radius-xl) var(--radius-xl) 0 0; background: linear-gradient(90deg, var(--btn-from), var(--accent-live)); }
 .planTier { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
-.planName { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 8px; }
-.planTag { color: var(--text-secondary); font-size: 0.92rem; min-height: 4.2em; margin-bottom: 18px; }
-.price { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.6rem); letter-spacing: -0.03em; line-height: 1.1; }
-.price small { font-family: var(--font-body); font-size: 0.9rem; letter-spacing: 0; color: var(--text-secondary); font-weight: 400; }
-.billing { color: var(--text-primary); font-size: 0.92rem; margin: 6px 0 4px; }
+.planName { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 8px; }
+.planTag { color: var(--text-secondary); font-size: 0.92rem; min-height: 4.8em; margin-bottom: 14px; }
+.price { white-space: nowrap; font-family: var(--font-display); font-size: clamp(1.7rem, 3vw, 2rem); letter-spacing: -0.03em; line-height: 1.1; }
+.price small { white-space: nowrap; font-family: var(--font-body); font-size: 0.9rem; letter-spacing: 0; color: var(--text-secondary); font-weight: 400; }
+.billing { color: var(--text-primary); font-size: 0.88rem; margin: 6px 0 0; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
 .planSupport { color: var(--text-secondary); font-size: 0.88rem; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
 .planSupport strong { color: var(--text-primary); font-weight: 600; }
 .planIncl { font-weight: 600; font-size: 0.92rem; margin-bottom: 12px; }
 .plan .ticks { flex: 1; }
 .planCta { margin-top: 24px; }
 @media (prefers-reduced-motion: reduce) { .plan { transition: none; } }
+// Grupos de planos (hospedado / no seu servidor)
+.planGroup { margin-top: 56px; }
+.groupTitle { font-family: var(--font-display); font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.02em; margin-bottom: 8px; }
+.groupLead { color: var(--text-secondary); max-width: 68ch; margin-bottom: 20px; }
+.planBadge { position: absolute; top: -11px; right: 20px; padding: 3px 10px; border-radius: 999px; background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); color: #fff; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em; text-transform: none; }
+.selfReq { margin-top: 8px; }
+.selfReq h4 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 12px; }

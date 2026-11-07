@@ -216,16 +216,14 @@ export function How({ C }) {
 
 const brl = (n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: SITE.pricing.currency }).format(n);
 
-// Carrossel de pacotes: faixa com rolagem por snap (funciona por toque e teclado), setas, indicadores e foco gerenciado.
-// Cada cartao mostra o que o pacote soma ao anterior ("cada um em cima do outro").
-export function Pricing({ C }) {
-  const p = C.pricing;
-  const plans = SITE.pricing.plans;
+// Carrossel de planos de uma linha. Quando os cartoes cabem na largura (desktop), todos aparecem lado a lado e
+// os controles somem. Abaixo disso, faixa com rolagem por snap (toque e teclado), setas, abas e foco gerenciado.
+function PlanCarousel({ p, plans, group }) {
   const track = useRef(null);
   const [active, setActive] = useState(0);
   const [scrolls, setScrolls] = useState(false);
+  const region = `${p.carousel.region}: ${group.title}`;
 
-  // Cartao ativo = o mais proximo do centro da faixa (atualiza durante o toque, o scroll e os botoes).
   useEffect(() => {
     const el = track.current;
     if (!el) return undefined;
@@ -235,7 +233,6 @@ export function Pricing({ C }) {
       setScrolls(el.scrollWidth - el.clientWidth > 4);
       const kids = [...el.children];
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) { setActive(kids.length - 1); return; }
-      // Ativo = cartao cujo inicio esta mais perto do inicio visivel da faixa.
       const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
       let best = 0; let dist = Infinity;
       kids.forEach((c, i) => { const d = Math.abs(c.offsetLeft - pad - el.scrollLeft); if (d < dist) { dist = d; best = i; } });
@@ -264,44 +261,39 @@ export function Pricing({ C }) {
   };
 
   return (
-    <section className={`${s.section} ${s.sectionLine}`} id={p.id} aria-labelledby="price-t">
-      <div className={s.container}>
-        <Head eyebrow={p.eyebrow} title={p.title} lead={p.lead} id="price-t" evIds={p.leadEv} />
-        <p className={s.planCommon} data-reveal {...ev(p.leadEv)}>{p.common}</p>
-      </div>
+    <>
       <div className={s.container}>
         <div className={s.carouselBar}>
-          <div className={s.planTabs} role="group" aria-label={p.carousel.region}>
+          <div className={s.planTabs} role="group" aria-label={region}>
             {plans.map((pl, i) => (
-              <button key={pl.id} type="button" className={`${s.planTab} ${i === active ? s.planTabOn : ''}`} aria-current={i === active ? 'true' : undefined} aria-label={`${p.carousel.goto} ${pl.name}`} onClick={() => go(i)}>
-                {pl.name.replace('Pacote ', '')}
+              <button key={pl.id} type="button" className={`${s.planTab} ${i === active ? s.planTabOn : ''}`} aria-current={i === active ? 'true' : undefined} aria-label={`${p.carousel.goto} ${pl.tier}`} onClick={() => go(i)}>
+                {pl.name}
               </button>
             ))}
           </div>
           <div className={s.carouselArrows}>
-            <button type="button" className={s.iconBtn} onClick={() => go(active - 1)} disabled={active === 0} aria-label={p.carousel.prev}>
+            <button type="button" className={s.iconBtn} onClick={() => go(active - 1)} disabled={active === 0} aria-label={`${p.carousel.prev}: ${group.title}`}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
             </button>
-            <button type="button" className={s.iconBtn} onClick={() => go(active + 1)} disabled={active === plans.length - 1} aria-label={p.carousel.next}>
+            <button type="button" className={s.iconBtn} onClick={() => go(active + 1)} disabled={active === plans.length - 1} aria-label={`${p.carousel.next}: ${group.title}`}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
             </button>
           </div>
         </div>
       </div>
-      <div className={`${s.carouselWrap} ${scrolls ? s.scrolls : s.fits}`}>
-        <div className={s.track} ref={track} role="region" aria-roledescription="carrossel" aria-label={p.carousel.region} tabIndex={0} onKeyDown={onKey}>
+      <div className={`${s.carouselWrap} ${scrolls ? s.scrolls : s.fits}`} style={{ '--n': Math.max(plans.length, 3) }}>
+        <div className={s.track} ref={track} role="region" aria-roledescription="carrossel" aria-label={region} tabIndex={0} onKeyDown={onKey}>
           {plans.map((pl, i) => {
             const c = p.plans[pl.id];
-            const prev = i > 0 ? plans[i - 1] : null;
             return (
-              <article key={pl.id} className={`${s.plan} ${pl.highlight ? s.planHi : ''} ${i === active ? s.planOn : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} de ${plans.length}: ${pl.name}`}>
-                <p className={s.planTier}>{pl.tier}</p>
-                <h3 className={s.planName}>{pl.name}</h3>
+              <article key={pl.id} className={`${s.plan} ${pl.highlight ? s.planHi : ''} ${i === active ? s.planOn : ''}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} de ${plans.length}: ${pl.tier}`}>
+                <p className={s.planTier}>{pl.tier}{pl.highlight && <span className={s.planBadge}>{p.labels.badge}</span>}</p>
+                <h4 className={s.planName}>{pl.name}</h4>
                 <p className={s.planTag} {...ev(c.taglineEv)}>{c.tagline}</p>
-                <p className={s.price}>{brl(pl.monthly)} <small>/ {p.labels.monthly.replace('por ', '')}</small></p>
-                <p className={s.billing}>{p.labels.setup}: {brl(pl.setup)} ({p.labels.setupNote})</p>
-                <p className={s.planSupport}><strong>{p.labels.support}:</strong> {pl.support}</p>
-                <p className={s.planIncl}>{prev ? <>{p.labels.includes} {prev.name} {p.labels.plus}</> : p.labels.first}</p>
+                {pl.monthly > 0
+                  ? <p className={s.price}>{brl(pl.monthly)} <small>/ {p.labels.monthly}</small></p>
+                  : <p className={s.price}>{brl(pl.setup)} <small>{p.labels.setupNote}</small></p>}
+                <p className={s.billing}>{pl.monthly > 0 ? `${p.labels.setup}: ${brl(pl.setup)} (${p.labels.setupNote})` : `${p.labels.setup} ${p.labels.noMonthly}`}</p>
                 <ul className={s.ticks}>
                   {c.features.map((f) => <li key={f.t} {...ev(f.ev)}>{f.t}</li>)}
                 </ul>
@@ -311,13 +303,47 @@ export function Pricing({ C }) {
           })}
         </div>
       </div>
+    </>
+  );
+}
+
+export function Pricing({ C }) {
+  const p = C.pricing;
+  return (
+    <section className={`${s.section} ${s.sectionLine}`} id={p.id} aria-labelledby="price-t">
+      <div className={s.container}>
+        <Head eyebrow={p.eyebrow} title={p.title} lead={p.lead} id="price-t" evIds={p.leadEv} />
+      </div>
+      {p.groups.map((g) => {
+        const plans = g.plans.map((id) => SITE.pricing.plans.find((x) => x.id === id));
+        return (
+          <div key={g.id} id={`planos-${g.id}`} className={s.planGroup}>
+            <div className={s.container}>
+              <h3 className={s.groupTitle} {...ev(g.ev)}>{g.title}</h3>
+              <p className={s.groupLead}>{g.lead}</p>
+            </div>
+            <PlanCarousel p={p} plans={plans} group={g} />
+            {g.note && <div className={s.container}><p className={s.foot} {...ev(g.noteEv)}>{g.note}</p></div>}
+            {g.id === 'self' && (
+              <div className={s.container}>
+                <div className={s.selfReq} {...ev(p.selfReq.ev)}>
+                  <h4>{p.selfReq.title}</h4>
+                  <dl className={s.reqTable}>
+                    {p.selfReq.rows.map((r) => <div key={r.t} className={s.reqRow} {...ev(r.ev)}><dt>{r.t}</dt><dd>{r.d}</dd></div>)}
+                  </dl>
+                  <p className={s.foot}>{p.selfReq.footnote}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
       <div className={s.container}>
         <p className={s.placeholder}>Garantia: {SITE.pricing.guarantee}</p>
       </div>
     </section>
   );
 }
-
 export function Faq({ C }) {
   const f = C.faq;
   return (

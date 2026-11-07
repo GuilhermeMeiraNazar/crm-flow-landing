@@ -5,7 +5,7 @@
 //   9.5    = item B marcado para revisao do dono
 //   FRAME  = enquadramento editorial, sem afirmacao factual sobre o produto
 // `review: true` = classe B: redacao conservadora, depende da aprovacao do dono.
-// Nenhum texto menciona KB/RAG, PIX, calendario, Baileys, Click-to-WhatsApp. Modelo de entrega: hospedado no servidor do dono (definido pelo dono, ev FRAME); a pagina nao fala em instalar no servidor do cliente.
+// Nenhum texto menciona KB/RAG, PIX, calendario, Baileys, Click-to-WhatsApp. Modelo de entrega: duas linhas definidas pelo dono (hospedado por ele; ou no servidor do cliente, com licenca presa ao IP).
 
 export const CAPTION = 'Dados fictícios de demonstração';
 
@@ -19,9 +19,9 @@ export const copy = (S) => ({
   ],
 
   hero: {
-    eyebrow: 'CRM de WhatsApp com IA',
-    h1: 'Atendimento e funil de vendas no WhatsApp, com IA, sem instalar nada.',
-    sub: 'Caixa de entrada para a equipe, funil de vendas em kanban, automações por etapa e relatórios. Nós colocamos tudo no ar no nosso servidor e você acessa pelo navegador.',
+    eyebrow: 'Hospedado por nós ou no seu servidor',
+    h1: 'CRM de WhatsApp com IA para a sua equipe de vendas.',
+    sub: 'Caixa de entrada para a equipe, funil de vendas em kanban, automações por etapa e relatórios. Escolha o plano hospedado por nós ou instalado no servidor da sua empresa.',
     ev: ['S1', 'S3.1', 'F1', 'F7', 'F12', 'F14'],
     shotAlt: `Tela de Pipeline do ${S.name} com o menu lateral e o quadro kanban de negócios por etapa.`,
   },
@@ -144,8 +144,8 @@ export const copy = (S) => ({
     title: 'Da contratação ao primeiro atendimento.',
     ev: ['S4'],
     steps: [
-      { t: 'Escolher o pacote', d: 'Compare Básico, Médio e Premium e fale com a gente.', ev: ['FRAME'] },
-      { t: 'Implantação', d: 'Colocamos o ConversIA da sua empresa no ar no nosso servidor, com a taxa única de implantação.', ev: ['FRAME'] },
+      { t: 'Escolher o plano', d: 'Compare os planos hospedados e os planos no seu servidor e fale com a gente.', ev: ['FRAME'] },
+      { t: 'Implantação', d: 'Colocamos o ConversIA da sua empresa no ar, no nosso servidor ou no seu, conforme o plano, com a taxa única de implantação.', ev: ['FRAME'] },
       { t: 'Acessar', d: 'Sua equipe entra pelo navegador, com perfis de admin e de agente.', ev: ['F27'] },
       { t: 'Conectar', d: 'Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA.', ev: ['S4', 'S5'] },
     ],
@@ -154,49 +154,107 @@ export const copy = (S) => ({
   pricing: {
     id: 'precos',
     eyebrow: 'Planos',
-    title: 'Escolha o pacote para o seu atendimento.',
-    lead: 'A implantação custa o mesmo valor em todos os pacotes e é cobrada uma vez. A mensalidade muda conforme o pacote, e cada um inclui tudo o que está no anterior.',
-    leadEv: ['F1', 'F3', 'F16'],
-    common: 'Todos os pacotes incluem o CRM de WhatsApp com agente de IA que usa as chaves do próprio cliente.',
-    labels: { setup: 'Implantação', setupNote: 'taxa única', monthly: 'por mês', support: 'Suporte', includes: 'Inclui tudo do', plus: 'e mais:', first: 'O que está incluso:' },
-    carousel: { region: 'Pacotes e valores', prev: 'Pacote anterior', next: 'Próximo pacote', goto: 'Ver' },
-    // O que cada pacote inclui. Só entra o que tem evidência em CONTEUDO.md.
+    title: 'Escolha onde o ConversIA vai rodar.',
+    lead: 'No nosso servidor, com tudo pronto, ou no servidor da sua empresa. Em todos os planos a implantação é uma taxa única.',
+    leadEv: ['FRAME'],
+    labels: { setup: 'Implantação', setupNote: 'taxa única', monthly: 'mês', noMonthly: 'sem mensalidade', badge: 'Recomendado' },
+    carousel: { region: 'Planos e valores', prev: 'Plano anterior', next: 'Próximo plano', goto: 'Ver plano' },
+    groups: [
+      {
+        id: 'hosted',
+        title: 'Hospedado por nós',
+        lead: 'Para quem quer o CRM pronto, sem cuidar de servidor. Cada empresa roda isolada, em contêineres Docker, na nossa VPS.',
+        ev: ['S3.1'],
+        note: 'A franquia de IA é uma estimativa em interações por mês. O painel mostra tokens e custo estimado de IA por provedor, função e dia.',
+        noteEv: ['F18a'],
+        plans: ['hosted-byok', 'hosted-basico', 'hosted-intermediario', 'hosted-avancado'],
+      },
+      {
+        id: 'self',
+        title: 'No seu servidor',
+        lead: 'Para empresas que já têm servidor e querem o sistema rodando internamente, com as próprias chaves de API.',
+        ev: ['S3.1', 'S3.2'],
+        plans: ['self-sem-suporte', 'self-com-suporte'],
+      },
+    ],
+    // O que cada plano inclui. Termos comerciais do dono levam FRAME; recursos do produto levam id de CONTEUDO.md.
     plans: {
-      basico: {
-        tagline: 'Para pequenas empresas que precisam organizar o atendimento e os leads no funil de vendas.',
+      'hosted-byok': {
+        tagline: 'Hospedagem completa, com a sua chave de IA.',
         taglineEv: ['FRAME'],
         features: [
-          { t: 'CRM de WhatsApp: contatos e conversas em uma caixa de entrada para a equipe.', ev: ['F1', 'F11'] },
-          { t: 'IA de atendimento e triagem: responde as conversas e passa para uma pessoa quando necessário.', ev: ['F3'] },
-          { t: 'Dados do lead no funil: nome, telefone, e-mail, orçamento e interesse extraídos da conversa.', ev: ['F5', 'F6'] },
-          { t: 'Pipeline kanban e relatórios de funil, atendimento e custo de IA.', ev: ['F7', 'F14'] },
+          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
+          { t: 'Você cadastra o seu cartão no provedor de IA e gera a sua chave de API. O custo dos tokens é 100% seu.', ev: ['F16'] },
         ],
       },
-      medio: {
-        tagline: 'Para empresas em crescimento que querem mais robustez na IA e suporte com resposta mais rápida.',
+      'hosted-basico': {
+        tagline: 'Para negócios com fluxo leve de mensagens.',
         taglineEv: ['FRAME'],
         features: [
-          { t: 'Cadeia de reserva entre provedores de IA: se o primeiro falhar, outro assume a resposta.', ev: ['F17'] },
+          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
+          { t: 'Franquia inicial de IA inclusa: cerca de 1.500 interações por mês.', ev: ['FRAME'] },
         ],
       },
-      premium: {
-        tagline: 'Para operações consolidadas que querem atendimento VIP e a plataforma com a cara da empresa.',
+      'hosted-intermediario': {
+        tagline: 'Para quem atende com mais volume e quer folga na franquia de IA.',
         taglineEv: ['FRAME'],
         features: [
-          { t: 'Adaptação da paleta de cores da plataforma à identidade da empresa (setup semi-personalizado).', ev: ['S7'] },
+          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
+          { t: 'Franquia de IA ampliada: cerca de 4.000 interações por mês.', ev: ['FRAME'] },
+        ],
+      },
+      'hosted-avancado': {
+        tagline: 'Para operações com grande fluxo de mensagens.',
+        taglineEv: ['FRAME'],
+        features: [
+          { t: 'CRM hospedado e mantido no nosso servidor.', ev: ['FRAME'] },
+          { t: 'A maior franquia de IA: cerca de 10.000 interações por mês.', ev: ['FRAME'] },
+        ],
+      },
+      'self-sem-suporte': {
+        tagline: 'Implantação única no seu servidor, sem acompanhamento depois.',
+        taglineEv: ['FRAME'],
+        features: [
+          { t: 'Implantação isolada no servidor da sua empresa.', ev: ['S3.1'] },
+          { t: 'Você usa as suas próprias chaves de API de IA.', ev: ['F16'] },
+          { t: 'Não inclui correção de bugs futuros, atualizações do sistema nem suporte técnico do dia a dia.', ev: ['FRAME'] },
+        ],
+      },
+      'self-com-suporte': {
+        tagline: 'Implantação no seu servidor com manutenção contínua.',
+        taglineEv: ['FRAME'],
+        features: [
+          { t: 'Implantação no servidor da sua empresa.', ev: ['S3.1'] },
+          { t: 'Você usa as suas próprias chaves de API de IA.', ev: ['F16'] },
+          { t: 'Atualizações do contêiner Docker e patches de segurança.', ev: ['FRAME'] },
+          { t: 'Suporte para dúvidas técnicas.', ev: ['FRAME'] },
         ],
       },
     },
+    // Exigido de quem escolhe rodar no proprio servidor (CONTEUDO.md secao 4).
+    selfReq: {
+      title: 'O que o servidor da sua empresa precisa ter',
+      ev: ['S4'],
+      rows: [
+        { t: 'Sistema', d: 'VPS Linux: Ubuntu 22.04 ou mais novo, ou Debian 12 ou mais novo', ev: ['S4'] },
+        { t: 'Capacidade mínima', d: '2 vCPU e 4 GB de RAM', ev: ['S4'] },
+        { t: 'Rede', d: 'IP fixo reservado pelo provedor e um domínio apontando para a VPS', ev: ['S4'] },
+        { t: 'Software', d: 'Docker Engine e Docker Compose v2, com proxy HTTPS no servidor', ev: ['S4'] },
+        { t: 'WhatsApp e IA', d: 'Conta Meta Business verificada e chave de API do provedor de IA', ev: ['S4', 'S5'] },
+        { t: 'Licença', d: 'Vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão.', ev: ['S3.4', 'S4'] },
+      ],
+      footnote: 'Não publicamos números de capacidade por servidor: eles ainda não foram medidos em produção.',
+    },
   },
-
   faq: {
     id: 'faq',
     eyebrow: 'Perguntas frequentes',
     title: 'O que perguntam antes de contratar.',
     items: [
-      { q: 'Preciso instalar alguma coisa?', a: 'Não. O ConversIA roda no nosso servidor e a sua equipe acessa pelo navegador.', ev: ['FRAME'] },
+      { q: 'Qual a diferença entre hospedado e no seu servidor?', a: 'Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem instalar nada. Nos planos no seu servidor, ele é implantado na infraestrutura da sua empresa, que precisa atender aos requisitos listados na seção de planos.', ev: ['FRAME', 'S4'] },
+      { q: 'A licença funciona em qualquer servidor?', a: 'Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é preciso emitir uma nova licença.', ev: ['S3.4', 'S4'] },
       { q: 'Para onde vão as conversas?', a: 'Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.', ev: ['S5'] },
-      { q: 'Quanto custa a IA?', a: 'O consumo é cobrado pelo provedor que você escolher, com a sua chave. O painel mostra tokens e custo estimado por função e por dia.', ev: ['F16', 'F18a'] },
+      { q: 'Quanto custa a IA?', a: 'Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave. Nos planos hospedados com franquia, uma quantidade mensal estimada de interações de IA já está inclusa. Em todos, o painel mostra tokens e custo estimado por função e por dia.', ev: ['F16', 'F18a'] },
       { q: 'Preciso de conta na Meta?', a: 'Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada.', ev: ['S5', 'S4'] },
       { q: 'A IA responde tudo sozinha?', a: 'Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou por regra de valor do negócio. A qualidade das respostas depende do modelo que você configurar.', ev: ['F3'] },
     ],
@@ -218,8 +276,8 @@ export const copy = (S) => ({
   },
 
   seo: {
-    title: `${S.name}: CRM de WhatsApp com IA, sem instalar nada`,
-    description: 'CRM de WhatsApp com caixa de entrada multiatendente, pipeline kanban, automações por etapa, relatórios e agente de IA com as suas chaves. Hospedado no nosso servidor.',
-    ogAlt: `${S.name}: CRM de WhatsApp com IA, sem instalar nada`,
+    title: `${S.name}: CRM de WhatsApp com IA`,
+    description: 'CRM de WhatsApp com caixa de entrada multiatendente, pipeline kanban, automações por etapa, relatórios e agente de IA com as suas chaves. Hospedado por nós ou no seu servidor.',
+    ogAlt: `${S.name}: CRM de WhatsApp com IA`,
   },
 });

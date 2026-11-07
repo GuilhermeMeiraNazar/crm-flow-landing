@@ -64,12 +64,14 @@ export function checkSources() {
   const plans = SITE.pricing?.plans || [];
   if (!plans.length) v.push('SITE.pricing.plans esta vazio');
   plans.forEach((p, i) => {
+    // implantacao: numero > 0. mensalidade: numero >= 0 (0 = plano sem mensalidade).
+    const min = { setup: (x) => x > 0, monthly: (x) => x >= 0 };
     for (const k of ['setup', 'monthly']) {
       const val = p[k];
       if (typeof val !== 'number' || !Number.isFinite(val)) v.push(`SITE.pricing.plans[${i}].${k} deve ser numerico (tipo ${typeof val}, valor ${val})`);
-      else if (val <= 0) v.push(`SITE.pricing.plans[${i}].${k} deve ser maior que zero (valor ${val})`);
+      else if (!min[k](val)) v.push(`SITE.pricing.plans[${i}].${k} deve ser ${k === 'setup' ? 'maior que zero' : 'zero ou maior'} (valor ${val})`);
     }
-    if (emptyish(p.support)) v.push(`SITE.pricing.plans[${i}].support esta vazio`);
+    if (!['hosted', 'self'].includes(p.line)) v.push(`SITE.pricing.plans[${i}].line deve ser "hosted" ou "self" (valor ${p.line})`);
   });
   // (a) qualquer texto com colchetes ou "CONFIRMAR"
   const all = { SITE, copy: copy(SITE), legal: legal(SITE) };

@@ -26,18 +26,21 @@ export const SITE = {
   // Razao social / CNPJ para o rodape e paginas legais. PLACEHOLDER.
   company: { legalName: '[RAZAO SOCIAL]', cnpj: '[CNPJ]', address: '[ENDERECO]' },
 
-  // Pacotes e valores (definidos pelo dono). Valores em reais.
-  //   setup   = taxa de implantacao (cobrada uma unica vez)
-  //   monthly = mensalidade
-  //   support = prazo de resposta do suporte (termo comercial do dono)
-  // O texto de cada pacote (descricao e o que inclui) fica em src/content/pt-BR.js, com evidencia.
-  // A ordem importa: cada pacote inclui tudo o que esta no anterior.
+  // Planos e valores (definidos pelo dono). Valores em reais.
+  //   line    = 'hosted' (hospedado no servidor do dono) ou 'self' (no servidor do cliente)
+  //   setup   = taxa de implantacao, cobrada uma unica vez (numero > 0)
+  //   monthly = mensalidade (numero >= 0; 0 = sem mensalidade)
+  //   highlight = destaca o cartao (carro-chefe)
+  // O texto de cada plano (descricao e o que inclui) fica em src/content/pt-BR.js, com evidencia.
   pricing: {
     currency: 'BRL',
     plans: [
-      { id: 'basico', name: 'Pacote Básico', tier: 'Starter', setup: 1500, monthly: 290, support: 'Atendimento em até 24 horas úteis', highlight: false },
-      { id: 'medio', name: 'Pacote Médio', tier: 'Growth', setup: 1500, monthly: 590, support: 'Suporte prioritário, em até 6 horas úteis', highlight: true },
-      { id: 'premium', name: 'Pacote Premium', tier: 'Enterprise', setup: 1500, monthly: 990, support: 'Suporte VIP dedicado, em até 2 horas úteis', highlight: false },
+      { id: 'hosted-byok', line: 'hosted', name: 'Chave própria', tier: 'Hosted BYOK', setup: 1500, monthly: 150, highlight: false },
+      { id: 'hosted-basico', line: 'hosted', name: 'Básico', tier: 'Hosted Básico', setup: 1500, monthly: 250, highlight: false },
+      { id: 'hosted-intermediario', line: 'hosted', name: 'Intermediário', tier: 'Hosted Intermediário', setup: 1500, monthly: 400, highlight: true },
+      { id: 'hosted-avancado', line: 'hosted', name: 'Avançado', tier: 'Hosted Avançado', setup: 1500, monthly: 600, highlight: false },
+      { id: 'self-sem-suporte', line: 'self', name: 'Sem suporte', tier: 'Self-Hosted', setup: 3500, monthly: 0, highlight: false },
+      { id: 'self-com-suporte', line: 'self', name: 'Com suporte', tier: 'Self-Hosted + Suporte', setup: 3000, monthly: 150, highlight: false },
     ],
     // Texto de garantia/reembolso. PLACEHOLDER: preencha apos revisao juridica.
     guarantee: '[GARANTIA E PRAZO DE ARREPENDIMENTO A DEFINIR COM ADVOGADO]',

@@ -41,13 +41,12 @@ const CASES = [
   ['dominio em http://', variant(/domain: '[^']*'/, "domain: 'http://landing-teste.com.br'"), /domain/],
   ['e-mail sem TLD (contato@landing)', variant(/contactEmail: '[^']*'/, "contactEmail: 'contato@landing'"), /contactEmail/],
   ['e-mail com duas arrobas', variant(/contactEmail: '[^']*'/, "contactEmail: 'contato@@landing-teste.com.br'"), /contactEmail/],
-  ['mensalidade zero', variant(/monthly: 290/, 'monthly: 0'), /monthly/],
-  ['mensalidade negativa', variant(/monthly: 290/, 'monthly: -10'), /monthly/],
-  ['mensalidade em texto ("290")', variant(/monthly: 290/, "monthly: '290'"), /monthly/],
-  ['mensalidade nula', variant(/monthly: 290/, 'monthly: null'), /monthly/],
+  ['mensalidade negativa', variant(/monthly: 150/, 'monthly: -10'), /monthly/],
+  ['mensalidade em texto ("150")', variant(/monthly: 150/, "monthly: '150'"), /monthly/],
+  ['mensalidade nula', variant(/monthly: 150/, 'monthly: null'), /monthly/],
   ['implantacao zero', variant(/setup: 1500/, 'setup: 0'), /setup/],
   ['implantacao em texto ("1500")', variant(/setup: 1500/, "setup: '1500'"), /setup/],
-  ['suporte vazio', variant(/support: 'Atendimento em até 24 horas úteis'/, "support: ''"), /support/],
+  ['linha do plano invalida', variant(/line: 'hosted'/, "line: 'outra'"), /line/],
 ];
 
 const run = () => {

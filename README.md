@@ -53,7 +53,7 @@ O texto da página está em `src/content/pt-BR.js`. Cada afirmação tem `ev` co
 
 - Só funcionalidades classe A. Nenhum item B está na página (o envio de imagens e documentos foi retirado até o teste de integração passar).
 - Fora da página: Base de Conhecimento/RAG, cobrança PIX, calendário, Baileys, Click-to-WhatsApp, estabilidade do WhatsApp não oficial.
-- Modelo de entrega: hospedado no servidor do dono (decisão do dono). A página não fala em instalar no servidor do cliente; as seções "Seus dados" e "Requisitos" foram removidas. Os textos legais (rascunho) foram ajustados para hospedagem e continuam dependendo de advogado.
+- Modelo de entrega: duas linhas definidas pelo dono (hospedado por ele; ou no servidor do cliente, com licença presa ao IP). Planos e pendências em verificacao/PLANOS-E-PENDENCIAS.md. Textos legais continuam rascunho para advogado.
 - Sem depoimentos, logos de clientes, números de clientes, métricas de desempenho, selos ou comparativos.
 - Privacidade, texto aprovado: "Seu banco de dados e seus arquivos ficam no servidor da sua empresa. Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta."
 

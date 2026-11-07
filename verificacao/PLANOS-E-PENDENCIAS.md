@@ -1,37 +1,36 @@
-# Pacotes: o que entrou e o que ficou de fora
+﻿# Planos: o que entrou e o que ficou de fora
 
-Valores (setup, mensalidade, suporte) ficam em `src/config/site.js`. Textos e ids de evidência em `src/content/pt-BR.js` (`pricing.plans`).
+Valores (implantação, mensalidade, linha) ficam em `src/config/site.js`. Textos e ids de evidência em `src/content/pt-BR.js` (`pricing`).
 
-## Entrou (com evidência no CRM)
-Os recursos de cada pacote têm ids em `CONTEUDO.md` e são checados por `scripts/trace.mjs`.
-Mapeamentos feitos por mim, a confirmar:
-- "Roteamento Inteligente de IA" virou "Cadeia de reserva entre provedores de IA" (F17).
-- "Setup semi-customizado" virou "Adaptação da paleta de cores" (S7).
+## Tabela implementada
+| Linha | Plano | Implantação | Mensalidade |
+|---|---|---|---|
+| Hospedado | Chave própria (BYOK) | R$ 1.500 | R$ 150 |
+| Hospedado | Básico (~1.500 interações/mês) | R$ 1.500 | R$ 250 |
+| Hospedado | Intermediário (~4.000/mês), marcado "Recomendado" | R$ 1.500 | R$ 400 |
+| Hospedado | Avançado (~10.000/mês) | R$ 1.500 | R$ 600 |
+| No seu servidor | Sem suporte | R$ 3.500 | sem mensalidade |
+| No seu servidor | Com suporte | R$ 3.000 | R$ 150 |
+
+A página também traz os requisitos do servidor (CONTEUDO.md seção 4) e o vínculo da licença ao IP fixo para a linha "No seu servidor".
 
 ## Ficou de fora e por quê
-- Conexão por QR Code (Baileys): classe C.
-- Agenda com confirmação automática e "redução de faltas": calendário fora da página; alegação sem prova.
-- PIX/cobrança via IA: classe C.
-- Assistente Executivo do Dono (incluindo teste de 7 dias e bônus): módulo não encontrado no CRM.
-- Múltiplos números e "instância extra": sem evidência.
-- Os quatro add-ons: dependem dos itens acima.
-- "24/7", "Mais Popular", "maior velocidade": não verificáveis.
-- Oferta de lançamento: escassez ("5 primeiros") e inconsistência ("de R$ 2.000 por R$ 1.500" para Básico e Médio, mas os setups listados são R$ 1.500 e R$ 2.500).
-- Emojis do texto original.
+- **Copiloto do Gestor** (consultar estoque, avisos de venda e relatórios pelo WhatsApp do dono): não existe no CRM. Busca por copilot, copiloto, estoque e gestor em `crm-flow-ia` e `core-hub-ia` não achou nada.
+- **Múltiplos funis (kanbans) simultâneos**: o CRM tem um pipeline com etapas configuráveis; não achei suporte a vários funis.
+- Resultado: Intermediário e Avançado diferem do Básico só pela franquia de IA.
+- "Mais popular", "carro-chefe" como fato, "24/7": não verificáveis. O Intermediário recebe só o selo "Recomendado".
+- Suporte com prazo de resposta (24h, 6h, 2h) do desenho anterior: a nova tabela não tem.
+- Add-ons e oferta de lançamento: não constam na nova tabela.
+- Frase "o consumo da nossa VPS é zero": é detalhe interno.
+
+## Termos comerciais sem verificação técnica (entraram como texto do dono)
+- Franquia de IA em "interações por mês": o CRM registra tokens e custo (F18a), mas não achei contador de interações nem bloqueio ao exceder a franquia.
+- "Cada empresa roda isolada em Docker na nossa VPS": o CRM é uma instalação por empresa (S3.1), mas a hospedagem em si é decisão sua.
+- Atualizações do contêiner, patches de segurança e suporte: serviço seu, não recurso do produto.
 
 ## Perguntas ao dono
-1. O que a mensalidade cobre (licença, hospedagem, suporte)? Pode conflitar com "cliente hospeda" e licença por IP.
-2. O custo das chaves dos provedores de IA está incluso ou é separado?
-3. Manter ou não o selo "Mais Popular" no Médio?
-4. Qual é o preço real da oferta de lançamento?
-5. Médio e Premium têm um diferencial verificado cada; quais outros recursos reais do CRM entram em cada um?
-
-## Lighthouse (mobile, container em localhost:8088, build de rascunho)
-Performance 99, Acessibilidade 100, Boas práticas 100, SEO 69.
-SEO 69 vem só de "Page is blocked from indexing", intencional no rascunho. Vale só após deploy real.
-
-## Atualiza��o: modelo hospedado e taxa �nica
-- Implanta��o: R$ 1.500,00 em todos os pacotes. Mensalidades: 290, 590 e 990.
-- Removidas da p�gina: se��es 'Seus dados' e 'Requisitos', passos de instala��o, perguntas sobre Docker, IP fixo, licen�a e servidor, e o campo de pol�tica de reemiss�o.
-- Carrossel: cart�es alinhados ao container; no desktop os tr�s aparecem lado a lado e os controles somem. Abaixo de 960 px h� rolagem com setas, abas e teclado.
-- Pendente com o dono: o que a implanta��o e a mensalidade cobrem (hospedagem, backup, disponibilidade). A p�gina n�o promete nenhum desses itens.
+1. O Copiloto do Gestor e os múltiplos funis existem em outro repositório ou branch? Se sim, aponte onde e eu incluo com evidência. Se ainda serão feitos, só entram na página depois de prontos.
+2. O que é uma "interação" e o que acontece ao passar da franquia (bloqueia, cobra extra, avisa)?
+3. Manter o selo "Recomendado" no Intermediário?
+4. O que a implantação cobre em cada linha, e o que a mensalidade da linha hospedada cobre (backup, disponibilidade)?
+5. Na linha "No seu servidor", o cliente recebe o produto como? Isso afeta a frase de entrega nos termos.

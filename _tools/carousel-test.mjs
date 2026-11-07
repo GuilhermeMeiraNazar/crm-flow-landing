@@ -13,10 +13,10 @@ async function open(w, h, extra = {}) {
   return { ctx, p };
 }
 const state = (p) => p.evaluate(() => {
-  const tabs = [...document.querySelectorAll('[aria-label="Pacotes e valores"] button')];
+  const tabs = [...document.querySelectorAll('[aria-label^="Planos e valores"] button')];
   const cur = tabs.findIndex((t) => t.getAttribute('aria-current') === 'true');
-  const next = document.querySelector('button[aria-label="Próximo pacote"]');
-  const prev = document.querySelector('button[aria-label="Pacote anterior"]');
+  const next = document.querySelector('button[aria-label^="Próximo plano"]');
+  const prev = document.querySelector('button[aria-label^="Plano anterior"]');
   const track = document.querySelector('[aria-roledescription="carrossel"]');
   const cards = [...track.children].map((c) => { const r = c.getBoundingClientRect(); return [Math.round(r.left), Math.round(r.right)]; });
   return { ativo: cur, scrollLeft: Math.round(track.scrollLeft), barra: getComputedStyle(next.closest('div').parentElement).display, anterior: prev.disabled ? 'off' : 'on', proximo: next.disabled ? 'off' : 'on', cartoes: cards, vw: document.documentElement.clientWidth };
@@ -32,22 +32,22 @@ await ctx.close();
 // mobile: rolagem com setas, abas, teclado
 ({ ctx, p } = await open(375, 812));
 console.log('mobile inicial', JSON.stringify(await state(p)));
-await p.locator('button[aria-label="Próximo pacote"]').click(); await p.waitForTimeout(1000);
+await p.locator('button[aria-label^="Próximo plano"]').first().click(); await p.waitForTimeout(1000);
 console.log('apos Proximo  ', JSON.stringify(await state(p)));
-await p.locator('[aria-roledescription="carrossel"]').focus();
+await p.locator('[aria-roledescription="carrossel"]').first().focus();
 await p.keyboard.press('ArrowRight'); await p.waitForTimeout(1000);
 console.log('ArrowRight    ', JSON.stringify(await state(p)));
 await p.keyboard.press('ArrowLeft'); await p.waitForTimeout(900);
 console.log('ArrowLeft     ', JSON.stringify(await state(p)));
-await p.getByRole('button', { name: 'Ver Pacote Premium' }).click(); await p.waitForTimeout(1000);
-console.log('aba Premium   ', JSON.stringify(await state(p)));
-await p.getByRole('button', { name: 'Ver Pacote Básico' }).click(); await p.waitForTimeout(1000);
-console.log('aba Basico    ', JSON.stringify(await state(p)));
+await p.getByRole('button', { name: 'Ver plano Hosted Avançado' }).click(); await p.waitForTimeout(1000);
+console.log('aba Avancado   ', JSON.stringify(await state(p)));
+await p.getByRole('button', { name: 'Ver plano Hosted BYOK' }).click(); await p.waitForTimeout(1000);
+console.log('aba BYOK    ', JSON.stringify(await state(p)));
 console.log('mobile overflowX', await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth));
 await ctx.close();
 // reduced motion
 ({ ctx, p } = await open(375, 812, { reducedMotion: 'reduce' }));
-await p.locator('button[aria-label="Próximo pacote"]').click(); await p.waitForTimeout(250);
+await p.locator('button[aria-label^="Próximo plano"]').first().click(); await p.waitForTimeout(250);
 console.log('reduced-motion', JSON.stringify((await state(p)).ativo), '| transicao:', await p.evaluate(() => getComputedStyle(document.querySelector('[aria-roledescription="slide"]')).transitionDuration));
 await ctx.close();
 console.log(logs.length ? logs.join('\n') : 'console: sem erros nem avisos');
