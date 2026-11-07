@@ -149,23 +149,23 @@ export function AiSection({ C }) {
   return (
     <section className={`${s.section} ${s.sectionLine}`} id={a.id} aria-labelledby="ia-t">
       <div className={s.container}>
+        <Head eyebrow={a.eyebrow} title={a.title} lead={a.lead} id="ia-t" evIds={a.ev} />
         <div className={s.aiGrid}>
-          <div>
-            <Head eyebrow={a.eyebrow} title={a.title} lead={a.lead} id="ia-t" evIds={a.ev} />
-            <div className={s.pillars}>
-              {a.pillars.map((p, k) => (
-                <article key={p.t} className={s.card} data-spot data-reveal style={{ '--i': k }} {...ev(p.ev)}><h3>{p.t}</h3><p>{p.d}</p></article>
-              ))}
-            </div>
-            <p className={s.notice} data-reveal {...ev(a.privacyEv)}>{a.privacy}</p>
-          </div>
-          <div data-reveal><Shot name="ia" alt={a.shotAlt} /></div>
+          <ol className={s.aiList}>
+            {a.pillars.map((p, k) => (
+              <li key={p.t} className={s.aiItem} data-reveal style={{ '--i': k }} {...ev(p.ev)}>
+                <span className={s.aiNum} aria-hidden="true">{k + 1}</span>
+                <div><h3>{p.t}</h3><p>{p.d}</p></div>
+              </li>
+            ))}
+          </ol>
+          <div className={s.aiShot} data-reveal><Shot name="ia" alt={a.shotAlt} /></div>
         </div>
+        <p className={s.notice} data-reveal {...ev(a.privacyEv)}>{a.privacy}</p>
       </div>
     </section>
   );
 }
-
 export function How({ C }) {
   const h = C.how;
   const { refs, lit } = useLitSteps(h.steps.length);
