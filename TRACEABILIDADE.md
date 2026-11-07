@@ -25,7 +25,7 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 19 | `product.tabs[3].bullets[0]` | Conversão, valor fechado e em aberto, tempo parado por etapa. | F14 | A |
 | 20 | `product.tabs[3].bullets[1]` | Conversas resolvidas pela IA, transferidas e tempo de primeira resposta. | F14 | A |
 | 21 | `product.tabs[3].bullets[2]` | Exportação em CSV e planilha. | F15 | A |
-| 22 | `product.video` | Veja o fluxo real Conversas, pipeline e automações em 1 min 25 s, sem áudio. | F1, F7, F12 | A |
+| 22 | `product.video` | Veja o fluxo real Conversas, pipeline e automações em 38 segundos, sem áudio. | F1, F7, F12 | A |
 | 23 | `product.also[0]` | Do chat ao negócio A IA extrai nome, telefone, e-mail, orçamento e interesse, e cria ou atualiza o negócio com um limiar de confiança. | F5, F6 | A |
 | 24 | `product.also[1]` | Transcrição de áudio Áudios recebidos viram texto pelo provedor que você configurar. | F4 | A |
 | 25 | `product.also[2]` | Perfis de admin e agente Cada pessoa vê o que o seu papel permite. | F27 | A |

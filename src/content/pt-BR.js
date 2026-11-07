@@ -100,9 +100,9 @@ export const copy = (S) => ({
     ],
     video: {
       title: 'Veja o fluxo real',
-      d: 'Conversas, pipeline e automações em 1 min 25 s, sem áudio.',
+      d: 'Conversas, pipeline e automações em 38 segundos, sem áudio.',
       play: 'Reproduzir o vídeo de demonstração',
-      desc: 'Vídeo sem áudio, com dados fictícios: abre conversas da fila, move um negócio entre as etapas do pipeline e mostra a lista de automações.',
+      desc: 'Vídeo sem áudio, com dados fictícios: abre conversas da fila, arrasta negócios entre as etapas do pipeline e mostra as automações por etapa.',
       posterAlt: 'Quadro do pipeline do ConversIA com os negócios por etapa.',
       ev: ['F1', 'F7', 'F12'],
     },
