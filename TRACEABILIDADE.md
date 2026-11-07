@@ -86,13 +86,29 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 80 | `pricing.selfReq.rows[3]` | Software Docker Engine e Docker Compose v2, com proxy HTTPS no servidor | S4 | A |
 | 81 | `pricing.selfReq.rows[4]` | WhatsApp e IA Conta Meta Business verificada e chave de API do provedor de IA | S4, S5 | A |
 | 82 | `pricing.selfReq.rows[5]` | Licença Vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão. | S3.4, S4 | A |
-| 83 | `faq.items[0]` | Qual a diferença entre hospedado e no seu servidor? Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem ... | FRAME, S4 | n/a, A |
-| 84 | `faq.items[1]` | A licença funciona em qualquer servidor? Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é p... | S3.4, S4 | A |
-| 85 | `faq.items[2]` | Para onde vão as conversas? Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta. | S5 | A |
-| 86 | `faq.items[3]` | Quanto custa a IA? Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave.... | F16, F18a | A |
-| 87 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
-| 88 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
-| 89 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil da sua empresa para funcionar. | FRAME | n/a |
+| 83 | `services` | Serviços para levar leads ao seu CRM. Se você ainda não tem uma estrutura de captação, ou não está satisfeito com a atual, nossa equipe oferece os ... | FRAME | n/a |
+| 84 | `services.items.landing` | Criação de landing page A porta de entrada para capturar clientes: uma página focada na sua oferta, rápida e ligada ao seu WhatsApp. | FRAME | n/a |
+| 85 | `services.items.landing.features[0]` | Design customizado com a identidade visual da sua empresa. | FRAME | n/a |
+| 86 | `services.items.landing.features[1]` | Textos (copywriting) pensados para transformar visitantes em leads. | FRAME | n/a |
+| 87 | `services.items.landing.features[2]` | Configuração de domínio e hospedagem, com o primeiro ano incluso. | FRAME | n/a |
+| 88 | `services.items.landing.features[3]` | Botão de ação que envia o lead ao funil do ConversIA pelo webhook de leads, com a origem registrada (campanha, anúncio e formulário). | S5 | A |
+| 89 | `services.items.consultoria` | Consultoria estratégica de tráfego pago Você gerencia os seus anúncios, mas o custo por mensagem está alto? Fazemos uma análise completa do seu ger... | FRAME | n/a |
+| 90 | `services.items.consultoria.features[0]` | Análise das campanhas atuais (Meta Ads ou Google Ads). | FRAME | n/a |
+| 91 | `services.items.consultoria.features[1]` | Identificação de gargalos em criativos, públicos e distribuição de verba. | FRAME | n/a |
+| 92 | `services.items.consultoria.features[2]` | Novo plano de ação e funil de vendas. | FRAME | n/a |
+| 93 | `services.items.consultoria.features[3]` | Ajuste da comunicação entre o anúncio e a primeira resposta da IA no ConversIA. | FRAME | n/a |
+| 94 | `services.items.gestao` | Gestão de tráfego pago Assumimos a direção das suas campanhas enquanto a sua equipe atende os leads que a IA do ConversIA triar. | FRAME | n/a |
+| 95 | `services.items.gestao.features[0]` | Criação, configuração e otimização diária das campanhas (Facebook, Instagram e Google Ads). | FRAME | n/a |
+| 96 | `services.items.gestao.features[1]` | Instalação de pixel e acompanhamento das conversões. | FRAME | n/a |
+| 97 | `services.items.gestao.features[2]` | Relatório mensal de desempenho: custo por lead e retorno sobre o investimento (ROAS). | FRAME | n/a |
+| 98 | `services.items.gestao.features[3]` | Os leads dos anúncios chegam ao funil do ConversIA pelo webhook de leads, com a origem registrada. | S5 | A |
+| 99 | `faq.items[0]` | Qual a diferença entre hospedado e no seu servidor? Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem ... | FRAME, S4 | n/a, A |
+| 100 | `faq.items[1]` | A licença funciona em qualquer servidor? Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é p... | S3.4, S4 | A |
+| 101 | `faq.items[2]` | Para onde vão as conversas? Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta. | S5 | A |
+| 102 | `faq.items[3]` | Quanto custa a IA? Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave.... | F16, F18a | A |
+| 103 | `faq.items[4]` | Preciso de conta na Meta? Sim. A conexão usa a API oficial do WhatsApp e exige uma conta Meta Business verificada. | S5, S4 | A |
+| 104 | `faq.items[5]` | A IA responde tudo sozinha? Não. O agente responde e transfere para a equipe quando o cliente pede um atendente, quando a IA falha em sequência ou ... | F3 | A |
+| 105 | `finalCta` | Fale com a gente ou siga direto para a compra. Coloque o atendimento e o funil da sua empresa para funcionar. | FRAME | n/a |
 
 ## Legenda dos ids
 

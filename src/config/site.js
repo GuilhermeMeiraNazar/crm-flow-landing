@@ -49,6 +49,12 @@ export const SITE = {
       { id: 'copiloto', monthly: 149 },
       { id: 'instancia', monthly: 120 },
     ],
+    // Servicos de aceleracao (opcionais), valor em reais. Unidade e prazos ficam no texto (src/content/pt-BR.js).
+    services: [
+      { id: 'landing', price: 997 },
+      { id: 'consultoria', price: 497 },
+      { id: 'gestao', price: 1200 },
+    ],
     // Texto de garantia/reembolso. PLACEHOLDER: preencha apos revisao juridica.
     guarantee: '[GARANTIA E PRAZO DE ARREPENDIMENTO A DEFINIR COM ADVOGADO]',
   },

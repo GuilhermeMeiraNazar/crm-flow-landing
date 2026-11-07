@@ -360,6 +360,47 @@ export function Pricing({ C }) {
     </section>
   );
 }
+const SERVICE_ICONS = {
+  landing: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M8 14h8" /></>,
+  consultoria: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4.5" /><path d="M12 12l5-5" /></>,
+  gestao: <path d="M3 20h18M6 16V10M11 16V6M16 16v-4M21 16V8" />,
+};
+
+// Servicos opcionais de marketing (valores em SITE.pricing.services, textos em C.services).
+export function Services({ C }) {
+  const sv = C.services;
+  return (
+    <section className={`${s.section} ${s.sectionLine}`} id={sv.id} aria-labelledby="serv-t">
+      <div className={s.container}>
+        <Head eyebrow={sv.eyebrow} title={sv.title} lead={sv.lead} id="serv-t" evIds={sv.ev} />
+        <div className={s.services}>
+          {SITE.pricing.services.map((x, k) => {
+            const c = sv.items[x.id];
+            return (
+              <article key={x.id} className={s.svc} data-reveal style={{ '--i': k }} {...ev(c.ev)}>
+                <div className={s.svcTop}>
+                  <span className={s.alsoIcon} aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{SERVICE_ICONS[c.icon]}</svg></span>
+                  <span className={s.svcBadge}>{sv.badge}</span>
+                </div>
+                <h3>{c.t}</h3>
+                <p className={s.svcTag}>{c.tagline}</p>
+                <p className={s.svcPrice}>{brl(x.price)} <small>{c.priceNote}</small></p>
+                <dl className={s.svcMeta}>
+                  {c.meta.map((m) => <div key={m.k}><dt>{m.k}</dt><dd>{m.v}</dd></div>)}
+                </dl>
+                <ul className={s.ticks}>
+                  {c.features.map((f) => <li key={f.t} {...ev(f.ev)}>{f.t}</li>)}
+                </ul>
+                <a className={`${s.btn} ${s.btnGhost} ${s.planCta}`} href={whatsappHref() || SITE.CTA_URL}>Quero saber mais</a>
+              </article>
+            );
+          })}
+        </div>
+        <p className={s.foot}>{sv.note}</p>
+      </div>
+    </section>
+  );
+}
 export function Faq({ C }) {
   const f = C.faq;
   return (

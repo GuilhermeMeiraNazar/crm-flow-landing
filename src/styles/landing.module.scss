@@ -308,3 +308,19 @@ $bp-lg: 1200px;
 .perkIcon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--accent-live-soft); color: var(--accent-live-text); }
 .perks h4 { font-size: 1rem; margin-bottom: 4px; }
 .perks p { color: var(--text-secondary); font-size: 0.88rem; }
+// Servicos de aceleracao
+.services { display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: $bp-lg) { .services { grid-template-columns: repeat(3, 1fr); } }
+.svc { display: flex; flex-direction: column; padding: 28px; border: 1px solid var(--border-strong); border-radius: var(--radius-xl); background: var(--surface); }
+.svcTop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.svcTop .alsoIcon { margin-bottom: 14px; }
+.svcBadge { padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--text-secondary); font-size: 0.72rem; font-weight: 600; }
+.svc h3 { font-size: 1.3rem; margin-bottom: 8px; }
+@media (min-width: $bp-lg) { .svc h3 { min-height: 2.6em; } }
+.svcTag { color: var(--text-secondary); font-size: 0.93rem; min-height: 6.5em; margin-bottom: 16px; }
+.svcPrice { font-family: var(--font-display); font-size: 2.2rem; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 14px; }
+.svcPrice small { display: block; margin-top: 4px; font-family: var(--font-body); font-size: 0.85rem; letter-spacing: 0; color: var(--text-secondary); }
+.svcMeta { display: grid; gap: 8px; padding: 14px 0; margin-bottom: 18px; border-block: 1px solid var(--border); font-size: 0.88rem; }
+.svcMeta dt { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); }
+.svcMeta dd { color: var(--text-primary); }
+.svc .ticks { flex: 1; align-content: start; }

@@ -32,3 +32,8 @@ Estado no CRM: Copiloto e múltiplos funis não existem; calendário nativo exis
 1. Quando cada módulo "Em breve" ficar pronto, avise para trocar a marca por disponível.
 2. Defina nos termos: prazo de liberação dos módulos, condições da oferta dos 20 primeiros, o que é uma "interação" e o que ocorre ao passar da franquia.
 3. O Intermediário hoje tem como recurso real só a franquia maior; o resto é "Em breve".
+
+## Serviços de aceleração (opcionais)
+- Landing page R$ 997 (pagamento único, 7 a 10 dias úteis), consultoria de tráfego R$ 497 (sessão de 1h30) e gestão de tráfego R$ 1.200/mês (sem a verba dos anúncios). Valores em SITE.pricing.services.
+- Cortado do texto original: 'garantimos que 100% dos cliques virem oportunidades' (garantia de resultado), 'alta conversão', 'previsibilidade' e 'rastreamento UTM'. O CRM não rastreia UTM; o webhook de leads registra campanha, anúncio e formulário (S5), e é isso que a página diz.
+- Pendência: escopo, prazos, reembolso e responsabilidade sobre a verba de anúncios nos termos (placeholder já criado).
