@@ -8,6 +8,7 @@
     "dev": "vite",
     "assets": "node scripts/make-assets.mjs",
     "build": "node scripts/build.mjs",
+    "package:deploy": "node scripts/package-deploy.mjs",
     "preview": "vite preview",
     "check:links": "node scripts/check-links.mjs",
     "scan:dist": "node scripts/scan-dist.mjs"
