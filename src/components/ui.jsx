@@ -54,7 +54,7 @@ export function Shot({ name, alt, sizes }) {
 export function Brand() {
   return (
     <a className={s.brand} href="/">
-      <span className={s.brandMark} aria-hidden="true">{SITE.monogram}</span>
+      <img className={s.brandMark} src="/android-chrome-192x192.png" width="32" height="32" alt="" aria-hidden="true" />
       <span>{SITE.name}</span>
     </a>
   );

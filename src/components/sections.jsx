@@ -99,34 +99,6 @@ export function Problem({ C }) {
   );
 }
 
-// Video de demonstracao: o poster (AVIF, lazy) ocupa o lugar; o video so e carregado depois do clique. Sem audio.
-function DemoVideo({ v }) {
-  const [on, setOn] = useState(false);
-  return (
-    <figure className={s.reel} {...ev(v.ev)}>
-      <h3 className={s.subTitle}>{v.title}</h3>
-      <p className={s.groupLead} id="demo-desc">{v.d} {v.desc}</p>
-      <div className={s.reelFrame}>
-        {on ? (
-          <video className={s.reelVideo} controls autoPlay muted playsInline preload="auto" poster="/media/fluxo-poster.avif" width="1032" height="720" aria-describedby="demo-desc">
-            <source src="/media/fluxo-conversia.webm" type="video/webm" />
-            <source src="/media/fluxo-conversia.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <>
-            <img className={s.reelVideo} src="/media/fluxo-poster.avif" width="1032" height="720" alt={v.posterAlt} loading="lazy" decoding="async" />
-            <button type="button" className={s.reelPlay} onClick={() => setOn(true)} aria-describedby="demo-desc">
-              <span className={s.reelIcon} aria-hidden="true"><Icon size={28}><path d="M8 5v14l11-7z" /></Icon></span>
-              {v.play}
-            </button>
-          </>
-        )}
-      </div>
-      <Caption />
-    </figure>
-  );
-}
-
 // "O produto": abas com a tela real de cada area. Todos os paineis ficam no HTML; so o ativo aparece.
 export function Product({ C }) {
   const b = C.product;
@@ -166,7 +138,6 @@ export function Product({ C }) {
             <div className={s.prodShot}><Shot name={t.shot} alt={t.alt} /></div>
           </div>
         ))}
-        <DemoVideo v={b.video} />
         <h3 className={s.subTitle}>{b.alsoTitle}</h3>
         <div className={s.grid4}>
           {b.also.map((x) => (
