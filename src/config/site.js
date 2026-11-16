@@ -3,7 +3,7 @@
 
 export const SITE = {
   // Marca provisoria (aprovada como provisoria). Troque aqui para renomear toda a pagina.
-  name: 'ConversIA',
+  name: 'Frontly',
   tagline: 'CRM · WhatsApp · IA',
   monogram: 'C',
   // Dominio publico da landing (usado em canonical, Open Graph, sitemap e robots). PLACEHOLDER.
@@ -21,7 +21,7 @@ export const SITE = {
   contactEmail: 'contato@conversia.example',
   // So digitos, com DDI. Ex.: 5511900000000. Deixe '' para ocultar o link de WhatsApp.
   contactWhatsapp: '5511900000000',
-  whatsappMessage: 'Olá! Quero falar com a equipe sobre o ConversIA.',
+  whatsappMessage: 'Olá! Quero falar com a equipe sobre o Frontly.',
 
   // Razao social / CNPJ para o rodape e paginas legais. PLACEHOLDER.
   company: { legalName: '[RAZAO SOCIAL]', cnpj: '[CNPJ]', address: '[ENDERECO]' },

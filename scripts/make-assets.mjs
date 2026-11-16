@@ -1,4 +1,4 @@
-// Gera favicon, apple-touch-icon e imagem Open Graph a partir do monograma "C" (provisorio).
+// Gera a imagem Open Graph a partir do monograma (provisorio). Favicons vem de favicon_io (ja em public/).
 // Uso: npm run assets
 import sharp from 'sharp';
 import fs from 'node:fs';
@@ -16,9 +16,6 @@ const mark = (size, radius) => `
 </svg>`;
 // O "C" e desenhado como tracado (sem depender de fonte instalada).
 
-fs.writeFileSync('public/favicon.svg', mark(64, 28).trim());
-await sharp(Buffer.from(mark(32, 28))).png().toFile('public/favicon-32.png');
-await sharp(Buffer.from(mark(180, 0))).png().toFile('public/apple-touch-icon.png');
 
 // OG 1200x630: fundo escuro com malha, monograma, nome, frase e recorte da captura real do pipeline.
 const shot = await sharp('src/assets/capturas/pipeline-dark@2x.webp').resize({ width: 1500 }).extract({ left: 0, top: 0, width: 1500, height: 760 }).png().toBuffer();

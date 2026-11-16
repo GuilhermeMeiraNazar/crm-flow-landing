@@ -36,14 +36,14 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 30 | `ai.pillars[2]` | Transferência para uma pessoa O cliente pede um atendente, a IA falha em sequência ou o negócio passa de um valor definido: a conversa vai para a e... | F3 | A |
 | 31 | `ai.pillars[3]` | Custo e tokens à vista Acompanhe tokens e custo estimado por provedor, por função e por dia. | F18a, F14 | A |
 | 32 | `how` | Da contratação ao primeiro atendimento. | S4 | A |
-| 33 | `how.steps[0]` | Escolher e implantar Você escolhe o plano e nós colocamos o ConversIA da sua empresa no ar, no nosso servidor ou no seu. | FRAME | n/a |
+| 33 | `how.steps[0]` | Escolher e implantar Você escolhe o plano e nós colocamos o Frontly da sua empresa no ar, no nosso servidor ou no seu. | FRAME | n/a |
 | 34 | `how.steps[1]` | Conectar Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA. | S4, S5 | A |
 | 35 | `how.steps[2]` | Atender Sua equipe entra pelo navegador, com perfis de admin e de agente, e atende pela fila de conversas. | F1, F27 | A |
 | 36 | `how.steps[3]` | Acompanhar Os negócios andam pelas etapas do funil, e os relatórios mostram funil, atendimento e custo de IA. | F7, F14 | A |
 | 37 | `models` | Qual modelo é o seu? É o mesmo produto. Muda onde ele roda e quem cuida do servidor. | FRAME | n/a |
 | 38 | `models.cards[0]` | Hospedado por nós | FRAME, S5 | n/a, A |
 | 39 | `models.cards[1]` | No seu servidor | S3.1, S4 | A |
-| 40 | `pricing` | Escolha como o ConversIA vai rodar. A implantação é uma taxa única. Escolha entre a hospedagem por nossa conta ou o seu próprio servidor. | FRAME | n/a |
+| 40 | `pricing` | Escolha como o Frontly vai rodar. A implantação é uma taxa única. Escolha entre a hospedagem por nossa conta ou o seu próprio servidor. | FRAME | n/a |
 | 41 | `pricing.groups[0]` | A franquia de IA é uma estimativa em interações por mês. O painel mostra tokens e custo estimado de IA por provedor, função e dia. | S3.1, S4, S5 | A |
 | 42 | `pricing.groups[0].compare[0]` | Franquia de IA incluída | FRAME | n/a |
 | 43 | `pricing.groups[0].compare[1]` | CRM completo: contatos e conversas | F1, F11 | A |
@@ -88,11 +88,11 @@ Gerado por `node scripts/trace.mjs` a partir de `src/content/pt-BR.js`. Cada lin
 | 82 | `pricing.selfReq.rows[3]` | Software Docker Engine e Docker Compose v2, com proxy HTTPS no servidor | S4 | A |
 | 83 | `pricing.selfReq.rows[4]` | WhatsApp e IA Conta Meta Business verificada e chave de API do provedor de IA | S4, S5 | A |
 | 84 | `pricing.selfReq.rows[5]` | Licença Vinculada ao IP fixo do servidor. Trocar de IP ou de servidor exige nova emissão. | S3.4, S4 | A |
-| 85 | `services` | Precisa de mais leads? Oferecemos serviços de marketing para encaminhar os leads dos seus anúncios ao ConversIA. Não são obrigatórios para usar o CRM. | FRAME | n/a |
+| 85 | `services` | Precisa de mais leads? Oferecemos serviços de marketing para encaminhar os leads dos seus anúncios ao Frontly. Não são obrigatórios para usar o CRM. | FRAME | n/a |
 | 86 | `services.items.landing` | Criação de landing page Página focada na sua oferta, com domínio e hospedagem no primeiro ano, ligada ao funil pelo webhook de leads. Entrega em 7 ... | S5 | A |
 | 87 | `services.items.consultoria` | Consultoria de tráfego pago Análise das suas campanhas e novo plano de ação, em videochamada de 1h30 com gravação. | FRAME | n/a |
 | 88 | `services.items.gestao` | Gestão de tráfego pago Criação e otimização das campanhas, com relatório mensal. A verba dos anúncios não está inclusa. | FRAME | n/a |
-| 89 | `faq.items[0]` | Qual a diferença entre hospedado e no seu servidor? Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem ... | FRAME, S4 | n/a, A |
+| 89 | `faq.items[0]` | Qual a diferença entre hospedado e no seu servidor? Nos planos hospedados, o Frontly roda na nossa VPS e a sua equipe acessa pelo navegador, sem ... | FRAME, S4 | n/a, A |
 | 90 | `faq.items[1]` | A licença funciona em qualquer servidor? Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é p... | S3.4, S4 | A |
 | 91 | `faq.items[2]` | Para onde vão as conversas? Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta. | S5 | A |
 | 92 | `faq.items[3]` | Quanto custa a IA? Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave.... | F16, F18a | A |
@@ -143,12 +143,12 @@ Nao fazem afirmacao factual sobre o produto.
 | `integrations.items[3]` | Gemini |
 | `integrations.items[4]` | Claude |
 | `integrations.items[5]` | Groq |
-| `pricing.groups[0].who` | Quem cuida do servidor Nós. O ConversIA da sua empresa roda isolado em Docker na nossa VPS. |
+| `pricing.groups[0].who` | Quem cuida do servidor Nós. O Frontly da sua empresa roda isolado em Docker na nossa VPS. |
 | `pricing.groups[0].does` | O que você faz Usa pelo navegador, conecta o WhatsApp oficial e, no plano de chave própria, cadastra a sua chave de IA. |
 | `pricing.groups[1].who` | Quem cuida do servidor Você. A sua empresa fornece o servidor e o mantém. |
 | `pricing.groups[1].does` | O que você faz Fornece um servidor Linux com Docker, IP fixo e domínio, e usa as suas próprias chaves de IA. |
 | `faq` | O que perguntam antes de contratar. |
-| `seo` | ConversIA: CRM de WhatsApp com IA |
+| `seo` | Frontly: CRM de WhatsApp com IA |
 
 ## Placeholders configuraveis (src/config/site.js)
 

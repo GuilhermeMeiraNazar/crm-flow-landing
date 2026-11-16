@@ -1,6 +1,6 @@
 > ATENCAO: este documento descreve a versao ANTERIOR ao refinamento. Ordem das secoes, planos, tema, fontes e video mudaram; veja verificacao/REFINAMENTO-RELATORIO.md.
 
-# ConversIA: estrutura do front e estética da landing page
+# Frontly: estrutura do front e estética da landing page
 
 Documento para revisão externa de design, UX e front-end. Descreve o que existe hoje, sem avaliar. A seção final lista dúvidas e pontos que já sei que merecem olhar.
 
@@ -8,7 +8,7 @@ Documento para revisão externa de design, UX e front-end. Descreve o que existe
 - **Tipo:** landing page estática (HTML pré-renderizado com hidratação em React).
 - **Produto:** CRM de WhatsApp com IA, vendido em duas linhas: hospedado pelo fornecedor ou no servidor do cliente.
 - **Público:** pequenas e médias empresas brasileiras que vendem pelo WhatsApp. Idioma: pt-BR.
-- **Marca:** "ConversIA" (nome provisório), monograma "C" sobre gradiente roxo.
+- **Marca:** "Frontly" (nome provisório), monograma "C" sobre gradiente roxo.
 - **Status:** build de rascunho. Há placeholders (CNPJ, domínio, contatos, textos legais) e uma trava que impede publicar enquanto existirem.
 
 ## 2. Stack e build
@@ -131,7 +131,7 @@ O mockup do hero é estático (a inclinação 3D foi removida por custo de rende
 3. **Cards Intermediário e Avançado** têm poucos recursos reais; a maioria dos itens está marcada "Em breve". Isso pesa na percepção de valor.
 4. **Fundo animado do hero** (manchas desfocadas) pode pesar em celulares simples.
 5. **Marquee** só tem texto; pode parecer vazio sem logotipos.
-6. **Hierarquia de CTAs:** o texto do botão é o mesmo ("Quero o ConversIA") em todo lugar, inclusive nos 6 cards de plano.
+6. **Hierarquia de CTAs:** o texto do botão é o mesmo ("Quero o Frontly") em todo lugar, inclusive nos 6 cards de plano.
 7. **Prova social:** não há. Foi deliberado, por não haver clientes ainda.
 8. **Tema claro:** menos testado que o escuro.
 9. **Hero:** título longo em 3 linhas no desktop; avaliar se a promessa fica clara em menos palavras.

@@ -37,7 +37,7 @@ links externos (nao requisitados; sao placeholders ou destinos de terceiros):
    https://conversia.example/privacidade/
    https://conversia.example/reembolso/
    https://conversia.example/termos/
-   https://wa.me/5511900000000?text=Ola!%20Quero%20saber%20mais%20sobre%20o%20ConversIA.
+   https://wa.me/5511900000000?text=Ola!%20Quero%20saber%20mais%20sobre%20o%20Frontly.
 exit: 0
 ```
 

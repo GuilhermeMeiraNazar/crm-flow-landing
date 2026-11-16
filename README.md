@@ -1,4 +1,4 @@
-# Landing page do ConversIA (nome provisório)
+# Landing page do Frontly (nome provisório)
 
 Página estática (React 18, Vite, SCSS Modules), sem backend e sem rastreadores de terceiros. Identidade visual e telas vêm do próprio produto. Nome, contatos, preços e CTA ficam em um único arquivo: `src/config/site.js`.
 

@@ -41,7 +41,7 @@ Estão marcados na página com o rótulo "revisão do dono" ou com redação con
 - **Modelo de entrega** ([CONFIRMAR PELO DONO]): a página só diz "produto instalável no seu servidor". Os termos têm placeholder.
 - **Placeholders em `src/config/site.js`**: domínio, URL do CTA, e-mail, WhatsApp, razão social, CNPJ, preço, cobrança, garantia, política de reemissão da licença, serviço de instalação.
 - **Textos legais**: são rascunho, marcados "revisar com advogado". Prazo de arrependimento, foro, limitação de responsabilidade, papéis de controlador e operador estão em colchetes.
-- **Marca provisória**: nome ConversIA e monograma "C" (favicon e imagem social) configuráveis. O app não tem logo oficial.
+- **Marca provisória**: nome Frontly e monograma "C" (favicon e imagem social) configuráveis. O app não tem logo oficial.
 - **Base de Conhecimento** permanece em C: a primeira versão de um documento fica indexada e ativa no MySQL, mas invisível para a busca. Prova e causa em `CONTEUDO.md`, seção 9.4.
 - **Defeitos do CRM**, só registrados em `DEFEITOS-CRM.md` (13 itens), entre eles o badge fixo "12", o `href="#"` no Dashboard e o total "R$ NaN" das colunas do kanban. Todos foram mascarados ou evitados nas capturas.
 - **Contraste**: 4 tokens do app falham AA e foram ajustados só na landing (tabela com razões antes e depois no `README.md`).

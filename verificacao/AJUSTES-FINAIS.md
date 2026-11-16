@@ -8,13 +8,13 @@ Todas as capturas foram refeitas (formato novo: AVIF com WebP de reserva, 1x e @
 
 | Imagem | Enquadramento | Rótulos de interface visíveis (lidos com a leitura de imagem) |
 |---|---|---|
-| `hero` (escuro e claro), 1440x900 | Tela de Pipeline **com sidebar completa** | Sidebar: ConversIA, "CRM · WHATSAPP · IA", PRINCIPAL, Visão geral, Conversas, Pipeline, Contatos, Automações, Integrações, ANÁLISE, Relatórios, Configurações, usuário "Admin Demo / admin". **Desfocados:** Catálogo, Calendário, Base de Conhecimento (3 linhas), badge de Conversas, card de estado da instância. Conteúdo: "Pipeline de vendas", Pipeline, "Arraste os deals entre etapas...", Novo lead, colunas Novo lead, Em atendimento, Proposta enviada, Negociação, 11 cartões fictícios com valor do negócio. Total das colunas desfocado (defeito do CRM) |
+| `hero` (escuro e claro), 1440x900 | Tela de Pipeline **com sidebar completa** | Sidebar: Frontly, "CRM · WHATSAPP · IA", PRINCIPAL, Visão geral, Conversas, Pipeline, Contatos, Automações, Integrações, ANÁLISE, Relatórios, Configurações, usuário "Admin Demo / admin". **Desfocados:** Catálogo, Calendário, Base de Conhecimento (3 linhas), badge de Conversas, card de estado da instância. Conteúdo: "Pipeline de vendas", Pipeline, "Arraste os deals entre etapas...", Novo lead, colunas Novo lead, Em atendimento, Proposta enviada, Negociação, 11 cartões fictícios com valor do negócio. Total das colunas desfocado (defeito do CRM) |
 | `pipeline`, 1184x900 | **Recorte sem sidebar** (clip do navegador a partir de x=256) | Só o conteúdo do Pipeline, igual ao acima, sem menu |
 | `inbox`, 1184x900 | Recorte sem sidebar | Fila 1, Minhas, Diego Amostra, Assumir, Conversas, busca, 8 contatos fictícios com hora e contador, chat "Ana Exemplo / Ai", 3 mensagens, Assumir conversa, "Digite uma mensagem...", Enviar. **Desfocados:** clipe de anexo e "Sem mensagens" da lista (defeito do CRM) |
 | `automacoes`, 1184x480 | Recorte sem sidebar | Automações, "Nova automação", ESTÁGIO/GATILHO/AÇÃO/STATUS; Notificar atendente, Agendar lembrete, Enviar template WhatsApp; Ativa, Editar, Excluir |
 | `ia`, 1184x900 | Recorte sem sidebar | Chaves de IA, Modelos, Agente De Conversa (Obrigatório; openai; gpt-4o-mini; "configurada"; Atualizar), Transcrição De Áudio (Opcional; openai; whisper-1). **Desfocado:** bloco "Saldo de tokens". "Limites do crédito próprio" fica fora do enquadramento |
 | `analytics`, 554x238 | Só o painel "Deals por estágio" (captura do elemento) | "Deals por estágio" e 6 etapas com contagem: Novo lead 3, Em atendimento 4, Proposta enviada 4, Negociação 2, Ganho 4, Perdido 1. **Sem** taxa de conversão, valores em R$, tempos ou gráfico de resultado |
-| `og-image.png`, 1200x630 | Recorte do Pipeline sem sidebar | ConversIA, frase de valor, subtítulo, Pipeline, 4 colunas, cartões fictícios. Sem "Catálogo" e sem menu |
+| `og-image.png`, 1200x630 | Recorte do Pipeline sem sidebar | Frontly, frase de valor, subtítulo, Pipeline, 4 colunas, cartões fictícios. Sem "Catálogo" e sem menu |
 | `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` | | Letra "C" branca em quadrado roxo; sem texto |
 
 Resultado da leitura: nenhum rótulo de Base de Conhecimento/RAG, PIX, calendário, Baileys/QR, Click-to-WhatsApp ou classe C legível em nenhuma imagem. Nas telas de funcionalidade a sidebar não aparece (nem Catálogo). Na do hero, os três itens estão desfocados.
@@ -91,7 +91,7 @@ O build do projeto continua bloqueado (33 pendências) e passa em rascunho com `
 
 ```
 varredura de termos (node scripts/scan-dist.mjs, dist de rascunho)
-  title: "ConversIA: CRM de WhatsApp com IA instalado no seu servidor"; 20 meta, 15 og/twitter, 1 JSON-LD, 12 alt, 5 aria-label, 0 title=""
+  title: "Frontly: CRM de WhatsApp com IA instalado no seu servidor"; 20 meta, 15 og/twitter, 1 JSON-LD, 12 alt, 5 aria-label, 0 title=""
   imagens no dist: 28 (inclui avif)   manifest: nao existe
   resumo: 66 arquivos, 10 de texto varridos, 11 grupos de termos, ocorrencias proibidas: 0
   exit: 0

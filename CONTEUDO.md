@@ -196,7 +196,7 @@ Marquee de integracoes reais (so classe A): WhatsApp Cloud API, webhook de leads
 1. **Definir o que significa "receber o codigo"**: repositorio legivel, pacote protegido (bytecode/ofuscado) ou so imagens Docker. Hoje `INSTALL.md` diz "clonar o repositorio" e o EULA proibe redistribuicao. Sem isso a pagina nao pode usar a expressao.
 2. **Texto contratual**: `LICENSE-EULA.md` e `LICENSE-TERMS.md` tem 4 a 5 linhas e remetem a um "contrato de licenca" que nao esta no repositorio. Os termos da landing (rascunho) dependem dele: escopo por instancia/CNPJ, direito a atualizacoes, suporte ("conforme plano contratado"), o que acontece ao trocar de IP.
 3. **Precos, garantia e prazo de arrependimento**: placeholders em `site.js`. Nenhuma base no codigo.
-4. **Nome do produto**: tres nomes convivem. Interface: "ConversIA" com tag "CRM . WHATSAPP . IA" (`client/src/components/Sidebar/Sidebar.jsx`, bloco "Brand"); README e `package.json`: "CRM WhatsApp AI-First"; pasta e compose: "CRM Flow IA". A aba do navegador mostra "CRM WhatsApp AI" (`client/index.html`). Uso provisorio `ConversIA`, configuravel em `site.js`.
+4. **Nome do produto**: tres nomes convivem. Interface: "Frontly" com tag "CRM . WHATSAPP . IA" (`client/src/components/Sidebar/Sidebar.jsx`, bloco "Brand"); README e `package.json`: "CRM WhatsApp AI-First"; pasta e compose: "CRM Flow IA". A aba do navegador mostra "CRM WhatsApp AI" (`client/index.html`). Uso provisorio `Frontly`, configuravel em `site.js`.
 5. **Liberar ou manter em C**: Base de Conhecimento e RAG. Sem a KB, a secao "IA (RAG)" da estrutura pedida nao pode existir; a IA entra apenas como agente conversacional com transferencia, extracao de lead e transcricao de audio. O agente responde sem contexto RAG quando nao encontra nada (`ragContextService.js:77-86`), entao funciona sem KB.
 6. **Sinais de que a KB estava quebrada ate recentemente**: o ultimo commit (`5423138`) e "iniciar os 4 workers da KB no boot"; antes disso os workers nao subiam. `docs/KB-OPERATIONAL-GUIDE.md` tem pendencia desatualizada (diz que a rota de reconciliacao nao existe; ela esta em `app.js:168`). Mantenho em C.
 
@@ -296,7 +296,7 @@ Consequencia para a Fase C: `--text-tertiary` nao serve para texto legivel em ne
 ### 7.4 Logo e icone
 
 - **Nao existe arquivo de logo, favicon, SVG de marca nem pasta `public/` no cliente** (busca por `*.svg|*.ico|*.png|*.woff*` em `client/` fora de `node_modules` e `dist` nao retornou nada). O `index.html` nao tem `<link rel="icon">`.
-- A marca existente e: um quadrado 32x32, raio 9px, preenchido com `--brand-gradient`, com a letra "C" em Space Grotesk, borda/brilho `0 0 0 1px rgba(124,111,255,.25), 0 4px 14px var(--glow-ai)`; ao lado, o texto "ConversIA" e a linha "CRM . WHATSAPP . IA" (`client/src/components/Sidebar/Sidebar.module.scss`, bloco `.brand`; `Sidebar.jsx`, bloco "Brand").
+- A marca existente e: um quadrado 32x32, raio 9px, preenchido com `--brand-gradient`, com a letra "C" em Space Grotesk, borda/brilho `0 0 0 1px rgba(124,111,255,.25), 0 4px 14px var(--glow-ai)`; ao lado, o texto "Frontly" e a linha "CRM . WHATSAPP . IA" (`client/src/components/Sidebar/Sidebar.module.scss`, bloco `.brand`; `Sidebar.jsx`, bloco "Brand").
 - Icones: 22 icones SVG em linha como componentes JSX proprios do projeto (`client/src/icons/`). Sao codigo do proprio CRM e podem ser reutilizados; incluem `IconWhatsApp`. Sobre `IconWhatsApp`: o desenho do logotipo do WhatsApp e marca da Meta; vou usar apenas o texto "WhatsApp", nao esse icone.
 - Para favicon e imagem Open Graph vou **derivar** o monograma "C" do quadrado de marca (criacao minha, baseada no que o app renderiza). Precisa da sua aprovacao, ja que o produto nao tem logo oficial.
 
@@ -304,7 +304,7 @@ Consequencia para a Fase C: `--text-tertiary` nao serve para texto legivel em ne
 
 ## 8. O que decidir para eu iniciar a Fase B
 
-1. Nome do produto na landing: `ConversIA` (provisorio).
+1. Nome do produto na landing: `Frontly` (provisorio).
 2. Aprovar o monograma "C" como favicon e imagem social.
 3. Confirmar a lista de funcionalidades da pagina:
    - Entram (A): itens 1 a 17, 24, 27 a 30, mais WhatsApp Cloud API, webhook de leads e provedores BYOK.

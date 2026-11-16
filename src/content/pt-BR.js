@@ -103,7 +103,7 @@ export const copy = (S) => ({
       d: 'Conversas, pipeline e automações em 38 segundos, sem áudio.',
       play: 'Reproduzir o vídeo de demonstração',
       desc: 'Vídeo sem áudio, com dados fictícios: abre conversas da fila, arrasta negócios entre as etapas do pipeline e mostra as automações por etapa.',
-      posterAlt: 'Quadro do pipeline do ConversIA com os negócios por etapa.',
+      posterAlt: 'Quadro do pipeline do Frontly com os negócios por etapa.',
       ev: ['F1', 'F7', 'F12'],
     },
     alsoTitle: 'Também no produto',
@@ -137,7 +137,7 @@ export const copy = (S) => ({
     title: 'Da contratação ao primeiro atendimento.',
     ev: ['S4'],
     steps: [
-      { t: 'Escolher e implantar', d: 'Você escolhe o plano e nós colocamos o ConversIA da sua empresa no ar, no nosso servidor ou no seu.', ev: ['FRAME'], icon: 'server' },
+      { t: 'Escolher e implantar', d: 'Você escolhe o plano e nós colocamos o Frontly da sua empresa no ar, no nosso servidor ou no seu.', ev: ['FRAME'], icon: 'server' },
       { t: 'Conectar', d: 'Cadastre o WhatsApp oficial e a chave do provedor de IA em Integrações e Chaves de IA.', ev: ['S4', 'S5'], icon: 'plug' },
       { t: 'Atender', d: 'Sua equipe entra pelo navegador, com perfis de admin e de agente, e atende pela fila de conversas.', ev: ['F1', 'F27'], icon: 'chat' },
       { t: 'Acompanhar', d: 'Os negócios andam pelas etapas do funil, e os relatórios mostram funil, atendimento e custo de IA.', ev: ['F7', 'F14'], icon: 'chart' },
@@ -154,7 +154,7 @@ export const copy = (S) => ({
       {
         id: 'hosted', t: 'Hospedado por nós', ev: ['FRAME', 'S5'],
         rows: [
-          { k: 'Quem cuida do servidor', v: 'Nós. O ConversIA da sua empresa roda isolado em Docker na nossa VPS.' },
+          { k: 'Quem cuida do servidor', v: 'Nós. O Frontly da sua empresa roda isolado em Docker na nossa VPS.' },
           { k: 'O que você faz', v: 'Usa pelo navegador e conecta o WhatsApp oficial.' },
           { k: 'Seus dados', v: 'Os dados ficam armazenados na infraestrutura do fornecedor. Com a IA ativa, o conteúdo das conversas segue ao provedor de LLM escolhido, e o WhatsApp trafega pela Meta.' },
         ],
@@ -172,7 +172,7 @@ export const copy = (S) => ({
   pricing: {
     id: 'precos',
     eyebrow: 'Planos',
-    title: 'Escolha como o ConversIA vai rodar.',
+    title: 'Escolha como o Frontly vai rodar.',
     lead: 'A implantação é uma taxa única. Escolha entre a hospedagem por nossa conta ou o seu próprio servidor.',
     leadEv: ['FRAME'],
     selectorLabel: 'Modelo de contratação',
@@ -186,7 +186,7 @@ export const copy = (S) => ({
         id: 'hosted',
         tab: 'Hospedado por nós',
         ev: ['S3.1', 'S4', 'S5'],
-        who: { t: 'Quem cuida do servidor', d: 'Nós. O ConversIA da sua empresa roda isolado em Docker na nossa VPS.' },
+        who: { t: 'Quem cuida do servidor', d: 'Nós. O Frontly da sua empresa roda isolado em Docker na nossa VPS.' },
         does: { t: 'O que você faz', d: 'Usa pelo navegador, conecta o WhatsApp oficial e, no plano de chave própria, cadastra a sua chave de IA.' },
         note: 'A franquia de IA é uma estimativa em interações por mês. O painel mostra tokens e custo estimado de IA por provedor, função e dia.',
         noteEv: ['F18a'],
@@ -303,7 +303,7 @@ export const copy = (S) => ({
     id: 'servicos',
     eyebrow: 'Serviços opcionais',
     title: 'Precisa de mais leads?',
-    lead: 'Oferecemos serviços de marketing para encaminhar os leads dos seus anúncios ao ConversIA. Não são obrigatórios para usar o CRM.',
+    lead: 'Oferecemos serviços de marketing para encaminhar os leads dos seus anúncios ao Frontly. Não são obrigatórios para usar o CRM.',
     ev: ['FRAME'],
     more: 'Saber mais',
     items: {
@@ -317,7 +317,7 @@ export const copy = (S) => ({
     eyebrow: 'Perguntas frequentes',
     title: 'O que perguntam antes de contratar.',
     items: [
-      { q: 'Qual a diferença entre hospedado e no seu servidor?', a: 'Nos planos hospedados, o ConversIA roda na nossa VPS e a sua equipe acessa pelo navegador, sem instalar nada. Nos planos no seu servidor, ele é implantado na infraestrutura da sua empresa, que precisa atender aos requisitos listados na seção de planos.', ev: ['FRAME', 'S4'] },
+      { q: 'Qual a diferença entre hospedado e no seu servidor?', a: 'Nos planos hospedados, o Frontly roda na nossa VPS e a sua equipe acessa pelo navegador, sem instalar nada. Nos planos no seu servidor, ele é implantado na infraestrutura da sua empresa, que precisa atender aos requisitos listados na seção de planos.', ev: ['FRAME', 'S4'] },
       { q: 'A licença funciona em qualquer servidor?', a: 'Nos planos no seu servidor, a licença é vinculada ao IP fixo do servidor. Se o IP ou o servidor mudar, é preciso emitir uma nova licença.', ev: ['S3.4', 'S4'] },
       { q: 'Para onde vão as conversas?', a: 'Com a IA ativa, o texto das conversas é enviado ao provedor de LLM que você escolher, e o WhatsApp trafega pela Meta.', ev: ['S5'] },
       { q: 'Quanto custa a IA?', a: 'Nos planos com chave própria e nos planos no seu servidor, o consumo é cobrado pelo provedor que você escolher, com a sua chave. Nos planos hospedados com franquia, uma quantidade mensal estimada de interações de IA já está inclusa. Em todos, o painel mostra tokens e custo estimado por função e por dia.', ev: ['F16', 'F18a'] },

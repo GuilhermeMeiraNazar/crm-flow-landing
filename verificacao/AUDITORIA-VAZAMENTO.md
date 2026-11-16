@@ -25,7 +25,7 @@ Método: abri cada arquivo de `public/` e `dist/` com a leitura de imagem. Os ar
 | `automacoes-dark`, `automacoes-light` | Menu lateral, Automações, "Nova automação", tabela: Proposta enviada / Ao entrar no estágio / Notificar atendente; Em atendimento / Após X dias parado / Agendar lembrete; Novo lead / Ao entrar no estágio / Enviar template WhatsApp; Ativa, Editar, Excluir | Não | Nenhuma ação de PIX presente |
 | `analytics-dark`, `analytics-light` | Menu lateral, Relatórios, Hoje/7 dias/30 dias/Tudo, De/Até, Atualizar, Funil, Exportar CSV, Taxa de conversão, Valor fechado, Valor em aberto, Deals perdidos, Deals por estágio, Tempo médio parado, Valor fechado por dia | Não | Campo de busca "(em breve)" desfocado. Os números são dados fictícios de demonstração, e a página diz isso |
 | `ia-dark`, `ia-light` | Menu lateral, Chaves de IA, Modelos, Agente De Conversa (Obrigatório; openai; gpt-4o-mini; "•••••••• configurada"; Atualizar), Transcrição De Áudio (Opcional; openai; whisper-1) | Não | "Saldo de tokens" desfocado; "Limites do crédito próprio" fora da imagem |
-| `og-image.png` | ConversIA, "CRM de WhatsApp com IA, instalado no seu servidor.", "Conversas, pipeline kanban, automações e relatórios.", recorte da tela Pipeline com menu lateral | Não | Regenerada da captura nova, com os desfoques |
+| `og-image.png` | Frontly, "CRM de WhatsApp com IA, instalado no seu servidor.", "Conversas, pipeline kanban, automações e relatórios.", recorte da tela Pipeline com menu lateral | Não | Regenerada da captura nova, com os desfoques |
 | `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` | Letra "C" branca em quadrado com gradiente roxo | Não | Sem texto de interface |
 
 Menu lateral nas telas atuais, por rótulo:
@@ -46,14 +46,14 @@ Saída final (trecho):
 
 ```
 == dist/index.html
- title        : ConversIA: CRM de WhatsApp com IA instalado no seu servidor
+ title        : Frontly: CRM de WhatsApp com IA instalado no seu servidor
  meta (n)     : 20 | og/twitter: 15
  json-ld (n)  : 1
  alt (n)      : 12 | aria-label (n): 5 | title="" (n): 0
  comentarios  : [" "," "," "," "," "]
-== dist/privacidade/index.html  (title: Política de privacidade | ConversIA; alt 0; aria-label 3)
-== dist/reembolso/index.html    (title: Reembolso e arrependimento | ConversIA; alt 0; aria-label 3)
-== dist/termos/index.html       (title: Termos de uso | ConversIA; alt 0; aria-label 3)
+== dist/privacidade/index.html  (title: Política de privacidade | Frontly; alt 0; aria-label 3)
+== dist/reembolso/index.html    (title: Reembolso e arrependimento | Frontly; alt 0; aria-label 3)
+== dist/termos/index.html       (title: Termos de uso | Frontly; alt 0; aria-label 3)
 chunk de terceiros nao varrido por termos de conteudo: dist/assets/vendor-DFrLV2pM.js
 manifest: nao existe (nenhum arquivo .webmanifest/manifest.json no dist)
 placeholders encontrados (informativo; o publish-guard bloqueia build de producao): 35

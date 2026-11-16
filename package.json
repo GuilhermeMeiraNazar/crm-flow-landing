@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Landing page estatica do ConversIA (nome provisorio, configuravel em src/config/site.js)",
+  "description": "Landing page estatica do Frontly (nome provisorio, configuravel em src/config/site.js)",
   "scripts": {
     "dev": "vite",
     "assets": "node scripts/make-assets.mjs",
